@@ -51,6 +51,7 @@
 
 .faq-content-left h2 i {
     font-style: italic;
+    color: var(--lightblue);
     opacity: 0.8;
 }
 

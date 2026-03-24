@@ -9,6 +9,7 @@ import FeaturesHome from '../components/FeaturesHome';
 import PatientStories from '../components/PatientStories';
 import TakeControl from '../components/TakeControl';
 import FrequentlyAsked from '../components/FrequentlyAsked';
+import Footer from './../common/Footer';
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
     <PatientStories/>
     <TakeControl/>
     <FrequentlyAsked/>
+    <Footer/>
     </main>
 
      </>
