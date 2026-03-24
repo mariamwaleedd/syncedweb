@@ -1,0 +1,161 @@
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
+
+:root {
+    --darkbg: #010422;
+    --lightblue: #A3D6FF;
+    --white: #FFFFFF;
+    --cardbg: #ffffff2b;
+    --titlefont: "Instrument Serif", serif;
+    --subtitlefont: "General Sans", sans-serif;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.nav-burger-container {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.burger-icon {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.burger-icon span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--white);
+    transition: 0.3s;
+}
+
+.burger-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--cardbg);
+    backdrop-filter: blur(15px);
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+    width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-burger-container:hover .burger-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.burger-menu li {
+    color: var(--white);
+    font-family: var(--subtitlefont);
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.burger-menu li:last-child {
+    border-bottom: none;
+}
+
+.burger-menu li:hover {
+    color: var(--lightblue);
+    padding-left: 25px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 50px;
+    padding: 5px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+.search-input {
+    width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-family: var(--subtitlefont);
+    transition: width 0.5s;
+    padding: 0;
+}
+
+.search-btn {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.search-wrapper:hover {
+    width: 250px;
+    background: var(--darkbg);
+    padding-left: 15px;
+    border: 1px solid rgba(163, 214, 255, 0.3);
+}
+
+.search-wrapper:hover .search-input {
+    width: 180px;
+    padding-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .navbar { height: 80px; }
+    .logo-img { height: 35px; }
+    .search-wrapper:hover { width: 180px; }
+}
