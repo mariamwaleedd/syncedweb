@@ -5,6 +5,9 @@ import WhatWeOffer from '../components/WhatWeOffer';
 import NavBar from './../common/NavBar';
 import Process from '../components/Process';
 import ClickAway from './../components/ClickAway';
+import FeaturesHome from '../components/FeaturesHome';
+import PatientStories from '../components/PatientStories';
+import TakeControl from '../components/TakeControl';
 
 const Home = () => {
   return (
@@ -17,6 +20,9 @@ const Home = () => {
     <Process/>
 
     <ClickAway/>
+    <FeaturesHome/>
+    <PatientStories/>
+    <TakeControl/>
     </main>
 
      </>
