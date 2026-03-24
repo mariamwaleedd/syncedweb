@@ -120,6 +120,9 @@
     font-size: 1.8rem;
 }
 
+span {
+    font-family: var(--titlefont)
+}
 .step-card:hover .step-icon {
     background-color: var(--lightblue);
     transform: translateY(-15px) scale(1.05);

@@ -8,6 +8,8 @@
     color: var(--white);
     display: flex;
     justify-content: center;
+     margin-top: 20%;
+    margin-bottom: 20%;
 }
 
 .faq-container {

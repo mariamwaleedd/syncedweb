@@ -1,6 +1,8 @@
 .click-away-section {
     width: 100%;
     min-height: 75vh;
+    margin-top: 20%;
+    margin-bottom: 20%;
     display: flex;
     align-items: center;
     position: relative;
