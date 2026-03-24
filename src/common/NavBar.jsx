@@ -20,9 +20,9 @@ const NavBar = () => {
                 </ul>
             </div>
 
-            <div className="nav-logo">
+            {/* <div className="nav-logo">
                 <img src={logoWhite} alt="Logo" className="logo-img" />
-            </div>
+            </div> */}
 
             <div className="nav-search-container">
                 <div className="search-wrapper">

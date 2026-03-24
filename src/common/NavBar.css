@@ -16,7 +16,7 @@
 }
 
 .navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -87,7 +87,7 @@
 .burger-menu li:hover {
     color: var(--lightblue);
 }
-
+/* 
 .nav-logo {
     flex: 1;
     display: flex;
@@ -98,7 +98,7 @@
 .logo-img {
     height: 35px;
     width: auto;
-}
+} */
 
 .nav-search-container {
     flex: 1;
