@@ -5,10 +5,11 @@
     --cardbg: #ffffff2b;
     --titlefont: "Instrument Serif", serif;
     --subtitlefont: "General Sans", sans-serif;
+    --numbersfont: "Unbounded", sans-serif;
 }
 
 
-
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
 

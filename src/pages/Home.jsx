@@ -11,6 +11,7 @@ import TakeControl from '../components/TakeControl';
 import FrequentlyAsked from '../components/FrequentlyAsked';
 import Footer from './../common/Footer';
 import IphoneSpline from '../components/iPhoneSpline';
+import CommandCenter from '../components/CommandCenter';
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
     <HeroSection />
     <WhatWeOffer/>
     <Process/>
-
+    <CommandCenter/>
     <ClickAway/>
     <FeaturesHome/>
     <PatientStories/>
