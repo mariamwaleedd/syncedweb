@@ -4,6 +4,7 @@ import './Home.css';
 import WhatWeOffer from '../components/WhatWeOffer';
 import NavBar from './../common/NavBar';
 import Process from '../components/Process';
+import ClickAway from './../components/ClickAway';
 
 const Home = () => {
   return (
@@ -14,6 +15,8 @@ const Home = () => {
     <HeroSection />
     <WhatWeOffer/>
     <Process/>
+
+    <ClickAway/>
     </main>
 
      </>
