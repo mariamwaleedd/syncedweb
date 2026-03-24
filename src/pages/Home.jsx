@@ -10,6 +10,7 @@ import PatientStories from '../components/PatientStories';
 import TakeControl from '../components/TakeControl';
 import FrequentlyAsked from '../components/FrequentlyAsked';
 import Footer from './../common/Footer';
+import IphoneSpline from '../components/iPhoneSpline';
 
 const Home = () => {
   return (
@@ -24,6 +25,7 @@ const Home = () => {
     <ClickAway/>
     <FeaturesHome/>
     <PatientStories/>
+    <IphoneSpline/>
     <TakeControl/>
     <FrequentlyAsked/>
     <Footer/>
