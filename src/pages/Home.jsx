@@ -8,6 +8,7 @@ import ClickAway from './../components/ClickAway';
 import FeaturesHome from '../components/FeaturesHome';
 import PatientStories from '../components/PatientStories';
 import TakeControl from '../components/TakeControl';
+import FrequentlyAsked from '../components/FrequentlyAsked';
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
     <FeaturesHome/>
     <PatientStories/>
     <TakeControl/>
+    <FrequentlyAsked/>
     </main>
 
      </>
