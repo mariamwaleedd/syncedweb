@@ -7,9 +7,7 @@
     --subtitlefont: "General Sans", sans-serif;
     --numbersfont: "Unbounded", sans-serif;
 }
-span {
-    font-family: var(--titlefont);
-}
+
 .take-control-section {
     background-color: var(--darkbg);
     background-image: 
@@ -62,10 +60,12 @@ span {
 .blue-text {
     color: #64B5F6;
     opacity: 0.8;
+        font-family: var(--titlefont);
 }
 
 .white-italic {
     color: var(--white);
+        font-family: var(--titlefont);
     font-style: italic;
 }
 

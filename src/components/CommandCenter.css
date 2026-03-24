@@ -80,7 +80,9 @@
     gap: 15px;
     margin-top: auto;
 }
-
+.anatomy-card{
+    border-radius: 25px;
+}
 .metric-card, .anatomy-card {
     border: 1px solid rgba(255, 255, 255, 0.16);
     background: linear-gradient(180deg, rgba(108, 144, 222, 0.169) 0%, rgba(60, 84, 103, 0.28) 100%);
