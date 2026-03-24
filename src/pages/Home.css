@@ -1,3 +1,17 @@
+:root {
+    --darkbg: #010422;
+    --lightblue: #A3D6FF;
+    --white: #FFFFFF;
+    --cardbg: #ffffff2b;
+    --titlefont: "Instrument Serif", serif;
+    --subtitlefont: "General Sans", sans-serif;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
+
 body {
     margin: 0;
     font-family: var(--main-font);
@@ -6,6 +20,19 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: var(--bg); 
+    background-color: var(--darkbg); 
 }
+.instrument-serif-regular {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.instrument-serif-regular-italic {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+
 
