@@ -1,12 +1,10 @@
 import React from 'react';
-import NavBar from '../common/NavBar';
 import './HeroSection.css';
 import heroVideo from '../vids/herovideo.mp4';
 
 const HeroSection = () => {
     return (
         <section className="hero-container">
-            <NavBar />
             
             <div className="video-background">
                 <video autoPlay loop muted playsInline className="main-video">
