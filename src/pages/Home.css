@@ -1,10 +1,8 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Zain:wght@200;300;400;700;800;900&display=swap');
 
 :root {
     --darkbg: #010422;
@@ -15,19 +13,18 @@
     --subtitlefont: "General Sans", sans-serif;
     --numbersfont: "Unbounded", sans-serif;
     --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --artitlefont: ;
-    --arsubtitlefont: "Almarai", sans-serif;
 }
 
 [data-theme='light'] {
     --darkbg: #f0f4f8;
     --white: #010422;
     --cardbg: rgba(0, 0, 0, 0.05);
-    --lightblue: #A3D6FF;
+    --lightblue: #3A8BFF;
 }
 
 [dir='rtl'] {
-    --subtitlefont: "Cairo", sans-serif;
+    --titlefont: "Zain", sans-serif;
+    --subtitlefont: "Almarai", sans-serif;
 }
 
 body {
@@ -48,15 +45,10 @@ body {
     box-sizing: border-box;
 }
 
-
-.instrument-serif-regular {
-  font-family: "Instrument Serif", serif;
-  font-weight: 400;
-  font-style: normal;
+h1, h2, h3, .hero-title {
+    font-family: var(--titlefont);
 }
 
-.instrument-serif-regular-italic {
-  font-family: "Instrument Serif", serif;
-  font-weight: 400;
-  font-style: italic;
+p, span, li, button, .hero-subtitle {
+    font-family: var(--subtitlefont);
 }
