@@ -1,21 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import './Preloader.css';
+import logoblue from '../imgs/logoblue.png';
 
 const Preloader = () => {
-    const [loading, setLoading] = useState(true);
+    const [isExiting, setIsExiting] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 2000);
+        const timer = setTimeout(() => {
+            setIsExiting(true);
+        }, 2200);
+
         return () => clearTimeout(timer);
     }, []);
 
-    if (!loading) return null;
-
     return (
-        <div className="preloader">
-            <div className="loader-content">
-                <div className="loader-circle"></div>
-                <h2 className="loader-text">SYNCED</h2>
+        <div className={`preloader-root ${isExiting ? 'preloader-exit' : ''}`}>
+            <div className="preloader-content">
+                <div className="medical-logo-anim">
+                    <div className="outer-ring"></div>
+                    <div className="inner-logo-wrapper">
+                        <img src={logoblue} alt="Synced Logo" className="rotating-logo" />
+                    </div>
+                </div>
+                
+                <div className="brand-load">
+                    <div className="load-line-container">
+                        <div className="load-line"></div>
+                    </div>
+                </div>
             </div>
         </div>
     );
