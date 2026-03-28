@@ -93,17 +93,14 @@
     .click-away-container {
         flex-direction: column;
         text-align: center;
-        padding-top: 80px;
     }
 
     .click-away-image {
         width: 100%;
-        margin-top: 40px;
     }
 
     .click-away-image img {
-        width: 100%;
-        margin-left: 0;
+        width: 120%;
     }
 
     .click-away-content {

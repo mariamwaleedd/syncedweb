@@ -12,11 +12,12 @@ import FrequentlyAsked from '../components/FrequentlyAsked';
 import Footer from './../common/Footer';
 import IphoneSpline from '../components/iPhoneSpline';
 import CommandCenter from '../components/CommandCenter';
+import Preloader from './../common/Preloader';
 
 const Home = () => {
   return (
     <>
-
+<Preloader/>
     <NavBar />
     <main>
     <HeroSection />
