@@ -17,7 +17,7 @@ import Preloader from './../common/Preloader';
 const Home = () => {
   return (
     <>
-<Preloader/>
+    <Preloader/>
     <NavBar />
     <main>
     <HeroSection />
