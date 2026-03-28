@@ -19,6 +19,7 @@ const Home = () => {
     <>
     <Preloader/>
     <NavBar />
+    
     <main>
     <HeroSection />
     <WhatWeOffer/>
