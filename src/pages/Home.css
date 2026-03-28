@@ -1,28 +1,50 @@
-:root {
-    --darkbg: #010422;
-    --lightblue: #A3D6FF;
-    --white: #FFFFFF;
-    --cardbg: #ffffff2b;
-    --titlefont: "Instrument Serif", serif;
-    --subtitlefont: "General Sans", sans-serif;
-    --numbersfont: "Unbounded", sans-serif;
-}
-
 
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..900&display=swap');
+
+:root {
+    --darkbg: #010422;
+    --lightblue: #A3D6FF;
+    --white: #FFFFFF;
+    --cardbg: rgba(255, 255, 255, 0.1);
+    --titlefont: "Instrument Serif", serif;
+    --subtitlefont: "General Sans", sans-serif;
+    --numbersfont: "Unbounded", sans-serif;
+    --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='light'] {
+    --darkbg: #f0f4f8;
+    --white: #010422;
+    --cardbg: rgba(0, 0, 0, 0.05);
+    --lightblue: #0066ff;
+}
+
+[dir='rtl'] {
+    --subtitlefont: "Cairo", sans-serif;
+}
 
 body {
     margin: 0;
-    font-family: var(--main-font);
     background-image: url('../imgs/bg.png'); 
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: var(--darkbg); 
+    color: var(--white);
+    transition: background-color var(--transition), color var(--transition);
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 .instrument-serif-regular {
   font-family: "Instrument Serif", serif;
   font-weight: 400;
@@ -34,6 +56,3 @@ body {
   font-weight: 400;
   font-style: italic;
 }
-
-
-
