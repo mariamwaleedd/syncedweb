@@ -1,38 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Footer.css';
-import whitelogo from '../imgs/logowhite.png';
-import fulllogo from '../imgs/fulllogo.png';
+import { supabase } from '../Supabase';
+import { useGlobal } from '../context/GlobalContext';
 
 const Footer = () => {
+    const { isAr, isDark } = useGlobal();
+    const [brandData, setBrandData] = useState(null);
+    const [productLinks, setProductLinks] = useState([]);
+    const [companyLinks, setCompanyLinks] = useState([]);
+    const [copyrightData, setCopyrightData] = useState(null);
+
+    useEffect(() => {
+        const fetchFooterData = async () => {
+            const { data, error } = await supabase
+                .from('footer')
+                .select('*')
+                .order('order_index', { ascending: true });
+            
+            if (data) {
+                setBrandData(data.find(i => i.type === 'brand'));
+                setProductLinks(data.filter(i => i.category === 'Product'));
+                setCompanyLinks(data.filter(i => i.category === 'Company'));
+                setCopyrightData(data.find(i => i.type === 'copyright'));
+            }
+        };
+        fetchFooterData();
+    }, []);
+
+    if (!brandData) return null;
+
     return (
         <footer className="footer">
             <div className="footer-overlay">
                 <div className="footer-top">
                     <div className="footer-brand">
-                        <img src={whitelogo} alt="Synced" className="footer-top-logo" />
-                        <p>
-                            Your all-in-one health platform for individuals and families. 
-                            Tracking everything that matters, for everyone you love.
-                        </p>
+                        <img 
+                            src={brandData.logo_url} 
+                            alt="Logo" 
+                            className="footer-top-logo" 
+                            style={{ filter: isDark ? 'none' : 'invert(1)' }}
+                        />
+                        <p>{isAr ? brandData.desc_ar : brandData.desc_en}</p>
                     </div>
 
                     <div className="footer-links-container">
                         <div className="footer-col">
-                            <h4>PRODUCT</h4>
+                            <h4>{isAr ? "المنتجات" : "PRODUCT"}</h4>
                             <ul>
-                                <li>Services</li>
-                                <li>Family Portal</li>
-                                <li>Dashboard</li>
-                                <li>Health Tracking</li>
+                                {productLinks.map((link, idx) => (
+                                    <li key={idx}>{isAr ? link.title_ar : link.title_en}</li>
+                                ))}
                             </ul>
                         </div>
                         <div className="footer-col">
-                            <h4>COMPANY</h4>
+                            <h4>{isAr ? "الشركة" : "COMPANY"}</h4>
                             <ul>
-                                <li>About Us</li>
-                                <li>Contact Us</li>
-                                <li>Frequently Asked</li>
-                                <li>How To Connect</li>
+                                {companyLinks.map((link, idx) => (
+                                    <li key={idx}>{isAr ? link.title_ar : link.title_en}</li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -40,10 +65,14 @@ const Footer = () => {
 
                 <div className="footer-bottom">
                     <div className="footer-branding-full">
-                        <img src={fulllogo} alt="Synced Connected by Care" />
+                        <img 
+                            src={brandData.full_logo_url} 
+                            alt="Synced Full Logo" 
+                            style={{ filter: isDark ? 'none' : 'invert(1)' }}
+                        />
                     </div>
                     <p className="footer-copyright">
-                        © 2026 Synced Health Technologies. All rights reserved.
+                        {isAr ? copyrightData?.desc_ar : copyrightData?.desc_en}
                     </p>
                 </div>
             </div>
