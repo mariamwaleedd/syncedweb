@@ -157,6 +157,7 @@
     background: transparent;
     border: none;
     color: var(--white);
+    width: 38px;
     height: 40px;
     display: flex;
     align-items: center;

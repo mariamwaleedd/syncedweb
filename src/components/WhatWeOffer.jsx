@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './WhatWeOffer.css';
-import img25 from '../imgs/image 25.png';
-import img27 from '../imgs/image 27.png';
-import img26 from '../imgs/image 26.png';
-import img24 from '../imgs/image 24.png';
-import img23 from '../imgs/image 23.png';
-import img22 from '../imgs/image 22.png';
-import img28 from '../imgs/image 28.png';
+import { supabase } from '../Supabase';
+import { useGlobal } from '../context/GlobalContext';
 
 const Counter = ({ end, suffix, duration = 2000 }) => {
     const [count, setCount] = useState(0);
@@ -14,21 +9,12 @@ const Counter = ({ end, suffix, duration = 2000 }) => {
     useEffect(() => {
         let startTimestamp = null;
         const endVal = parseFloat(end);
-        
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const currentCount = progress * endVal;
             setCount(endVal > 10 ? Math.floor(currentCount) : currentCount.toFixed(1));
-
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                setTimeout(() => {
-                    startTimestamp = null;
-                    window.requestAnimationFrame(step);
-                }, 3000);
-            }
+            if (progress < 1) window.requestAnimationFrame(step);
         };
         window.requestAnimationFrame(step);
     }, [end, duration]);
@@ -37,105 +23,61 @@ const Counter = ({ end, suffix, duration = 2000 }) => {
 };
 
 const WhatWeOffer = () => {
+    const { isAr } = useGlobal();
+    const [header, setHeader] = useState(null);
+    const [stats, setStats] = useState([]);
+    const [cards, setCards] = useState([]);
+
+    useEffect(() => {
+        const fetchOfferData = async () => {
+            const { data } = await supabase.from('what_we_offer').select('*');
+            if (data) {
+                setHeader(data.find(item => item.type === 'header'));
+                setStats(data.filter(item => item.type === 'stat'));
+                setCards(data.filter(item => item.type === 'card'));
+            }
+        };
+        fetchOfferData();
+    }, []);
+
+    if (!header) return null;
+
     return (
         <section className="offer-section">
             <div className="stats-container">
-                <div className="stat-item">
-                    <h3><Counter end="50" suffix="+" /></h3>
-                    <p>Active Users</p>
-                </div>
-                <div className="stat-item">
-                    <h3><Counter end="1.2" suffix=" Million" /></h3>
-                    <p>Records Tracked</p>
-                </div>
-                <div className="stat-item">
-                    <h3><Counter end="98" suffix="%" /></h3>
-                    <p>Satisfaction Rate</p>
-                </div>
-                <div className="stat-item">
-                    <h3><Counter end="340" suffix="+" /></h3>
-                    <p>Partner Physicians</p>
-                </div>
+                {stats.map((stat, idx) => (
+                    <div className="stat-item" key={idx}>
+                        <h3>
+                            <Counter 
+                                end={stat.val_end} 
+                                suffix={isAr ? stat.suffix_ar : stat.suffix_en} 
+                            />
+                        </h3>
+                        <p>{isAr ? stat.label_ar : stat.label_en}</p>
+                    </div>
+                ))}
             </div>
 
             <div className="offer-header">
                 <div className="label">
-                    <span className="line"></span> WHAT WE OFFER
+                    <span className="line"></span> {isAr ? header.label_ar : header.label_en}
                 </div>
-                <h2>Every tool you need for <i>complete</i> health care</h2>
-                <p>From real-time vitals to family management, every feature is built around what actually matters to your wellbeing.</p>
+                <h2>{isAr ? header.title_ar : header.title_en}</h2>
+                <p>{isAr ? header.desc_ar : header.desc_en}</p>
             </div>
 
             <div className="offer-grid">
-                <div className="card medicine-card">
-                    <div className="card-info">
-                        <h4>Medicine</h4>
-                        <p>Personalize your own profile</p>
+                {cards.map((card, idx) => (
+                    <div className={`card ${card.card_class}`} key={idx}>
+                        <div className="card-info">
+                            <h4>{isAr ? card.title_ar : card.title_en}</h4>
+                            <p>{isAr ? card.desc_ar : card.desc_en}</p>
+                        </div>
+                        <div className="img-wrapper">
+                            <img src={card.img_url} alt="" className={card.img_class} />
+                        </div>
                     </div>
-                    <div className="img-wrapper">
-                        <img src={img25} alt="Medicine" className="img-med" />
-                    </div>
-                </div>
-
-                <div className="card doctor-card">
-                    <div className="card-info">
-                        <h4>Doctor Connectivity</h4>
-                        <p>Personalize your own profile</p>
-                    </div>
-                    <div className="img-wrapper">
-                        <img src={img27} alt="Doctor" className="img-doc" />
-                    </div>
-                </div>
-
-                <div className="card syncing-card">
-                    <div className="card-info">
-                        <h4>Smart Syncing</h4>
-                        <p>All your data safe in one place.</p>
-                    </div>
-                    <div className="img-wrapper">
-                        <img src={img26} alt="Smart Syncing" className="img-sync" />
-                    </div>
-                </div>
-
-                <div className="card family-card">
-                    <div className="card-info">
-                        <h4>Family Portal</h4>
-                        <p>Never forget your medicine.</p>
-                    </div>
-                    <div className="img-wrapper">
-                        <img src={img24} alt="Family Portal" className="img-fam" />
-                    </div>
-                </div>
-
-                <div className="card tracking-card">
-                    <div className="card-info">
-                        <h4>Health Tracking</h4>
-                        <p>All your data safe in one place.</p>
-                    </div>
-                    <div className="img-wrapper">
-                        <img src={img23} alt="Health Tracking" className="img-track" />
-                    </div>
-                </div>
-
-                <div className="card reports-card">
-                    <div className="card-info">
-                        <h4>Medical Reports</h4>
-                        <p>All your data safe in one place.</p>
-                    </div>
-                    <div className="img-wrapper">
-                        <img src={img22} alt="Medical Reports" className="img-rep" />
-                    </div>
-                </div>
-
-                <div className="card reminders-card">
-                    <div className="card-info">
-                        <h4>Reminders</h4>
-                        <p>Personalize your own profile</p>
-                    </div>
-                    <div className="img-wrapper">
-                        <img src={img28} alt="Reminders" className="img-rem" />
-                    </div>
-                </div>
+                ))}
             </div>
         </section>
     );

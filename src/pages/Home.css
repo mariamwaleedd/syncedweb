@@ -44,7 +44,6 @@
 
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
 }
 
@@ -56,6 +55,7 @@ body {
     color: var(--white);
     overflow-x: hidden;
     width: 100%;
+    margin: 0;
     transition: background-color var(--transition), color var(--transition);
 }
 
