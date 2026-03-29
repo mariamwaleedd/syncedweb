@@ -20,8 +20,8 @@ const Process = () => {
             if (data && data.length > 0) {
                 setHeader(data.find(i => i.type === 'header'));
                 setSteps(data.filter(i => i.type === 'step'));
-            } else {
-                console.error("No data found in 'the_process' table", error);
+            } else if (error) {
+                console.error("Process Table Error:", error.message);
             }
         };
         fetchData();
@@ -39,16 +39,19 @@ const Process = () => {
         };
     }, []);
 
-    if (!header) return null;
-
     return (
         <section className="process-section" ref={sectionRef}>
             <div className={`process-header ${inView ? 'animate-header' : ''}`}>
                 <div className="process-label">
-                    <span className="line"></span> {isAr ? header.label_ar : header.label_en}
+                    <span className="line"></span> 
+                    {header ? (isAr ? header.label_ar : header.label_en) : "THE PROCESS"}
                 </div>
-                <h2>{isAr ? header.title_ar : header.title_en}</h2>
-                <p>{isAr ? header.desc_ar : header.desc_en}</p>
+                <h2>
+                    {header ? (isAr ? header.title_ar : header.title_en) : "Up and running in minutes"}
+                </h2>
+                <p>
+                    {header ? (isAr ? header.desc_ar : header.desc_en) : "Loading details..."}
+                </p>
             </div>
 
             <div className="steps-container">

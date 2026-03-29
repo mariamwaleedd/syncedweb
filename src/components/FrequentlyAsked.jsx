@@ -1,31 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './FrequentlyAsked.css';
+import { supabase } from '../Supabase';
+import { useGlobal } from '../context/GlobalContext';
 
 const FrequentlyAsked = () => {
+    const { isAr } = useGlobal();
     const [activeIndex, setActiveIndex] = useState(null);
+    const [header, setHeader] = useState(null);
+    const [faqs, setFaqs] = useState([]);
 
-    const faqs = [
-        {
-            question: "Is my health data secure and private?",
-            answer: "Yes, we use enterprise-grade encryption and comply with all international health data privacy standards to ensure your information remains yours alone."
-        },
-        {
-            question: "Which wearable devices does Synced support?",
-            answer: "Synced supports all major wearables including Apple Watch, Garmin, Fitbit, and Samsung Health, as well as various smart scales and blood pressure monitors."
-        },
-        {
-            question: "How does the Family Portal work for children?",
-            answer: "Parents can create managed profiles for children under their main account, allowing them to track growth, vaccinations, and daily vitals in one dashboard."
-        },
-        {
-            question: "What happens to my data if I cancel?",
-            answer: "You can export all your historical data at any time. If you cancel, your data is securely archived for 30 days before being permanently deleted."
-        },
-        {
-            question: "Is there an app for iOS and Android?",
-            answer: "Yes, our native apps are available for both iOS and Android platforms, providing a seamless mobile experience with real-time notifications."
-        }
-    ];
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            const { data, error } = await supabase
+                .from('faqs')
+                .select('*')
+                .order('order_index', { ascending: true });
+            
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            if (data) {
+                const headerRow = data.find(i => i.type?.toLowerCase().includes('header'));
+                const faqRows = data.filter(i => i.type?.toLowerCase().includes('faq'));
+                
+                setHeader(headerRow);
+                setFaqs(faqRows);
+            }
+        };
+        fetchFaqs();
+    }, []);
 
     const toggleAccordion = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
@@ -36,36 +41,42 @@ const FrequentlyAsked = () => {
             <div className="faq-container">
                 <div className="faq-content-left">
                     <div className="faq-label">
-                        <span className="line"></span> QUESTIONS
+                        <span className="line"></span> 
+                        {header ? (isAr ? header.label_ar : header.label_en) : "QUESTIONS"}
                     </div>
-                    <h2>Frequently <br /> asked <i>questions</i></h2>
+                    <h2>
+                        {header ? (isAr ? header.title_ar : header.title_en) : "Frequently Asked Questions"}
+                    </h2>
                     <p>
-                        Have a question not answered here? <br />
-                        Reach out to our support team 24/7.
+                        {header ? (isAr ? header.desc_ar : header.desc_en) : "Reach out to our support team 24/7."}
                     </p>
                 </div>
 
                 <div className="faq-accordion-right">
-                    {faqs.map((faq, index) => (
+                    {faqs.length > 0 ? faqs.map((faq, index) => (
                         <div 
                             key={index} 
                             className={`faq-item ${activeIndex === index ? 'active' : ''}`}
                             onClick={() => toggleAccordion(index)}
                         >
                             <div className="faq-question-row">
-                                <span className="faq-question">{faq.question}</span>
+                                <span className="faq-question">
+                                    {isAr ? faq.question_ar : faq.question_en}
+                                </span>
                                 <div className="faq-toggle-btn">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <line x1="12" y1="5" x2="12" y2="19"></line>
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                     </svg>
                                 </div>
                             </div>
                             <div className="faq-answer">
-                                <p>{faq.answer}</p>
+                                <p>{isAr ? faq.answer_ar : faq.answer_en}</p>
                             </div>
                         </div>
-                    ))}
+                    )) : (
+                        <div style={{color: 'white', opacity: 0.5}}>Updating questions...</div>
+                    )}
                 </div>
             </div>
         </section>
