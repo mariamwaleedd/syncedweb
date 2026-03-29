@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Error from './pages/Error';
 import ContactUs from './pages/ContactUs';
 import FAQPage from './pages/FAQPage';
+import PlansPage from './pages/PlansPage';
 
 const Routing = () => {
   return (
@@ -11,6 +12,7 @@ const Routing = () => {
       <Route path="/" element={<Home />} />
       <Route path="/ContactUs" element={<ContactUs />} />
       <Route path="/FAQPage" element={<FAQPage />} />
+      <Route path="/plans" element={<PlansPage />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
