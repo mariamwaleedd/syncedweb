@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     height: 100px;
     display: flex;
     justify-content: space-between;
@@ -121,11 +121,6 @@
     align-items: center;
 }
 
-.logo-img {
-    height: 45px;
-    width: auto;
-    transition: var(--transition);
-}
 
 .nav-search-container {
     flex: 1;
@@ -162,7 +157,6 @@
     background: transparent;
     border: none;
     color: var(--white);
-    width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -175,7 +169,7 @@
     width: 280px;
     background: var(--darkbg);
     border: 1px solid var(--lightblue);
-    padding-left: 15px;
+    padding-left: 35px;
 }
 
 [dir='rtl'] .search-wrapper:hover {

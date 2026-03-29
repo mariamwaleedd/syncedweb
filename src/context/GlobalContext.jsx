@@ -10,11 +10,13 @@ export const GlobalProvider = ({ children }) => {
     const toggleTheme = () => setIsDark(!isDark);
 
     useEffect(() => {
-        const dir = isAr ? 'rtl' : 'ltr';
-        document.documentElement.setAttribute('dir', dir);
-        document.documentElement.setAttribute('lang', isAr ? 'ar' : 'en');
+        document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+        document.documentElement.lang = isAr ? 'ar' : 'en';
+    }, [isAr]);
+
+    useEffect(() => {
         document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    }, [isAr, isDark]);
+    }, [isDark]);
 
     return (
         <GlobalContext.Provider value={{ isAr, toggleLang, isDark, toggleTheme }}>

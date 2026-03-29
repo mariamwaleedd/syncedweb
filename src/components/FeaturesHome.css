@@ -22,7 +22,7 @@
 .features-left-column {
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 75px;
 }
 
 .features-label {
