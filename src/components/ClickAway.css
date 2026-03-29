@@ -1,13 +1,12 @@
 .click-away-section {
     width: 100%;
     min-height: 75vh;
-    margin-top: 20%;
-    margin-bottom: 20%;
+    margin-top: 10%;
+    margin-bottom: 10%;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    border-radius: var(--0, 0);
     background: linear-gradient(13deg, rgba(100, 181, 246, 0.28) 1.13%, #010422 74.95%);
 }
 
@@ -27,15 +26,26 @@
     align-self: flex-end;
     position: relative;
     bottom: 0;
+    height: 100%;
 }
 
 .click-away-image img {
-    width: 110%;
+    width: 115%;
     height: auto;
     object-fit: contain;
     display: block;
-    margin-left: -10%;
+    margin-left: -15%;
     margin-bottom: -5px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[dir='rtl'] .click-away-image img {
+    margin-left: 0;
+    margin-right: -15%;
+}
+
+.click-away-image img.rotated-ar {
+    transform: scaleX(-1);
 }
 
 .click-away-content {
@@ -64,7 +74,7 @@
 
 .click-away-content h2 {
     font-family: var(--titlefont);
-    font-size: 6.5rem;
+    font-size: clamp(3rem, 6vw, 6.5rem);
     line-height: 0.95;
     margin-bottom: 30px;
     font-weight: 400;
@@ -85,7 +95,6 @@
 
 @media (max-width: 1200px) {
     .click-away-content h2 { font-size: 4.5rem; }
-    .click-away-container { padding: 0 5%; }
 }
 
 @media (max-width: 992px) {
@@ -93,28 +102,12 @@
     .click-away-container {
         flex-direction: column;
         text-align: center;
+        padding-top: 50px;
     }
-
-    .click-away-image {
-        width: 100%;
-    }
-
-    .click-away-image img {
-        width: 120%;
-    }
-
-    .click-away-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 0;
-    }
-
+    .click-away-image { width: 100%; order: 2; }
+    .click-away-image img { width: 100%; margin-left: 0; margin-right: 0; }
+    [dir='rtl'] .click-away-image img { margin-right: 0; }
+    .click-away-content { order: 1; padding-bottom: 0; }
     .click-away-label { justify-content: center; }
     .click-away-content p { max-width: 100%; }
-}
-
-@media (max-width: 600px) {
-    .click-away-content h2 { font-size: 3.5rem; }
-    .click-away-content p { font-size: 1.1rem; }
 }

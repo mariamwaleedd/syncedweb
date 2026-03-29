@@ -10,7 +10,7 @@ import PatientStories from '../components/PatientStories';
 import TakeControl from '../components/TakeControl';
 import FrequentlyAsked from '../components/FrequentlyAsked';
 import Footer from './../common/Footer';
-import IphoneSpline from '../components/iPhoneSpline';
+import IphoneSpline from '../components/IPhoneSpline';
 import CommandCenter from '../components/CommandCenter';
 import Preloader from './../common/Preloader';
 
