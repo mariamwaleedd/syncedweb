@@ -20,7 +20,7 @@ const Routing = () => {
         <Route path="/" element={<Home />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/features" element={<Features />} />
-        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/FAQPage" element={<FAQPage />} />
         <Route path="/plans" element={<PlansPage />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />

@@ -20,7 +20,7 @@ const NavBar = () => {
                         <li><Link to="/">{isAr ? 'الرئيسية' : 'Home'}</Link></li>
                         <li><Link to="/features">{isAr ? 'الميزات' : 'Features'}</Link></li>
                         <li><Link to="/doctors">{isAr ? 'الأطباء' : 'Doctors'}</Link></li>
-                        <li><Link to="/aboutus">{isAr ? 'عنا' : 'About'}</Link></li>
+                        <li><Link to="/AboutUs">{isAr ? 'عنا' : 'About'}</Link></li>
                         <li><Link to="/ContactUs">{isAr ? 'اتصل بنا' : 'Contact'}</Link></li>
                     </ul>
                 </div>
