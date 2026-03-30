@@ -1,3 +1,4 @@
+//
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -9,6 +10,7 @@ import Features from './pages/Features';
 import NavBar from './common/NavBar';
 import Footer from './common/Footer';
 import AboutUs from './pages/AboutUs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 const Routing = () => {
   return (
@@ -21,6 +23,7 @@ const Routing = () => {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/FAQPage" element={<FAQPage />} />
         <Route path="/plans" element={<PlansPage />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
