@@ -5,8 +5,10 @@ import Error from './pages/Error';
 import ContactUs from './pages/ContactUs';
 import FAQPage from './pages/FAQPage';
 import PlansPage from './pages/PlansPage';
+import Features from './pages/Features';
 import NavBar from './common/NavBar';
 import Footer from './common/Footer';
+import AboutUs from './pages/AboutUs';
 
 const Routing = () => {
   return (
@@ -15,6 +17,8 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/FAQPage" element={<FAQPage />} />
         <Route path="/plans" element={<PlansPage />} />
         <Route path="*" element={<Error />} />

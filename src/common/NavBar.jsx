@@ -2,6 +2,7 @@ import React from 'react';
 import './NavBar.css';
 import whitelogo from '../imgs/logowhite.png';
 import { useGlobal } from '../context/GlobalContext';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     const { isAr, toggleLang, isDark, toggleTheme } = useGlobal();
@@ -16,11 +17,11 @@ const NavBar = () => {
                         <span></span>
                     </div>
                     <ul className="burger-menu">
-                        <li>{isAr ? 'الرئيسية' : 'Home'}</li>
-                        <li>{isAr ? 'الخدمات' : 'Services'}</li>
-                        <li>{isAr ? 'الأطباء' : 'Doctors'}</li>
-                        <li>{isAr ? 'عنا' : 'About'}</li>
-                        <li>{isAr ? 'اتصل بنا' : 'Contact'}</li>
+                        <li><Link to="/">{isAr ? 'الرئيسية' : 'Home'}</Link></li>
+                        <li><Link to="/features">{isAr ? 'الميزات' : 'Features'}</Link></li>
+                        <li><Link to="/doctors">{isAr ? 'الأطباء' : 'Doctors'}</Link></li>
+                        <li><Link to="/about">{isAr ? 'عنا' : 'About'}</Link></li>
+                        <li><Link to="/ContactUs">{isAr ? 'اتصل بنا' : 'Contact'}</Link></li>
                     </ul>
                 </div>
 
