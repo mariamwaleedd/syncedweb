@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './ContactUs.css';
-import NavBar from '../common/NavBar';
-import Footer from '../common/Footer';
 import TopSections from '../common/TopSections';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
@@ -31,7 +29,6 @@ const ContactUs = () => {
 
     return (
         <div className="contact-root">
-            <NavBar />
             <TopSections 
                 titleMain={isAr ? header?.label_ar : header?.label_en}
                 titleItalic={isAr ? header?.value_ar : header?.value_en}
@@ -104,7 +101,6 @@ const ContactUs = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
         </div>
     );
 };

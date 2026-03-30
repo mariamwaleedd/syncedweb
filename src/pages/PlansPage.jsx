@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './PlansPage.css';
-import NavBar from '../common/NavBar';
-import Footer from '../common/Footer';
 import TopSections from '../common/TopSections';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
@@ -33,7 +31,6 @@ const PlansPage = () => {
 
     return (
         <div className="plans-page-root">
-            <NavBar />
             <TopSections 
                 titleMain={isAr ? header.main_ar : header.main_en}
                 titleItalic={isAr ? header.italic_ar : header.italic_en}
@@ -76,7 +73,6 @@ const PlansPage = () => {
                     ))}
                 </div>
             </main>
-            <Footer />
         </div>
     );
 };

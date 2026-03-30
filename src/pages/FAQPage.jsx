@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './FAQPage.css';
-import NavBar from '../common/NavBar';
-import Footer from '../common/Footer';
 import TopSections from '../common/TopSections';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
@@ -42,7 +40,6 @@ const FAQPage = () => {
 
     return (
         <div className="faq-page-wrapper">
-            <NavBar />
             <TopSections 
                 titleMain={isAr ? header.title_ar.split(' ').slice(0,2).join(' ') : header.title_en.split(' ').slice(0,3).join(' ')}
                 titleItalic={isAr ? header.title_ar.split(' ').slice(2).join(' ') : header.title_en.split(' ').slice(3).join(' ')}
@@ -94,7 +91,6 @@ const FAQPage = () => {
                     ))}
                 </section>
             </main>
-            <Footer />
         </div>
     );
 };
