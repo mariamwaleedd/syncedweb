@@ -6,8 +6,8 @@ export const GlobalProvider = ({ children }) => {
     const [isAr, setIsAr] = useState(false);
     const [isDark, setIsDark] = useState(true);
 
-    const toggleLang = () => setIsAr(!isAr);
-    const toggleTheme = () => setIsDark(!isDark);
+    const toggleLang = () => setIsAr(prev => !prev);
+    const toggleTheme = () => setIsDark(prev => !prev);
 
     useEffect(() => {
         document.documentElement.dir = isAr ? 'rtl' : 'ltr';
