@@ -140,7 +140,7 @@
 .doctor-card img { width: 52%; bottom: 0; }
 .syncing-card img { width: 100%; right: 0; bottom: 0; }
 .family-card img { width: 100%; right: 0; bottom: 0; }
-.tracking-card img { width: 82%; right: 0; left: 27%; }
+.tracking-card img { width: 120%; right: 0; left: 27%; rotate: calc(12deg); }
 .reports-card { grid-column: span 2; }
 .reports-card img { width: 45%; right: 50px; bottom: 0; }
 .reminders-card img { width: 85%; right: 7%; bottom: -10%; }
