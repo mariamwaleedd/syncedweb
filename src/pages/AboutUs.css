@@ -1,3 +1,22 @@
+:root {
+    --darkbg: #010422;
+    --lightblue: #A3D6FF;
+    --white: #FFFFFF;
+    --cardbg: rgba(255, 255, 255, 0.1);
+    --titlefont: "Instrument Serif", serif;
+    --subtitlefont: "General Sans", sans-serif;
+    --numbersfont: "Unbounded", sans-serif;
+    --transition: 0.3s ease-in-out;
+}
+
+:root[data-theme='light'] {
+    --darkbg: #F4F7FF;
+    --white: #010422;
+    --lightblue: #0066FF;
+    --cardbg: rgba(0, 0, 0, 0.05);
+    --bg-img: none; 
+}
+
 .about-page {
     color: var(--white);
     width: 100%;
