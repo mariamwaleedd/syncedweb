@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Features.css';
 import NavBar from '../common/NavBar';
 import Footer from '../common/Footer';
@@ -9,6 +10,7 @@ import { useGlobal } from '../context/GlobalContext';
 const Features = () => {
     const { isAr } = useGlobal();
     const [features, setFeatures] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchFeatures = async () => {
@@ -21,18 +23,19 @@ const Features = () => {
         fetchFeatures();
     }, []);
 
+    const generateSlug = (text) => {
+        return text.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    };
+
     const handleImgMove = (e) => {
         const img = e.currentTarget.querySelector('.feature-3d-img');
         const rect = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
         const rotateX = (y - centerY) / 10;
         const rotateY = (centerX - x) / 10;
-
         img.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.2)`;
     };
 
@@ -71,7 +74,10 @@ const Features = () => {
                             <div className="feat-content-box">
                                 <h3>{isAr ? item.title_ar : item.title_en}</h3>
                                 <p>{isAr ? item.desc_ar : item.desc_en}</p>
-                                <button className="feat-action-btn">
+                                <button 
+                                    className="feat-action-btn"
+                                    onClick={() => navigate(`/features/${generateSlug(item.title_en)}`)}
+                                >
                                     {isAr ? item.btn_text_ar : item.btn_text_en}
                                 </button>
                             </div>
