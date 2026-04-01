@@ -3,61 +3,71 @@ import { useParams } from 'react-router-dom';
 import './RepeatedPage.css';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
-import FeatureHero from '../components/FeatureHero';
-import FeatureAbout from '../components/FeatureAbout';
-import FeatureRationale from '../components/FeatureRationale';
+
+import HeroSec from '../components/repeated/HeroSec';
+import WhatIsSec from '../components/repeated/WhatIsSec';
+import WhySec from '../components/repeated/WhySec';
+import BenefitsSec from '../components/repeated/BenefitsSec';
+import HowItHelpsSec from '../components/repeated/HowItHelpsSec';
+import ScenariosSec from '../components/repeated/ScenariosSec';
+import StatsSec from '../components/repeated/StatSec';
+import CTASec from '../components/repeated/CTASec';
 
 const RepeatedPage = () => {
     const { slug } = useParams();
     const { isAr } = useGlobal();
-    const [page, setPage] = useState(null);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
-        const fetchPage = async () => {
-            const { data } = await supabase.from('feature_details').select('*').eq('slug', slug).single();
-            if (data) setPage(data);
+        const fetchPageData = async () => {
+            const { data: pageData } = await supabase.from('feature_details').select('*').eq('slug', slug).single();
+            if (pageData) setData(pageData);
         };
-        fetchPage();
+        fetchPageData();
         window.scrollTo(0, 0);
     }, [slug]);
 
-    if (!page) return null;
+    if (!data) return null;
 
     return (
-        <div className="f-root">
-            <FeatureHero 
-                title={isAr ? page.title_ar : page.title_en}
-                sub={isAr ? page.sub_ar : page.sub_en}
-                cap={isAr ? page.cap_ar : page.cap_en}
-                img={page.img}
+        <div className="rep-root-v2">
+            <HeroSec 
+                img={data.hero_img} 
+                title={isAr ? data.title_ar : data.title_en} 
+                sub={isAr ? data.sub_ar : data.sub_en} 
             />
-
-            <main className="f-container">
-                <FeatureAbout 
-                    title={isAr ? `ما هي ${page.title_ar}؟` : `What is ${page.title_en} For?`}
-                    desc={isAr ? page.about_ar : page.about_en}
-                    points={(isAr ? page.points_ar : page.points_en).split(',')}
-                />
-
-                <FeatureRationale 
-                    title={isAr ? "لماذا اخترنا هذه الميزة" : "Why We Chose This Feature"}
-                    desc={isAr ? page.why_ar : page.why_en}
-                />
-
-                <section className="f-scenarios">
-                    <h2>{isAr ? "سيناريوهات واقعية" : "Real-Life Scenarios"}</h2>
-                    <div className="f-sc-grid">
-                        <div className="f-sc-card">
-                            <span className="f-tag">SCENARIO 01</span>
-                            <p>{isAr ? page.sc1_ar : page.sc1_en}</p>
-                        </div>
-                        <div className="f-sc-card">
-                            <span className="f-tag">SCENARIO 02</span>
-                            <p>{isAr ? page.sc2_ar : page.sc2_en}</p>
-                        </div>
-                    </div>
-                </section>
-            </main>
+            <WhatIsSec 
+                title={isAr ? data.title_ar : data.title_en} 
+                desc={isAr ? data.what_desc_ar : data.what_desc_en} 
+                points={isAr ? data.what_points_ar?.split(';') || [] : data.what_points_en?.split(';') || []} 
+                isAr={isAr}
+            />
+            <WhySec 
+                desc={isAr ? data.why_desc_ar : data.why_desc_en} 
+                cards={isAr ? data.why_cards_ar?.split(';') || [] : data.why_cards_en?.split(';') || []} 
+                isAr={isAr}
+            />
+            <BenefitsSec 
+                items={isAr ? data.benefit_cards_ar?.split(';') || [] : data.benefit_cards_en?.split(';') || []} 
+                isAr={isAr}
+            />
+            <HowItHelpsSec 
+                items={isAr ? data.how_items_ar?.split(';') || [] : data.how_items_en?.split(';') || []} 
+                isAr={isAr}
+            />
+            <ScenariosSec 
+                s1={isAr ? data.sc1_ar : data.sc1_en} 
+                s2={isAr ? data.sc2_ar : data.sc2_en} 
+                isAr={isAr}
+            />
+            <StatsSec 
+                stats={isAr ? data.stats_ar?.split(';') || [] : data.stats_en?.split(';') || []} 
+            />
+            <CTASec 
+                title={isAr ? data.title_ar : data.title_en} 
+                desc={isAr ? data.cta_desc_ar : data.cta_desc_en} 
+                isAr={isAr}
+            />
         </div>
     );
 };
