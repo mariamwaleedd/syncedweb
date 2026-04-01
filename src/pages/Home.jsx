@@ -10,12 +10,10 @@ import TakeControl from '../components/TakeControl';
 import FrequentlyAsked from '../components/FrequentlyAsked';
 import IphoneSpline from '../components/IPhoneSpline';
 import CommandCenter from '../components/CommandCenter';
-import Preloader from './../common/Preloader';
 
 const Home = () => {
   return (
     <>
-    <Preloader/>
     
     <main>
     <HeroSection />

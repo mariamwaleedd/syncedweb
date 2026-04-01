@@ -11,11 +11,14 @@ import NavBar from './common/NavBar';
 import Footer from './common/Footer';
 import AboutUs from './pages/AboutUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Preloader from './common/Preloader';
+import RepeatedPage from './pages/RepeatedPage';
 
 const Routing = () => {
   return (
     <>
       <NavBar />
+      <Preloader/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/ContactUs" element={<ContactUs />} />
@@ -24,6 +27,7 @@ const Routing = () => {
         <Route path="/FAQPage" element={<FAQPage />} />
         <Route path="/plans" element={<PlansPage />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/features/:slug" element={<RepeatedPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
