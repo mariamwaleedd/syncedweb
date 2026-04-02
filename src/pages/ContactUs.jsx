@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './ContactUs.css';
-import NavBar from '../common/NavBar';
-import Footer from '../common/Footer';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';

@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom';
 import './RepeatedPage.css';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
-import NavBar from '../common/NavBar';
-import Footer from '../common/Footer';
 import { 
     FaStethoscope, FaInfoCircle, FaCheck, FaLightbulb, 
     FaShieldAlt, FaRocket, FaUsers, FaArrowRight, 

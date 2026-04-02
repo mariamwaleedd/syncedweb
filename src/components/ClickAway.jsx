@@ -27,7 +27,7 @@ const ClickAway = () => {
                 <div className="click-away-image">
                     <img 
                         src={data.img_url} 
-                        alt="" 
+                        alt="Synced Mobile Experience" 
                         className={isAr ? 'rotated-ar' : ''} 
                     />
                 </div>
@@ -38,7 +38,7 @@ const ClickAway = () => {
                     <h2>
                         {isAr ? data.title_main_ar : data.title_main_en} 
                         <i>{isAr ? data.title_italic_ar : data.title_italic_en}</i> 
-                        {isAr ? "" : " away."}
+                        {!isAr && " away."}
                     </h2>
                     <p>{isAr ? data.desc_ar : data.desc_en}</p>
                 </div>
