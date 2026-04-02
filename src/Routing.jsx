@@ -13,12 +13,14 @@ import AboutUs from './pages/AboutUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Preloader from './common/Preloader';
 import RepeatedPage from './pages/RepeatedPage';
+import HealthCursor from './common/HealthCursor';
 
 const Routing = () => {
   return (
     <>
       <NavBar />
       <Preloader/>
+      <HealthCursor/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/ContactUs" element={<ContactUs />} />
