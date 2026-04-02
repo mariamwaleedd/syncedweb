@@ -10,10 +10,10 @@ const UserIcon = () => (
     </svg>
 );
 
-const Stars = () => (
+const Stars = ({ rating = 5 }) => (
     <div className="star-rating">
         {[...Array(5)].map((_, i) => (
-            <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="white">
+            <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i < rating ? "white" : "rgba(255,255,255,0.2)"}>
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </svg>
         ))}
@@ -25,24 +25,62 @@ const PatientStories = () => {
     const [header, setHeader] = useState(null);
     const [cards, setCards] = useState([]);
     const [bar, setBar] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    
+    const [newReview, setNewReview] = useState({
+        name: '',
+        role: '',
+        content: '',
+        rating: 5
+    });
+
+    const fetchTestimonials = async () => {
+        const { data, error } = await supabase
+            .from('testimonials')
+            .select('*')
+            .order('order_index', { ascending: true });
+        
+        if (data && data.length > 0) {
+            setHeader(data.find(i => i.type === 'header'));
+            setCards(data.filter(i => i.type === 'card'));
+            setBar(data.find(i => i.type === 'bar'));
+        }
+    };
 
     useEffect(() => {
-        const fetchTestimonials = async () => {
-            const { data, error } = await supabase
-                .from('testimonials')
-                .select('*')
-                .order('order_index', { ascending: true });
-            
-            if (data && data.length > 0) {
-                setHeader(data.find(i => i.type === 'header'));
-                setCards(data.filter(i => i.type === 'card'));
-                setBar(data.find(i => i.type === 'bar'));
-            } else if (error) {
-                console.error("Fetch error:", error.message);
-            }
-        };
         fetchTestimonials();
     }, []);
+
+    const handleInputChange = (e) => {
+        setNewReview({ ...newReview, [e.target.name]: e.target.value });
+    };
+
+    const submitReview = async (e) => {
+        e.preventDefault();
+        setSubmitting(true);
+        
+        const { error } = await supabase
+            .from('testimonials')
+            .insert([{
+                type: 'card',
+                variant: 'normal',
+                name_en: newReview.name,
+                name_ar: newReview.name,
+                role_en: newReview.role,
+                role_ar: newReview.role,
+                content_en: newReview.content,
+                content_ar: newReview.content,
+                order_index: cards.length + 1
+            }]);
+
+        if (!error) {
+            setIsModalOpen(false);
+            setNewReview({ name: '', role: '', content: '', rating: 5 });
+            fetchTestimonials();
+        }
+        setSubmitting(false);
+    };
 
     if (cards.length === 0 && !header) return null;
 
@@ -87,7 +125,7 @@ const PatientStories = () => {
                     </div>
                     <span className="count-text">{bar?.count_text || "+30"}</span>
                 </div>
-                <button className="write-review-btn">
+                <button className="write-review-btn" onClick={() => setIsModalOpen(true)}>
                     {isAr ? "اكتب مراجعتك" : "Write Your Review"}
                     <div className="btn-circle">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
@@ -96,6 +134,35 @@ const PatientStories = () => {
                     </div>
                 </button>
             </div>
+
+            {isModalOpen && (
+                <div className="review-modal-overlay">
+                    <div className="review-modal-content">
+                        <button className="close-modal" onClick={() => setIsModalOpen(false)}>&times;</button>
+                        <div className="modal-header">
+                            <h3>{isAr ? "أضف مراجعتك" : "Add Your Review"}</h3>
+                            <p>{isAr ? "شاركنا تجربتك مع سينكد" : "Share your experience with Synced"}</p>
+                        </div>
+                        <form onSubmit={submitReview}>
+                            <div className="modal-input-group">
+                                <label>{isAr ? "الاسم" : "Full Name"}</label>
+                                <input type="text" name="name" value={newReview.name} onChange={handleInputChange} required />
+                            </div>
+                            <div className="modal-input-group">
+                                <label>{isAr ? "الوظيفة أو الدور" : "Role (e.g. Family Member)"}</label>
+                                <input type="text" name="role" value={newReview.role} onChange={handleInputChange} required />
+                            </div>
+                            <div className="modal-input-group">
+                                <label>{isAr ? "المراجعة" : "Your Testimonial"}</label>
+                                <textarea name="content" rows="4" value={newReview.content} onChange={handleInputChange} required></textarea>
+                            </div>
+                            <button type="submit" className="modal-submit-btn" disabled={submitting}>
+                                {submitting ? (isAr ? "جاري الإرسال..." : "Sending...") : (isAr ? "نشر المراجعة" : "Post Review")}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
