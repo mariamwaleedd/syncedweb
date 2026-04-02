@@ -8,20 +8,21 @@
     justify-content: center;
     margin-top: -80px;
     position: relative;
-    z-index: 10;
+    z-index: 100;
     padding: 0 5%;
 }
 
 .faq-search-input-box {
     width: 100%;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     border-radius: 50px;
     display: flex;
     align-items: center;
     padding: 15px 30px;
     gap: 15px;
+    border: 1px solid rgba(163, 214, 255, 0.3);
 }
 
 .faq-search-input-box input {
@@ -31,11 +32,11 @@
     outline: none;
     font-family: var(--subtitlefont);
     font-size: 1.1rem;
-    color: #333;
+    color: #010422;
 }
 
 .search-icon-faq {
-    color: #666;
+    color: #010422;
     font-size: 1.2rem;
 }
 
@@ -45,22 +46,19 @@
     padding: 100px 5%;
 }
 
-.faq-categories-section {
-    text-align: center;
-    margin-bottom: 120px;
-}
-
-.faq-categories-section h2 {
+.faq-v2-title {
     font-family: var(--titlefont);
     font-size: 3.5rem;
     margin-bottom: 60px;
     font-weight: 400;
+    text-align: center;
 }
 
 .faq-cat-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
+    margin-bottom: 120px;
 }
 
 .faq-cat-card {
@@ -73,8 +71,8 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.faq-cat-card:hover {
-    background: linear-gradient(180deg, rgba(100, 181, 246, 0.2) 0%, rgba(1, 4, 34, 0.5) 100%);
+.faq-cat-card:hover, .faq-cat-card.active-cat {
+    background: linear-gradient(180deg, rgba(100, 181, 246, 0.28) 0%, rgba(60, 84, 103, 0.28) 100%);
     border-color: var(--lightblue);
     transform: translateY(-10px);
 }
@@ -93,6 +91,12 @@
 
 .faq-group {
     margin-bottom: 80px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .group-title {
@@ -126,7 +130,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
     transition: transform 0.4s ease;
 }
 
@@ -143,7 +146,7 @@
 }
 
 .faq-accordion-item.active .faq-a-row {
-    max-height: 200px;
+    max-height: 300px;
     padding-top: 20px;
 }
 
@@ -154,6 +157,77 @@
     font-size: 1.1rem;
 }
 
+.ask-own-question {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.ask-card {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 60px;
+    text-align: center;
+}
+
+.ask-header h3 {
+    font-family: var(--titlefont);
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.ask-header p {
+    font-family: var(--subtitlefont);
+    opacity: 0.6;
+    margin-bottom: 40px;
+}
+
+.ask-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ask-form textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    font-family: var(--subtitlefont);
+    min-height: 150px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.ask-form textarea:focus {
+    border-color: var(--lightblue);
+}
+
+.ask-form button {
+    background: var(--lightblue);
+    color: #010422;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-family: var(--subtitlefont);
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.ask-form button:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
 @media (max-width: 1024px) {
     .faq-cat-grid { grid-template-columns: repeat(2, 1fr); }
     .group-title { font-size: 2.8rem; }
@@ -161,6 +235,7 @@
 
 @media (max-width: 600px) {
     .faq-cat-grid { grid-template-columns: 1fr; }
-    .faq-categories-section h2 { font-size: 2.5rem; }
+    .faq-v2-title { font-size: 2.5rem; }
     .faq-q-row { font-size: 1.1rem; }
+    .ask-card { padding: 40px 20px; }
 }
