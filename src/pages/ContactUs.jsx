@@ -34,7 +34,6 @@ const ContactUs = () => {
 
     return (
         <div className="contact-page-root">
-            <NavBar />
             
             <section className="contact-hero-side-by-side">
                 <div className="hero-bg-layer"></div>
@@ -108,7 +107,7 @@ const ContactUs = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
+
         </div>
     );
 };
