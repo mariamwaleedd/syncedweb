@@ -1,0 +1,192 @@
+.contact-form-section {
+    width: 100%;
+    padding: 100px 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-container-v2 {
+    max-width: 1000px;
+    width: 100%;
+}
+
+.form-header-v2 {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.form-tag-v2 {
+    font-family: var(--subtitlefont);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: var(--lightblue);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.form-header-v2 h2 {
+    font-family: var(--titlefont);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+.form-header-v2 h2 i {
+    color: var(--lightblue);
+    font-style: italic;
+}
+
+.form-header-v2 p {
+    font-family: var(--subtitlefont);
+    opacity: 0.7;
+    font-size: 1.1rem;
+}
+
+.form-wrapper-v2 {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 60px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.input-row-v2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.input-group-v2 {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-group-v2 label {
+    font-family: var(--subtitlefont);
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    opacity: 0.9;
+}
+
+.input-group-v2 input, 
+.input-group-v2 textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 18px;
+    color: #FFFFFF;
+    font-family: var(--subtitlefont);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-group-v2 input:focus, 
+.input-group-v2 textarea:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--lightblue);
+    box-shadow: 0 0 15px rgba(163, 214, 255, 0.1);
+}
+
+.input-group-v2.has-error input, 
+.input-group-v2.has-error textarea {
+    border-color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.05);
+}
+
+.error-text-v2 {
+    color: #ff4d4d;
+    font-size: 0.85rem;
+    font-family: var(--subtitlefont);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.submit-form-btn {
+    width: 100%;
+    background: var(--lightblue);
+    color: #010422;
+    border: none;
+    padding: 22px;
+    border-radius: 50px;
+    font-family: var(--subtitlefont);
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.4s;
+    margin-top: 20px;
+}
+
+.submit-form-btn:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 30px rgba(163, 214, 255, 0.3);
+}
+
+.btn-loading {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.success-message-v2 {
+    text-align: center;
+    padding: 40px 0;
+    animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.success-icon-v2 {
+    font-size: 5rem;
+    color: #00e676;
+    margin-bottom: 25px;
+}
+
+.success-message-v2 h3 {
+    font-family: var(--titlefont);
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.back-btn-v2 {
+    background: transparent;
+    border: 1px solid var(--lightblue);
+    color: var(--lightblue);
+    padding: 12px 30px;
+    border-radius: 50px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-family: var(--subtitlefont);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.back-btn-v2:hover {
+    background: var(--lightblue);
+    color: #010422;
+}
+
+@media (max-width: 768px) {
+    .input-row-v2 { grid-template-columns: 1fr; gap: 0; }
+    .form-wrapper-v2 { padding: 40px 25px; }
+    .form-header-v2 h2 { font-size: 2.2rem; }
+}

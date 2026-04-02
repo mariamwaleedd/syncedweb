@@ -10,6 +10,7 @@ import TakeControl from '../components/TakeControl';
 import FrequentlyAsked from '../components/FrequentlyAsked';
 import IphoneSpline from '../components/IPhoneSpline';
 import CommandCenter from '../components/CommandCenter';
+import ContactForm from '../components/ContactForm';
 
 const Home = () => {
   return (
@@ -22,6 +23,7 @@ const Home = () => {
     <CommandCenter/>
     <ClickAway/>
     <FeaturesHome/>
+    <ContactForm/>
     <PatientStories/>
     <IphoneSpline/>
     <TakeControl/>
