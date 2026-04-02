@@ -7,13 +7,13 @@ import { useGlobal } from '../context/GlobalContext';
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { IoSend } from 'react-icons/io5';
 
-useEffect(() => {
-    document.title = isAr ? "سينكد | اتصل بنا" : "Synced | Contact Us";
-}, [isAr]);
-
 const ContactUs = () => {
     const { isAr } = useGlobal();
     const [data, setData] = useState([]);
+
+    useEffect(() => {
+        document.title = isAr ? "سينكد | اتصل بنا" : "Synced | Contact Us";
+    }, [isAr]);
 
     useEffect(() => {
         const fetchContactData = async () => {
@@ -91,15 +91,6 @@ const ContactUs = () => {
                                     <h4>{isAr ? item.label_ar : item.label_en}</h4>
                                     <p>{isAr ? item.value_ar : item.value_en}</p>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="business-hours-box">
-                        <h3>{isAr ? "ساعات العمل" : "Business Hours"}</h3>
-                        {getList('hours').map((item, idx) => (
-                            <div className="hour-entry" key={idx}>
-                                <h4>{isAr ? item.label_ar : item.label_en}</h4>
-                                <p>{isAr ? item.value_ar : item.value_en}</p>
                             </div>
                         ))}
                     </div>
