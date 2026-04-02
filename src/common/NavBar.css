@@ -76,7 +76,7 @@
 
 .burger-menu {
     position: absolute;
-    top: 55px;
+    top: 22px;
     left: 0;
     background: var(--cardbg);
     backdrop-filter: blur(20px);

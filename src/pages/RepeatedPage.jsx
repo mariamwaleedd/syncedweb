@@ -38,7 +38,6 @@ const RepeatedPage = () => {
 
     return (
         <div className="feature-dynamic-root">
-            <NavBar />
             <section className="f-hero-fullscreen" style={{backgroundImage: `url(${data.hero_img})`}}>
                 <div className="f-hero-overlay-solid"></div>
                 <div className="f-hero-text-align">
@@ -96,7 +95,6 @@ const RepeatedPage = () => {
                     </div>
                 </section>
             </div>
-            <Footer />
         </div>
     );
 };

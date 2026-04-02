@@ -127,7 +127,7 @@
     padding: 22px;
     border-radius: 50px;
     font-family: var(--subtitlefont);
-    font-weight: 800;
+    font-weight: 600;
     font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.4s;

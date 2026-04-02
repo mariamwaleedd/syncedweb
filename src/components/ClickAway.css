@@ -95,6 +95,7 @@
 
 @media (max-width: 1200px) {
     .click-away-content h2 { font-size: 4.5rem; }
+    .click-away-image img { margin-right: 0; width: 100%; left: 0; }
 }
 
 @media (max-width: 992px) {
@@ -106,7 +107,7 @@
     }
     .click-away-image { width: 100%; order: 2; }
     .click-away-image img { width: 100%; margin-left: 0; margin-right: 0; }
-    [dir='rtl'] .click-away-image img { margin-right: 0; }
+    [dir='rtl'] .click-away-image img { margin-right: 0; width: 100%; left: 0; }
     .click-away-content { order: 1; padding-bottom: 0; }
     .click-away-label { justify-content: center; }
     .click-away-content p { max-width: 100%; }
