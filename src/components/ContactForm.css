@@ -20,7 +20,7 @@
     font-size: 0.85rem;
     letter-spacing: 3px;
     color: var(--lightblue);
-    font-weight: 700;
+    font-weight: 400;
     display: block;
     margin-bottom: 15px;
 }
@@ -29,6 +29,7 @@
     font-family: var(--titlefont);
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 20px;
+    font-weight: 400;
     color: var(--white);
 }
 
