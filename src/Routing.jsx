@@ -14,6 +14,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Preloader from './common/Preloader';
 import RepeatedPage from './pages/RepeatedPage';
 import HealthCursor from './common/HealthCursor';
+import WhySynced from './pages/WhySynced';
 
 const Routing = () => {
   return (
@@ -29,6 +30,7 @@ const Routing = () => {
         <Route path="/FAQPage" element={<FAQPage />} />
         <Route path="/plans" element={<PlansPage />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/whysynced" element={<WhySynced />} />
         <Route path="/features/:slug" element={<RepeatedPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
