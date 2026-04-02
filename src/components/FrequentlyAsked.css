@@ -179,3 +179,35 @@
     .faq-toggle-btn { width: 35px; height: 35px; }
     .faq-question { font-size: 1.1rem; }
 }
+.faq-support-text {
+    margin-bottom: 25px;
+}
+
+.faq-contact-link {
+    color: var(--lightblue);
+    text-decoration: underline;
+    transition: opacity 0.3s ease;
+}
+
+.faq-contact-link:hover {
+    opacity: 0.7;
+}
+
+.faq-view-all-btn {
+    display: inline-block;
+    background: var(--lightblue);
+    color: var(--darkbg);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-family: var(--subtitlefont);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.faq-view-all-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(163, 214, 255, 0.2);
+    filter: brightness(1.1);
+}

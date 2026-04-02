@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './FrequentlyAsked.css';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
@@ -47,9 +48,20 @@ const FrequentlyAsked = () => {
                     <h2>
                         {header ? (isAr ? header.title_ar : header.title_en) : "Frequently Asked Questions"}
                     </h2>
-                    <p>
-                        {header ? (isAr ? header.desc_ar : header.desc_en) : "Reach out to our support team 24/7."}
+                    <p className="faq-support-text">
+                        {isAr ? (
+                            <>
+                                هل لديك سؤال لم تتم الإجابة عليه هنا؟ <Link to="/ContactUs" className="faq-contact-link">تواصل مع فريق الدعم لدينا</Link> على مدار الساعة.
+                            </>
+                        ) : (
+                            <>
+                                Have a question not answered here? <Link to="/ContactUs" className="faq-contact-link">Reach out to our support team</Link> 24/7.
+                            </>
+                        )}
                     </p>
+                    <Link to="/FAQPage" className="faq-view-all-btn">
+                        {isAr ? "عرض كل الأسئلة" : "View All FAQ"}
+                    </Link>
                 </div>
 
                 <div className="faq-accordion-right">
@@ -75,7 +87,7 @@ const FrequentlyAsked = () => {
                             </div>
                         </div>
                     )) : (
-                        <div style={{color: 'white', opacity: 0.5}}>Updating questions...</div>
+                        <div style={{color: 'white', opacity: 0.5}}>{isAr ? "جاري التحديث..." : "Updating questions..."}</div>
                     )}
                 </div>
             </div>
