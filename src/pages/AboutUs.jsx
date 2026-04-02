@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './AboutUs.css';
 import TopSections from '../common/TopSections';
 import { useGlobal } from '../context/GlobalContext';
@@ -6,7 +7,7 @@ import { supabase } from '../Supabase';
 import { 
     FaBullseye, FaEye, FaFlag, FaLightbulb, FaRocket, 
     FaShieldAlt, FaUsers, FaHeartbeat, FaHistory, FaDraftingCompass,
-    FaPenFancy, FaStickyNote, FaBookOpen
+    FaPenFancy, FaStickyNote, FaBookOpen, FaArrowRight
 } from 'react-icons/fa';
 
 const AboutUs = () => {
@@ -135,6 +136,21 @@ const AboutUs = () => {
                             <p>{isAr ? philosophy?.content_ar : philosophy?.content_en}</p>
                         </div>
                         <div className="phi-icon"><div className="icon-pulse">{iconMap[philosophy?.icon_type]}</div></div>
+                    </div>
+                </section>
+
+                <section className="about-privacy-bar">
+                    <div className="privacy-bar-content">
+                        <div className="p-bar-icon"><FaShieldAlt /></div>
+                        <p>
+                            {isAr 
+                                ? "نحن نأخذ خصوصيتك على محمل الجد. جميع بياناتك مشفرة ومحمية." 
+                                : "We take your privacy seriously. All your data is encrypted and protected."
+                            }
+                        </p>
+                        <Link to="/PrivacyPolicy" className="privacy-link-btn">
+                            {isAr ? "سياستنا للخصوصية" : "Our Privacy Policy"} <FaArrowRight />
+                        </Link>
                     </div>
                 </section>
             </main>
