@@ -9,6 +9,10 @@ import {
     FaPenFancy, FaStickyNote, FaBookOpen
 } from 'react-icons/fa';
 
+useEffect(() => {
+    document.title = isAr ? "سينكد | من نحن " : "Synced | About Us";
+}, [isAr]);
+
 const AboutUs = () => {
     const { isAr } = useGlobal();
     const [dbData, setDbData] = useState([]);

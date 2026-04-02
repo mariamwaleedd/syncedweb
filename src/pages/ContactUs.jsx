@@ -7,6 +7,10 @@ import { useGlobal } from '../context/GlobalContext';
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { IoSend } from 'react-icons/io5';
 
+useEffect(() => {
+    document.title = isAr ? "سينكد | اتصل بنا" : "Synced | Contact Us";
+}, [isAr]);
+
 const ContactUs = () => {
     const { isAr } = useGlobal();
     const [data, setData] = useState([]);
