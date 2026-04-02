@@ -22,6 +22,8 @@ const NavBar = () => {
                         <li><Link to="/AboutUs">{isAr ? 'عنا' : 'About'}</Link></li>
                         <li><Link to="/ContactUs">{isAr ? 'اتصل بنا' : 'Contact'}</Link></li>
                         <li><Link to="/plans">{isAr ? 'الأطباء' : 'Plans'}</Link></li>
+                        <li><Link to="/whysynced">{isAr ? ' ليه Synced ' : 'Why Synced'}</Link></li>
+                        <li><Link to="/blog">{isAr ? 'مدونة' : 'Blog'}</Link></li>
                     </ul>
                 </div>
 
