@@ -26,6 +26,22 @@ const WhySynced = () => {
         document.title = isAr ? "لماذا سينكد؟" : "Why Synced?";
     }, [isAr]);
 
+    useEffect(() => {
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('ws-reveal-active');
+                }
+            });
+        }, observerOptions);
+
+        const sections = document.querySelectorAll('.ws-reveal');
+        sections.forEach(sec => observer.observe(sec));
+
+        return () => observer.disconnect();
+    }, [pageData]);
+
     const get = (type) => pageData.filter(i => i.type === type);
     const hero = pageData.find(i => i.type === 'hero');
 
@@ -33,15 +49,15 @@ const WhySynced = () => {
 
     return (
         <div className="ws-page-wrapper">
-            <WS_Hero data={hero} isAr={isAr} />
-            <WS_WhatFor data={get('what')} isAr={isAr} />
-            <WS_WhoFor data={get('who')} isAr={isAr} />
-            <WS_Features data={get('feature')} isAr={isAr} />
-            <WS_HowTo data={get('step')} isAr={isAr} />
-            <WS_Interface isAr={isAr} />
-            <WS_Video isAr={isAr} />
-            <WS_WhyDownload isAr={isAr} />
-            <WS_Ready isAr={isAr} />
+            <div className="ws-reveal"><WS_Hero data={hero} isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_WhatFor data={get('what')} isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_WhoFor data={get('who')} isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_Features data={get('feature')} isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_HowTo data={get('step')} isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_Interface isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_Video isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_WhyDownload isAr={isAr} /></div>
+            <div className="ws-reveal"><WS_Ready isAr={isAr} /></div>
         </div>
     );
 };

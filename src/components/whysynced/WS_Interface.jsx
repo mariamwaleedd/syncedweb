@@ -39,6 +39,7 @@ const WS_Interface = () => {
                         alt="3D iPhone Model"
                         loading="eager"
                         dir="ltr"
+                        style={{ width: '60%', height: '100%' }}
                     ></model-viewer>
                 </div>
             </div>
