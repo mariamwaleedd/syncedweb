@@ -5,9 +5,10 @@ import blogHero from '../imgs/blog.png';
 import story1 from '../imgs/div.png';
 import story2 from '../imgs/div-1.png';
 import story3 from '../imgs/div-2.png';
-import topic1 from '../imgs/clickaway.png';
-import topic2 from '../imgs/Container.png';
-import topic3 from '../imgs/Container-1.png';
+import topic1 from '../imgs/Container1.png';
+import topic2 from '../imgs/Container2.png';
+import topic3 from '../imgs/Container3.png';
+import topic4 from '../imgs/Container4.png';
 
 const Blogs = () => {
     const sectionRefs = useRef([]);
@@ -132,7 +133,7 @@ const Blogs = () => {
                             <button className="topic-btn">56 articles</button>
                         </div>
                     </div>
-                    <div className="topic-card" style={{ backgroundImage: `url(${story3})` }}>
+                    <div className="topic-card" style={{ backgroundImage: `url(${topic4})` }}>
                         <div className="topic-overlay">
                             <h3>Sleep & Recovery</h3>
                             <p>Optimize your rest for better health</p>
