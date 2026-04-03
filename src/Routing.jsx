@@ -6,6 +6,7 @@ import Preloader from './common/Preloader';
 import HealthCursor from './common/HealthCursor';
 import BackToTop from './common/BackToTop';
 import ChatBot from './common/ChatBot';
+import ScrollToTop from './common/ScrollToTop';
 
 const Home = lazy(() => import('./pages/Home'));
 const Error = lazy(() => import('./pages/Error'));
@@ -76,6 +77,7 @@ const Routing = () => {
   return (
     <>
       <NavBar />
+      <ScrollToTop />
       <Preloader/>
       <BackToTop/>
       <ChatBot/>
