@@ -3,7 +3,7 @@
 .ws-hero { height: 100vh; position: relative; background: url('https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/WhatWeOffer/image%2024.png'); background-size: cover; background-position: center; display: flex; align-items: center; padding: 0 8%; }
 .ws-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, #010422 30%, transparent 100%); z-index: 1; }
 .ws-hero-content { position: relative; z-index: 5; max-width: 700px; }
-.ws-badge { background: var(--lightblue); color: #010422; padding: 6px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; display: inline-block; margin-bottom: 25px; }
+.ws-badge { background: var(--lightblue); color: #010422; padding: 6px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; display: inline-block; }
 .ws-hero-content h1 { font-family: var(--titlefont); font-size: clamp(3rem, 7vw, 6rem); line-height: 0.95; margin-bottom: 20px; }
 .ws-hero-content i { color: var(--lightblue); font-style: italic; }
 .ws-hero-btns { display: flex; gap: 20px; margin-top: 40px; }
@@ -23,7 +23,7 @@
 
 .ws-who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 .ws-who-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; overflow: hidden; padding: 30px; }
-.ws-who-card img { width: 100%; border-radius: 20px; margin-bottom: 25px; }
+.ws-who-card img { width: 100%; border-radius: 20px; }
 .wide-who { grid-column: span 2; display: flex; align-items: center; gap: 40px; }
 .wide-who img { width: 50%; margin-bottom: 0; }
 
@@ -157,4 +157,38 @@
     .ws-video-section {
         margin: 40px 0;
     }
+}
+
+.ws-who-text h3 {
+    font-size: 2rem;
+}
+
+.ws-who-text p {
+    font-size: 1.2rem;
+}
+
+.ws-glass-card h3 {
+    font-size: 1.8rem;
+}
+
+.ws-icon-small {
+    background-color: #64b4f649;
+    color: #64B5F6;
+    padding: 10px;
+    width: 15%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ws-icon-box {
+    background-color: #64b4f649;
+    color: #64B5F6;
+    padding: 10px;
+    width: 20%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
