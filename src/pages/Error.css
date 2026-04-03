@@ -1,0 +1,138 @@
+.error-page-root {
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.error-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 150px 5%;
+    text-align: center;
+    position: relative;
+}
+
+.error-visuals {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 50px;
+}
+
+.error-code-bg {
+    font-family: var(--numbersfont);
+    font-size: clamp(8rem, 20vw, 15rem);
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(180deg, rgba(163, 214, 255, 0.1) 0%, transparent 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.5;
+}
+
+.heart-monitor-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.ecg-line {
+    width: 100%;
+    height: 100px;
+    fill: none;
+    stroke: var(--lightblue);
+    stroke-width: 2;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 3s linear infinite;
+}
+
+.pulsing-heart {
+    position: absolute;
+    left: 20%;
+    font-size: 2rem;
+    color: var(--lightblue);
+    filter: drop-shadow(0 0 10px var(--lightblue));
+    animation: heartbeat 1.5s ease-in-out infinite;
+    z-index: 10;
+}
+
+.error-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(163, 214, 255, 0.1);
+    color: var(--lightblue);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-family: var(--subtitlefont);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.error-text-box h1 {
+    font-family: var(--titlefont);
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+.error-text-box h1 i {
+    color: var(--lightblue);
+    font-style: italic;
+}
+
+.error-text-box p {
+    font-family: var(--subtitlefont);
+    font-size: 1.2rem;
+    opacity: 0.7;
+    max-width: 500px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.error-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--lightblue);
+    color: #010422;
+    padding: 18px 45px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: var(--subtitlefont);
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.error-home-btn:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(163, 214, 255, 0.3);
+}
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.3); }
+    20% { transform: scale(1.1); }
+    30% { transform: scale(1.2); }
+}
+
+@media (max-width: 768px) {
+    .error-code-bg { font-size: 10rem; }
+    .heart-monitor-line { display: none; }
+    .error-content-container { padding: 100px 5%; }
+}
