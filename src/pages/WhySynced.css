@@ -63,3 +63,98 @@
     .wide-who { flex-direction: column; }
     .ws-ready-btns { flex-direction: column; align-items: center; }
 }
+.wide-who {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.wide-who img {
+    width: 50%;
+    margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+    .wide-who {
+        grid-column: span 1;
+        flex-direction: column;
+    }
+    .wide-who img {
+        width: 100%;
+    }
+}
+
+.ws-int-text h2 {
+    font-size: 3.4rem;
+}
+
+.ws-int-text p {
+    font-size: 1.4rem;
+}
+.ws-video-section {
+    width: 100%;
+    padding: 0;
+    margin: 80px 0;
+    overflow: hidden;
+}
+
+.ws-video-container {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ws-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.ws-video-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    z-index: 200;
+    pointer-events: none;
+}
+
+.ws-video-text-overlay {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.ws-video-text-overlay h2 {
+    font-family: var(--titlefont);
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    color: var(--white);
+    line-height: 1.1;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.ws-video-text-overlay h2 i {
+    color: var(--lightblue);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .ws-video-container {
+        height: 50vh;
+    }
+    .ws-video-section {
+        margin: 40px 0;
+    }
+}

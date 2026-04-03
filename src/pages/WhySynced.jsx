@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './WhySynced.css';
-import NavBar from '../common/NavBar';
-import Footer from '../common/Footer';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
-import WS_Hero from '../components/WhySynced/WS_Hero';
-import WS_WhatFor from '../components/WhySynced/WS_WhatFor';
-import WS_WhoFor from '../components/WhySynced/WS_WhoFor';
-import WS_Features from '../components/WhySynced/WS_Features';
-import WS_HowTo from '../components/WhySynced/WS_HowTo';
-import WS_Interface from '../components/WhySynced/WS_Interface';
-import WS_Video from '../components/WhySynced/WS_Video';
-import WS_WhyDownload from '../components/WhySynced/WS_WhyDownload';
-import WS_Ready from '../components/WhySynced/WS_Ready';
+import WS_Hero from '../components/whysynced/WS_Hero';
+import WS_WhatFor from '../components/whysynced/WS_WhatFor';
+import WS_WhoFor from '../components/whysynced/WS_WhoFor';
+import WS_Features from '../components/whysynced/WS_Features';
+import WS_HowTo from '../components/whysynced/WS_HowTo';
+import WS_Interface from '../components/whysynced/WS_Interface';
+import WS_Video from '../components/whysynced/WS_Video';
+import WS_WhyDownload from '../components/whysynced/WS_WhyDownload';
+import WS_Ready from '../components/whysynced/WS_Ready';
 
 const WhySynced = () => {
     const { isAr } = useGlobal();
@@ -35,7 +33,6 @@ const WhySynced = () => {
 
     return (
         <div className="ws-page-wrapper">
-            <NavBar />
             <WS_Hero data={hero} isAr={isAr} />
             <WS_WhatFor data={get('what')} isAr={isAr} />
             <WS_WhoFor data={get('who')} isAr={isAr} />
@@ -45,7 +42,6 @@ const WhySynced = () => {
             <WS_Video isAr={isAr} />
             <WS_WhyDownload isAr={isAr} />
             <WS_Ready isAr={isAr} />
-            <Footer />
         </div>
     );
 };
