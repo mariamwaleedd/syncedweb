@@ -7,6 +7,11 @@ import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { FaHeartbeat, FaUsers, FaShieldAlt, FaFileMedical, FaSearch, FaPlus, FaPaperPlane } from 'react-icons/fa';
 
+
+    useEffect(() => {
+        document.title = isAr ? "سينكد | الأسئلة الشائعة" : "Synced | FAQ";
+    }, [isAr]);
+
 const FAQPage = () => {
     const { isAr } = useGlobal();
     const [header, setHeader] = useState(null);

@@ -7,6 +7,11 @@ import TopSections from '../common/TopSections';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
+
+    useEffect(() => {
+        document.title = isAr ? "سينكد | الميزات" : "Synced | Features";
+    }, [isAr]);
+
 const Features = () => {
     const { isAr } = useGlobal();
     const [features, setFeatures] = useState([]);

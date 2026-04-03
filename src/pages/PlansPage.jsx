@@ -5,6 +5,11 @@ import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { FaCheck } from 'react-icons/fa';
 
+
+    useEffect(() => {
+        document.title = isAr ? "سينكد | الخطط" : "Synced | Plans";
+    }, [isAr]);
+
 const PlansPage = () => {
     const { isAr } = useGlobal();
     const [header, setHeader] = useState(null);

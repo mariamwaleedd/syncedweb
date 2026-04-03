@@ -13,6 +13,11 @@ import WS_Video from '../components/whysynced/WS_Video';
 import WS_WhyDownload from '../components/whysynced/WS_WhyDownload';
 import WS_Ready from '../components/whysynced/WS_Ready';
 
+
+    useEffect(() => {
+        document.title = isAr ? "سينكد | لماذا سينكد؟" : "Synced | Why Synced?";
+    }, [isAr]); 
+
 const WhySynced = () => {
     const { isAr } = useGlobal();
     const [pageData, setPageData] = useState([]);

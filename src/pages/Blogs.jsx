@@ -10,6 +10,10 @@ import topic2 from '../imgs/Container2.png';
 import topic3 from '../imgs/Container3.png';
 import topic4 from '../imgs/Container4.png';
 
+    useEffect(() => {
+        document.title = isAr ? "سينكد | المدونة" : "Synced | Blogs";
+    }, [isAr]);
+
 const Blogs = () => {
     const sectionRefs = useRef([]);
 

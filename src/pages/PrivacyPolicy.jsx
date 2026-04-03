@@ -8,6 +8,11 @@ import {
     FaFingerprint, FaBug, FaChartLine, FaTools, FaLaptopCode, FaCheckCircle
 } from 'react-icons/fa';
 
+
+    useEffect(() => {
+        document.title = isAr ? "سينكد | سياسة الخصوصية" : "Synced | Privacy Policy";
+    }, [isAr]);
+
 const PrivacyPolicy = () => {
     const { isAr } = useGlobal();
 
