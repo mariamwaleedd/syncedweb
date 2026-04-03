@@ -66,3 +66,31 @@ h1, h2, h3, h4, .hero-title {
 p, span, li, button, input, .hero-subtitle {
     font-family: var(--subtitlefont);
 }
+
+/* GLOBAL REVEAL ON SCROLL ANIMATIONS */
+.reveal-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* GLOBAL HOVER EFFECTS */
+.global-hover-effect {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
+}
+
+.global-hover-effect:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme='light'] .global-hover-effect:hover {
+    box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15) !important;
+}
