@@ -81,6 +81,7 @@ background: linear-gradient(180deg, rgba(108, 144, 222, 0.28) 0%, rgba(60, 84, 1
 
 .story-card.wide {
     grid-column: span 2;
+    width: 105%;
 }
 
 .testimonial {
