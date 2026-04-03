@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './PrivacyPolicy.css';
 import TopSections from '../common/TopSections';
 import { useGlobal } from '../context/GlobalContext';
@@ -9,12 +9,12 @@ import {
 } from 'react-icons/fa';
 
 
+const PrivacyPolicy = () => {
+    const { isAr } = useGlobal();
+
     useEffect(() => {
         document.title = isAr ? "سينكد | سياسة الخصوصية" : "Synced | Privacy Policy";
     }, [isAr]);
-
-const PrivacyPolicy = () => {
-    const { isAr } = useGlobal();
 
     return (
         <div className="privacy-page">

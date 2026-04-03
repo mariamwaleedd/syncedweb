@@ -8,12 +8,12 @@ import { useGlobal } from '../context/GlobalContext';
 import { FaHeartbeat, FaUsers, FaShieldAlt, FaFileMedical, FaSearch, FaPlus, FaPaperPlane } from 'react-icons/fa';
 
 
+const FAQPage = () => {
+    const { isAr } = useGlobal();
+
     useEffect(() => {
         document.title = isAr ? "سينكد | الأسئلة الشائعة" : "Synced | FAQ";
     }, [isAr]);
-
-const FAQPage = () => {
-    const { isAr } = useGlobal();
     const [header, setHeader] = useState(null);
     const [categories, setCategories] = useState([]);
     const [faqs, setFaqs] = useState([]);

@@ -6,12 +6,12 @@ import { useGlobal } from '../context/GlobalContext';
 import { FaCheck } from 'react-icons/fa';
 
 
+const PlansPage = () => {
+    const { isAr } = useGlobal();
+
     useEffect(() => {
         document.title = isAr ? "سينكد | الخطط" : "Synced | Plans";
     }, [isAr]);
-
-const PlansPage = () => {
-    const { isAr } = useGlobal();
     const [header, setHeader] = useState(null);
     const [secTitle, setSecTitle] = useState(null);
     const [plans, setPlans] = useState([]);

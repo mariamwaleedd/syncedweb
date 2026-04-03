@@ -14,10 +14,6 @@ import WS_WhyDownload from '../components/whysynced/WS_WhyDownload';
 import WS_Ready from '../components/whysynced/WS_Ready';
 
 
-    useEffect(() => {
-        document.title = isAr ? "سينكد | لماذا سينكد؟" : "Synced | Why Synced?";
-    }, [isAr]); 
-
 const WhySynced = () => {
     const { isAr } = useGlobal();
     const [pageData, setPageData] = useState([]);
@@ -28,7 +24,7 @@ const WhySynced = () => {
             if (data) setPageData(data);
         };
         fetchData();
-        document.title = isAr ? "لماذا سينكد؟" : "Why Synced?";
+        document.title = isAr ? "سينكد | لماذا سينكد؟" : "Synced | Why Synced?";
     }, [isAr]);
 
     useEffect(() => {

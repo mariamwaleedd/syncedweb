@@ -8,12 +8,12 @@ import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 
+const Features = () => {
+    const { isAr } = useGlobal();
+
     useEffect(() => {
         document.title = isAr ? "سينكد | الميزات" : "Synced | Features";
     }, [isAr]);
-
-const Features = () => {
-    const { isAr } = useGlobal();
     const [features, setFeatures] = useState([]);
     const navigate = useNavigate();
 

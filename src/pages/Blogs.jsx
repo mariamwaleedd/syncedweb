@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useGlobal } from '../context/GlobalContext';
 import './Blogs.css';
 
 import blogHero from '../imgs/blog.png';
@@ -10,12 +11,13 @@ import topic2 from '../imgs/Container2.png';
 import topic3 from '../imgs/Container3.png';
 import topic4 from '../imgs/Container4.png';
 
+const Blogs = () => {
+    const { isAr } = useGlobal();
+    const sectionRefs = useRef([]);
+
     useEffect(() => {
         document.title = isAr ? "سينكد | المدونة" : "Synced | Blogs";
     }, [isAr]);
-
-const Blogs = () => {
-    const sectionRefs = useRef([]);
 
     useEffect(() => {
         const observerOptions = {
