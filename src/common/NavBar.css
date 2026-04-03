@@ -190,7 +190,15 @@
 }
 
 @media (max-width: 768px) {
-    .navbar { height: 80px; }
-    .controls-group { display: none; }
-    .search-wrapper:hover { width: 180px; }
+    .navbar {
+        height: 80px;
+    }
+
+    .controls-group {
+        display: none;
+    }
+
+    .search-wrapper:hover {
+        width: 180px;
+    }
 }
