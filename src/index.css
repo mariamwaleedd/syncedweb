@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'Zain Mob';
+    src: url('./fonts/zain-Regular-mob.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Zain Mob';
+    src: url('./fonts/alfont_com_ZAIN-mob-variable-800.ttf') format('truetype');
+    font-weight: 700 900;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
+
+:root {
+    --darkbg: #010422;
+    --lightblue: #A3D6FF;
+    --white: #FFFFFF;
+    --cardbg: rgba(255, 255, 255, 0.1);
+    --bg-img: url('./imgs/bg.png');
+    --titlefont: "Instrument Serif", serif;
+    --subtitlefont: "General Sans", sans-serif;
+    --numbersfont: "Unbounded", sans-serif;
+    --transition: 0.3s ease-in-out;
+}
+
+:root[data-theme='light'] {
+    --darkbg: #F4F7FF;
+    --white: #010422;
+    --lightblue: #0066FF;
+    --cardbg: rgba(0, 0, 0, 0.05);
+    --bg-img: none; 
+}
+
+[dir='rtl'] {
+    --titlefont: "Zain Mob", sans-serif !important;
+    --subtitlefont: "Almarai", sans-serif !important;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+    background-color: var(--darkbg);
+    background-image: var(--bg-img);
+    background-attachment: fixed;
+    background-size: cover;
+    color: var(--white);
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+h1, h2, h3, h4, .hero-title {
+    font-family: var(--titlefont);
+}
+
+p, span, li, button, input, .hero-subtitle {
+    font-family: var(--subtitlefont);
+}

@@ -1,13 +1,3 @@
-:root {
-    --darkbg: #010422;
-    --lightblue: #A3D6FF;
-    --white: #FFFFFF;
-    --cardbg: #ffffff2b;
-    --titlefont: "Instrument Serif", serif;
-    --subtitlefont: "General Sans", sans-serif;
-}
-
-
 .offer-section {
     background-color: var(--darkbg);
     background-image: 
