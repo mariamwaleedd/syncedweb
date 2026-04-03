@@ -16,6 +16,7 @@ import RepeatedPage from './pages/RepeatedPage';
 import HealthCursor from './common/HealthCursor';
 import WhySynced from './pages/WhySynced';
 import Blogs from './pages/Blogs';
+import BackToTop from './common/BackToTop';
 
 const Routing = () => {
   useEffect(() => {
@@ -75,6 +76,7 @@ const Routing = () => {
     <>
       <NavBar />
       <Preloader/>
+      <BackToTop/>
       <HealthCursor/>
       <Routes>
         <Route path="/" element={<Home />} />
