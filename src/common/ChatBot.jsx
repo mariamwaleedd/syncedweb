@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './ChatBot.css';
 import { useGlobal } from '../context/GlobalContext';
-import { FaComments, FaTimes, FaUser, FaHeadset, FaPaperPlane, FaInfoCircle, FaRocket, FaEnvelope } from 'react-icons/fa';
+import { FaComments, FaTimes, FaUser, FaHeadset, FaPaperPlane, FaInfoCircle, FaRocket } from 'react-icons/fa';
 
 const ChatBot = () => {
     const { isAr } = useGlobal();
     const [isOpen, setIsOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const [mode, setMode] = useState('chat'); 
     const [history, setHistory] = useState([]);
     const scrollRef = useRef(null);
@@ -26,6 +27,19 @@ const ChatBot = () => {
             ]
         }
     ];
+
+    useEffect(() => {
+        const toggleVisibility = () => {
+            if (window.scrollY > 300) {
+                setIsVisible(true);
+            } else {
+                setIsVisible(false);
+            }
+        };
+
+        window.addEventListener('scroll', toggleVisibility);
+        return () => window.removeEventListener('scroll', toggleVisibility);
+    }, []);
 
     useEffect(() => {
         setHistory(initialMessages);
@@ -58,8 +72,9 @@ const ChatBot = () => {
     };
 
     return (
-        <div className={`chatbot-wrapper ${isAr ? 'rtl' : 'ltr'}`}>
+        <div className={`chatbot-wrapper ${isAr ? 'rtl' : 'ltr'} ${isVisible ? 'visible' : ''}`}>
             <button className={`chatbot-trigger ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+                <span className="tooltip">{isAr ? 'تحدث معنا' : 'chat with us'}</span>
                 {isOpen ? <FaTimes /> : <FaComments />}
             </button>
 

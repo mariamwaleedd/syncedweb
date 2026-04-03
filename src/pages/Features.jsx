@@ -46,7 +46,6 @@ const Features = () => {
 
     return (
         <div className="features-root">
-            <NavBar />
             <TopSections 
                 titleMain={isAr ? "ما هي الميزات التي " : "What features "}
                 titleItalic={isAr ? "يقدمها سينكد؟" : "does synced offer?"}
@@ -85,7 +84,6 @@ const Features = () => {
                     ))}
                 </div>
             </main>
-            <Footer />
         </div>
     );
 };
