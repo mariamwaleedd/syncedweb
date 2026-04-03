@@ -5,6 +5,17 @@
     overflow-x: hidden;
 }
 
+.reveal-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .blog-hero {
     width: 100%;
     height: 100vh;
@@ -18,50 +29,55 @@
 .blog-hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(1, 4, 34, 0.2) 0%, #010422 100%);
+    background: linear-gradient(180deg, rgba(1, 4, 34, 0.1) 0%, #010422 100%);
     padding: 0 8% 80px;
     display: flex;
     align-items: flex-end;
 }
 
 .blog-hero-content {
-    max-width: 800px;
+    max-width: 850px;
 }
 
 .featured-badge {
     background: var(--lightblue);
     color: #010422;
-    padding: 8px 20px;
+    padding: 8px 22px;
     border-radius: 50px;
     font-family: var(--subtitlefont);
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: 0.3s;
 }
 
 .blog-hero-content h1 {
     font-family: var(--titlefont);
     font-size: clamp(3rem, 6vw, 5.5rem);
     margin: 25px 0;
-    line-height: 1.1;
+    line-height: 1;
+    font-weight: 400;
 }
 
 .blog-hero-content h1 i {
     color: var(--lightblue);
     font-style: italic;
+    font-weight: 400;
 }
 
 .blog-hero-content p {
     font-family: var(--subtitlefont);
-    font-size: 1.25rem;
-    opacity: 0.8;
+    font-size: 1.2rem;
+    opacity: 0.75;
     line-height: 1.6;
     margin-bottom: 40px;
+    font-weight: 300;
 }
 
 .author-box {
     display: flex;
     align-items: center;
     gap: 15px;
+    transition: 0.3s;
 }
 
 .author-avatar {
@@ -73,18 +89,19 @@
     align-items: center;
     justify-content: center;
     color: #010422;
-    font-weight: 700;
+    font-weight: 600;
     font-family: var(--subtitlefont);
 }
 
 .author-info strong {
     display: block;
     font-family: var(--subtitlefont);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
 }
 
 .author-info span {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     opacity: 0.6;
 }
 
@@ -93,7 +110,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     opacity: 0.5;
 }
 
@@ -115,8 +132,9 @@
 
 .section-header h2 {
     font-family: var(--titlefont);
-    font-size: 4rem;
+    font-size: 3.8rem;
     margin-bottom: 15px;
+    font-weight: 400;
 }
 
 .section-header h2 i {
@@ -125,8 +143,9 @@
 }
 
 .section-header p {
-    opacity: 0.7;
+    opacity: 0.6;
     font-size: 1.1rem;
+    font-weight: 300;
 }
 
 .stories-grid {
@@ -136,22 +155,35 @@
 }
 
 .story-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     overflow: hidden;
-    transition: 0.3s;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s;
+    cursor: pointer;
 }
 
 .story-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-12px);
     border-color: var(--lightblue);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.img-zoom-wrap {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
 }
 
 .story-card img {
     width: 100%;
-    height: 250px;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.story-card:hover img {
+    transform: scale(1.08);
 }
 
 .story-card-content {
@@ -160,23 +192,26 @@
 
 .story-card-content h3 {
     font-family: var(--titlefont);
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 1.7rem;
+    margin-bottom: 12px;
     line-height: 1.3;
+    font-weight: 400;
 }
 
 .story-card-content p {
-    opacity: 0.6;
-    font-size: 0.95rem;
+    opacity: 0.55;
+    font-size: 0.9rem;
     line-height: 1.6;
     margin-bottom: 25px;
+    font-weight: 300;
 }
 
 .card-footer {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     opacity: 0.4;
+    font-weight: 300;
 }
 
 .topics-grid {
@@ -192,7 +227,8 @@
     border-radius: 24px;
     position: relative;
     overflow: hidden;
-    transition: 0.4s;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
 }
 
 .topic-overlay {
@@ -203,33 +239,42 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    transition: background 0.4s;
 }
 
 .topic-card:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
 }
 
 .topic-card h3 {
     font-family: var(--titlefont);
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .topic-card p {
-    font-size: 0.9rem;
-    opacity: 0.7;
+    font-size: 0.85rem;
+    opacity: 0.65;
     margin-bottom: 20px;
+    font-weight: 300;
 }
 
 .topic-btn {
     width: fit-content;
-    background: rgba(163, 214, 255, 0.2);
+    background: rgba(163, 214, 255, 0.15);
     color: var(--lightblue);
-    border: none;
-    padding: 8px 15px;
+    border: 1px solid rgba(163, 214, 255, 0.3);
+    padding: 8px 18px;
     border-radius: 8px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
+    transition: 0.3s;
+}
+
+.topic-card:hover .topic-btn {
+    background: var(--lightblue);
+    color: #010422;
 }
 
 .news-grid {
@@ -239,32 +284,41 @@
 }
 
 .news-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     padding: 40px;
     border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    border-color: rgba(163, 214, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .news-cat {
     color: var(--lightblue);
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     display: block;
     margin-bottom: 15px;
 }
 
 .news-card h3 {
     font-family: var(--titlefont);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: 15px;
+    font-weight: 400;
 }
 
 .news-card p {
-    opacity: 0.6;
-    font-size: 0.95rem;
+    opacity: 0.55;
+    font-size: 0.9rem;
     margin-bottom: 30px;
+    font-weight: 300;
 }
 
 .center-btn-wrap {
@@ -277,10 +331,17 @@
     background: var(--lightblue);
     color: #010422;
     border: none;
-    padding: 15px 40px;
-    border-radius: 12px;
+    padding: 18px 45px;
+    border-radius: 50px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.view-all-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(163, 214, 255, 0.2);
 }
 
 .tips-grid {
@@ -290,10 +351,16 @@
 }
 
 .tip-card {
-    background: rgba(100, 181, 246, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 40px;
+    background: rgba(100, 181, 246, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 45px;
     border-radius: 24px;
+    transition: 0.4s;
+}
+
+.tip-card:hover {
+    border-color: var(--lightblue);
+    background: rgba(100, 181, 246, 0.08);
 }
 
 .tip-author {
@@ -312,46 +379,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .tip-card h4 {
     color: var(--lightblue);
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     margin-bottom: 15px;
+    font-weight: 500;
 }
 
-.subscribe-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+.tip-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.65;
+    font-weight: 300;
 }
 
 .subscribe-box {
     width: 100%;
     max-width: 1000px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 80px;
     border-radius: 40px;
-    margin-bottom: 60px;
+    margin: 0 auto 60px;
 }
 
 .subscribe-box h2 {
     font-family: var(--titlefont);
-    font-size: 4.5rem;
+    font-size: 4rem;
     margin-bottom: 15px;
+    font-weight: 400;
 }
 
 .subscribe-form {
     margin: 40px auto;
     display: flex;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
     padding: 8px;
     border-radius: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.3s;
+}
+
+.subscribe-form:focus-within {
+    border-color: var(--lightblue);
 }
 
 .subscribe-form input {
@@ -361,43 +435,29 @@
     padding: 0 30px;
     color: white;
     outline: none;
+    font-family: var(--subtitlefont);
 }
 
 .subscribe-form button {
     background: var(--lightblue);
     color: #010422;
     border: none;
-    padding: 15px 35px;
+    padding: 15px 40px;
     border-radius: 100px;
     font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.sub-count {
-    opacity: 0.5;
-    font-size: 0.9rem;
-}
-
-.perks-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    width: 100%;
-}
-
-.perk-icon {
-    font-size: 2rem;
-    margin-bottom: 15px;
+.subscribe-form button:hover {
+    transform: scale(1.05);
 }
 
 .perk h4 {
     font-family: var(--titlefont);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
-}
-
-.perk p {
-    opacity: 0.6;
-    font-size: 0.95rem;
+    font-weight: 400;
 }
 
 @media (max-width: 1100px) {
@@ -407,8 +467,19 @@
 
 @media (max-width: 768px) {
     .stories-grid, .news-grid, .topics-grid, .tips-grid, .perks-row { grid-template-columns: 1fr; }
-    .blog-hero-overlay { padding-bottom: 50px; }
+    .section-header h2 { font-size: 2.8rem; }
     .subscribe-box { padding: 40px 20px; }
-    .subscribe-form { flex-direction: column; border-radius: 20px; gap: 15px; }
-    .section-header h2 { font-size: 3rem; }
+}
+.perks-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;  
+    text-align: center;
+}
+.subscribe-box {
+    text-align: center;
+}
+.story-card {
+    width: 110%;
 }

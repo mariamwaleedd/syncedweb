@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Blogs.css';
 
 import blogHero from '../imgs/blog.png';
@@ -10,9 +10,38 @@ import topic2 from '../imgs/Container.png';
 import topic3 from '../imgs/Container-1.png';
 
 const Blogs = () => {
+    const sectionRefs = useRef([]);
+
+    useEffect(() => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                }
+            });
+        }, observerOptions);
+
+        sectionRefs.current.forEach((ref) => {
+            if (ref) observer.observe(ref);
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
+    const addToRefs = (el) => {
+        if (el && !sectionRefs.current.includes(el)) {
+            sectionRefs.current.push(el);
+        }
+    };
+
     return (
         <div className="blog-page-container">
-            <section className="blog-hero" style={{ backgroundImage: `url(${blogHero})` }}>
+            <section className="blog-hero reveal-section" ref={addToRefs} style={{ backgroundImage: `url(${blogHero})` }}>
                 <div className="blog-hero-overlay">
                     <div className="blog-hero-content">
                         <span className="featured-badge">Featured Article</span>
@@ -34,14 +63,14 @@ const Blogs = () => {
                 </div>
             </section>
 
-            <section className="blog-section">
+            <section className="blog-section reveal-section" ref={addToRefs}>
                 <div className="section-header">
                     <h2>Featured <i>Health</i> Stories</h2>
                     <p>Curated insights from leading health professionals</p>
                 </div>
                 <div className="stories-grid">
                     <div className="story-card">
-                        <img src={story1} alt="Fitness" />
+                        <div className="img-zoom-wrap"><img src={story1} alt="Fitness" /></div>
                         <div className="story-card-content">
                             <h3>Fitness Made Simple: Workouts for Every Level</h3>
                             <p>From beginner to advanced, find the perfect exercise routine to match your fitness goals.</p>
@@ -52,7 +81,7 @@ const Blogs = () => {
                         </div>
                     </div>
                     <div className="story-card">
-                        <img src={story2} alt="Nutrition" />
+                        <div className="img-zoom-wrap"><img src={story2} alt="Nutrition" /></div>
                         <div className="story-card-content">
                             <h3>Nutrition Essentials: Building a Balanced Plate</h3>
                             <p>Expert nutritionists share their top tips for creating meals that nourish your body and mind.</p>
@@ -63,7 +92,7 @@ const Blogs = () => {
                         </div>
                     </div>
                     <div className="story-card">
-                        <img src={story3} alt="Mindfulness" />
+                        <div className="img-zoom-wrap"><img src={story3} alt="Mindfulness" /></div>
                         <div className="story-card-content">
                             <h3>Mindfulness Meditation: Transform Your Mental Health</h3>
                             <p>Learn how daily meditation practices can reduce stress, improve focus, and enhance overall wellbeing.</p>
@@ -76,7 +105,7 @@ const Blogs = () => {
                 </div>
             </section>
 
-            <section className="blog-section topics-bg">
+            <section className="blog-section topics-bg reveal-section" ref={addToRefs}>
                 <div className="section-header">
                     <h2>Explore <i>Health</i> Topics</h2>
                     <p>Deep dive into specific areas of wellness</p>
@@ -113,7 +142,7 @@ const Blogs = () => {
                 </div>
             </section>
 
-            <section className="blog-section">
+            <section className="blog-section reveal-section" ref={addToRefs}>
                 <div className="section-header">
                     <h2>Latest <i>Health</i> News</h2>
                     <p>Stay informed with cutting-edge health research and insights</p>
@@ -143,7 +172,7 @@ const Blogs = () => {
                 </div>
             </section>
 
-            <section className="blog-section">
+            <section className="blog-section reveal-section" ref={addToRefs}>
                 <div className="section-header">
                     <h2>Expert <i>Health</i> Tips</h2>
                     <p>Quick wellness advice from leading health professionals</p>
@@ -196,7 +225,7 @@ const Blogs = () => {
                 </div>
             </section>
 
-            <section className="blog-section subscribe-section">
+            <section className="blog-section subscribe-section reveal-section" ref={addToRefs}>
                 <div className="subscribe-box">
                     <h2>Stay Healthy, Stay Informed</h2>
                     <p>Get the latest health news, expert tips, and wellness insights delivered to your inbox weekly</p>
