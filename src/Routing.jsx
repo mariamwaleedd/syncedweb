@@ -17,6 +17,7 @@ import HealthCursor from './common/HealthCursor';
 import WhySynced from './pages/WhySynced';
 import Blogs from './pages/Blogs';
 import BackToTop from './common/BackToTop';
+import ChatBot from './common/ChatBot';
 
 const Routing = () => {
   useEffect(() => {
@@ -77,6 +78,7 @@ const Routing = () => {
       <NavBar />
       <Preloader/>
       <BackToTop/>
+      <ChatBot/>
       <HealthCursor/>
       <Routes>
         <Route path="/" element={<Home />} />
