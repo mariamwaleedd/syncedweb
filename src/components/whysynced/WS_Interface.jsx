@@ -1,6 +1,8 @@
 import React from 'react';
 import { useGlobal } from '../../context/GlobalContext';
 import { FaCheckCircle } from 'react-icons/fa';
+import '@google/model-viewer';
+import iphoneModel from '../../3d/iphone_12_pro.glb';
 
 const WS_Interface = () => {
     const { isAr } = useGlobal();
@@ -10,6 +12,7 @@ const WS_Interface = () => {
         { en: "Quick data entry", ar: "إدخال بيانات سريع" },
         { en: "Dark mode support", ar: "دعم الوضع الداكن" }
     ];
+
     return (
         <section className="ws-section ws-interface-sec">
             <div className="ws-interface-grid">
@@ -25,10 +28,22 @@ const WS_Interface = () => {
                     </div>
                 </div>
                 <div className="ws-int-visual">
-                    <img src="https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Features/image%2055-5.png" alt="" />
+                    <model-viewer
+                        src={iphoneModel}
+                        camera-controls
+                        auto-rotate
+                        rotation-per-second="30deg"
+                        shadow-intensity="1"
+                        camera-orbit="30deg 75deg 105%"
+                        disable-zoom
+                        alt="3D iPhone Model"
+                        loading="eager"
+                        dir="ltr"
+                    ></model-viewer>
                 </div>
             </div>
         </section>
     );
 };
+
 export default WS_Interface;
