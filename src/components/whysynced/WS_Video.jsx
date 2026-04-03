@@ -6,7 +6,7 @@ const WS_Video = ({ isAr }) => {
     return (
         <section className="ws-video-section">
             <div className="ws-video-container">
-                <video autoPlay loop muted playsInline className="ws-bg-video">
+                <video autoPlay loop muted playsInline preload="metadata" className="ws-bg-video">
                     <source src={hugsVideo} type="video/mp4" />
                 </video>
                 <img src={overlayImg} alt="" className="ws-video-img-overlay" />

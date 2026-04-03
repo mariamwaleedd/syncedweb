@@ -32,6 +32,7 @@ const HeroSection = () => {
                         loop 
                         muted 
                         playsInline 
+                        preload="metadata" 
                         className="main-video"
                     >
                         <source src={content.video_link} type="video/mp4" />
