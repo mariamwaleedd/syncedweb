@@ -15,15 +15,17 @@ const Error = () => {
 
     return (
         <div className="error-page-root">
-           
+            <NavBar />
             <main className="error-content-container">
                 <div className="error-visuals">
                     <div className="error-code-bg">404</div>
                     <div className="heart-monitor-line">
-                        <FaHeartbeat className="pulsing-heart" />
                         <svg viewBox="0 0 1000 100" className="ecg-line">
-                            <path d="M0,50 L200,50 L210,40 L220,60 L230,20 L245,80 L260,50 L400,50 L410,10 L430,90 L450,50 L1000,50" />
+                            <path d="M0,50 L200,50 L210,40 L220,60 L230,20 L245,80 L260,50 L400,50 L410,10 L430,90 L450,50 L600,50 L610,40 L620,60 L630,20 L645,80 L660,50 L800,50 L810,10 L830,90 L850,50 L1000,50" />
                         </svg>
+                        <div className="heart-pulse-lead">
+                            <FaHeartbeat className="pulsing-heart" />
+                        </div>
                     </div>
                 </div>
 
@@ -42,7 +44,7 @@ const Error = () => {
                     </Link>
                 </div>
             </main>
-         
+            <Footer />
         </div>
     );
 };
