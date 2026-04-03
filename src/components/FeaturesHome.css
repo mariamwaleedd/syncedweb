@@ -1,9 +1,5 @@
 .features-home {
     background-color: var(--darkbg);
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
     padding: 100px 8%;
     color: var(--white);
     display: flex;
