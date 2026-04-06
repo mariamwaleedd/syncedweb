@@ -3,6 +3,7 @@ import './ContactForm.css';
 import { useGlobal } from '../context/GlobalContext';
 import { supabase } from '../Supabase';
 import { FaUser, FaEnvelope, FaPen, FaCommentDots, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+import Spline from '@splinetool/react-spline';
 
 const ContactForm = () => {
     const { isAr } = useGlobal();
@@ -68,9 +69,8 @@ const ContactForm = () => {
 
     return (
         <section className="contact-form-section">
-            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.74/build/spline-viewer.js"></script>
             <div className="spline-bg">
-                <spline-viewer url="https://prod.spline.design/aD3oOJjMGWrg1pu2/scene.splinecode"></spline-viewer>
+                <Spline scene="https://prod.spline.design/aD3oOJjMGWrg1pu2/scene.splinecode" />
             </div>
             <div className="form-container-v2">
                 <div className="form-header-v2">
