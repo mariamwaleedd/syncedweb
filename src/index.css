@@ -94,3 +94,55 @@ p, span, li, button, input, .hero-subtitle {
 [data-theme='light'] .global-hover-effect:hover {
     box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15) !important;
 }
+
+/* CREATIVE AURORA EDGE GLOW */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    top: -40vw;
+    left: -40vw;
+    width: 80vw;
+    height: 80vw;
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+body::before {
+    background: radial-gradient(circle, var(--lightblue) 0%, transparent 50%);
+    opacity: 0.15;
+    animation: orbTravel1 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+body::after {
+    background: radial-gradient(circle, #ffffff 0%, transparent 60%);
+    opacity: 0.07;
+    animation: orbTravel2 24s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite reverse;
+}
+
+[data-theme='light'] body::before {
+    opacity: 0.1;
+    mix-blend-mode: normal;
+}
+
+[data-theme='light'] body::after {
+    background: radial-gradient(circle, var(--lightblue) 0%, transparent 60%);
+    opacity: 0.05;
+    mix-blend-mode: normal;
+}
+
+@keyframes orbTravel1 {
+    0% { transform: translate(0vw, 0vh) scale(1); }
+    25% { transform: translate(100vw, 15vh) scale(1.3); }
+    50% { transform: translate(85vw, 100vh) scale(0.9); }
+    75% { transform: translate(10vw, 85vh) scale(1.2); }
+    100% { transform: translate(0vw, 0vh) scale(1); }
+}
+
+@keyframes orbTravel2 {
+    0% { transform: translate(100vw, 100vh) scale(1); }
+    33% { transform: translate(0vw, 80vh) scale(1.4); }
+    66% { transform: translate(80vw, 0vh) scale(0.8); }
+    100% { transform: translate(100vw, 100vh) scale(1); }
+}
