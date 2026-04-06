@@ -3,11 +3,27 @@
     padding: 100px 5%;
     display: flex;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.spline-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+spline-viewer {
+    width: 100%;
 }
 
 .form-container-v2 {
     max-width: 1000px;
     width: 100%;
+    position: relative;
+    z-index: 10;
 }
 
 .form-header-v2 {
