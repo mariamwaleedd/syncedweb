@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Spline from '@splinetool/react-spline';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import './iPhoneSpline.css';
 import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
+
+const Spline = lazy(() => import('@splinetool/react-spline'));
 
 const IPhoneSpline = () => {
     const { isAr } = useGlobal();
@@ -26,7 +27,9 @@ const IPhoneSpline = () => {
     return (
         <section className="spline-section">
             <div className="spline-container">
-                <Spline scene={data.spline_url} />
+                <Suspense fallback={<div style={{ width: '100%', height: '100%', opacity: 0 }}></div>}>
+                    <Spline scene={data.spline_url} />
+                </Suspense>
             </div>
             <div className="spline-content">
                 <div className="spline-label">

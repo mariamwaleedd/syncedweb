@@ -16,8 +16,11 @@ export const fetchWithCache = async (cacheKey, fetchPromise, onData) => {
     try {
         const { data, error } = await fetchPromise;
         if (data) {
-            localStorage.setItem(cacheKey, JSON.stringify(data));
-            onData(data);
+            const newDataString = JSON.stringify(data);
+            if (newDataString !== cached) {
+                localStorage.setItem(cacheKey, newDataString);
+                onData(data);
+            }
         } else if (error) {
             console.error('Supabase fetch error:', error);
         }

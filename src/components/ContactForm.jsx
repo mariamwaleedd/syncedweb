@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import './ContactForm.css';
 import { useGlobal } from '../context/GlobalContext';
 import { supabase, fetchWithCache } from '../Supabase';
 import { FaUser, FaEnvelope, FaPen, FaCommentDots, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
-import Spline from '@splinetool/react-spline';
+const Spline = lazy(() => import('@splinetool/react-spline'));
 
 const ContactForm = () => {
     const { isAr } = useGlobal();
@@ -77,7 +77,9 @@ const ContactForm = () => {
                 onTouchMoveCapture={(e) => e.stopPropagation()}
                 onScrollCapture={(e) => e.stopPropagation()}
             >
-                <Spline scene="https://prod.spline.design/aD3oOJjMGWrg1pu2/scene.splinecode" />
+                <Suspense fallback={<div style={{ width: '100%', height: '100%', opacity: 0 }}></div>}>
+                    <Spline scene="https://prod.spline.design/aD3oOJjMGWrg1pu2/scene.splinecode" />
+                </Suspense>
             </div>
             <div className="form-container-v2">
                 <div className="form-header-v2">
