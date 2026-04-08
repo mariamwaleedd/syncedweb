@@ -57,6 +57,17 @@ body {
     width: 100%;
     margin: 0;
     transition: background-color var(--transition), color var(--transition);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+input, textarea, select {
+    user-select: auto;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
 }
 
 h1, h2, h3, h4, .hero-title {
