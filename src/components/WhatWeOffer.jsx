@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './WhatWeOffer.css';
 import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
+import { Link } from 'react-router-dom';
 
 const Counter = ({ end, suffix, duration = 2000 }) => {
     const [count, setCount] = useState(0);
@@ -66,17 +67,26 @@ const WhatWeOffer = () => {
             </div>
 
             <div className="offer-grid">
-                {cards.map((card, idx) => (
-                    <div className={`card ${card.card_class}`} key={idx}>
-                        <div className="card-info">
-                            <h4>{isAr ? card.title_ar : card.title_en}</h4>
-                            <p>{isAr ? card.desc_ar : card.desc_en}</p>
-                        </div>
-                        <div className="img-wrapper">
-                            <img src={`${card.img_url}?t=${new Date().getTime()}`} alt="" className={card.img_class} />
-                        </div>
-                    </div>
-                ))}
+                {cards.map((card, idx) => {
+                    // Generate a slug based on the English title, matching the router's expectations
+                    const slug = card.title_en?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+                    return (
+                        <Link 
+                            to={`/features/${slug}`} 
+                            className={`card ${card.card_class}`} 
+                            key={idx}
+                            style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}
+                        >
+                            <div className="card-info">
+                                <h4>{isAr ? card.title_ar : card.title_en}</h4>
+                                <p>{isAr ? card.desc_ar : card.desc_en}</p>
+                            </div>
+                            <div className="img-wrapper">
+                                <img src={`${card.img_url}?t=${new Date().getTime()}`} alt="" className={card.img_class} />
+                            </div>
+                        </Link>
+                    );
+                })}
             </div>
         </section>
     );
