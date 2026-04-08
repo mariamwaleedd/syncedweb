@@ -10,6 +10,7 @@ const Process = () => {
     const [header, setHeader] = useState(null);
     const [steps, setSteps] = useState([]);
     const sectionRef = useRef(null);
+    const modelRef = useRef(null);
 
     useEffect(() => {
         const fetchData = () => {
@@ -31,8 +32,23 @@ const Process = () => {
         );
 
         if (sectionRef.current) observer.observe(sectionRef.current);
+
+        const handleMouseMove = (e) => {
+            if (!modelRef.current) return;
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            
+            const yaw = x * 100;
+            const pitch = 75 + (y * 50);
+            
+            modelRef.current.cameraOrbit = `${yaw}deg ${pitch}deg auto`;
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
         return () => {
             if (sectionRef.current) observer.unobserve(sectionRef.current);
+            window.removeEventListener('mousemove', handleMouseMove);
         };
     }, []);
 
@@ -54,14 +70,13 @@ const Process = () => {
                 
                 <div className={`process-model-container ${inView ? 'animate-header' : ''}`}>
                     <model-viewer 
+                        ref={modelRef}
                         src={alarmClockModel} 
                         ar 
                         ar-modes="webxr scene-viewer quick-look" 
-                        camera-controls 
                         tone-mapping="neutral" 
                         shadow-intensity="1" 
                         autoplay 
-                        auto-rotate
                         disable-zoom
                         interaction-prompt="none">
                     </model-viewer>
