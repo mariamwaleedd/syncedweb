@@ -1,11 +1,87 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './NavBar.css';
 import whitelogo from '../imgs/logowhite.png';
 import { useGlobal } from '../context/GlobalContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../Supabase';
 
 const NavBar = () => {
     const { isAr, toggleLang, isDark, toggleTheme } = useGlobal();
+    const navigate = useNavigate();
+    
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchData, setSearchData] = useState([]);
+    const searchRef = useRef(null);
+
+    useEffect(() => {
+        const buildIndex = async () => {
+            const staticRoutes = [
+                { title_en: 'About Us', title_ar: 'معلومات عنا', type: 'Page', link: '/AboutUs' },
+                { title_en: 'Contact Us', title_ar: 'اتصل بنا', type: 'Page', link: '/ContactUs' },
+                { title_en: 'Plans & Pricing', title_ar: 'الخطط والأسعار', type: 'Page', link: '/plans' },
+                { title_en: 'Why Synced', title_ar: 'لماذا سينكد', type: 'Page', link: '/whysynced' },
+                { title_en: 'Features', title_ar: 'الميزات', type: 'Page', link: '/features' },
+                { title_en: 'FAQs', title_ar: 'الأسئلة الشائعة', type: 'Page', link: '/faq' },
+            ];
+            
+            let dynamicData = [];
+            const { data: features } = await supabase.from('features').select('title_en, title_ar, desc_en, desc_ar');
+            const { data: faqs } = await supabase.from('faq_page').select('title_en, title_ar').eq('type', 'faq');
+            
+            if (features) {
+                dynamicData = [...dynamicData, ...features.map(f => ({
+                    title_en: f.title_en,
+                    title_ar: f.title_ar,
+                    desc_en: f.desc_en,
+                    desc_ar: f.desc_ar,
+                    type: 'Feature',
+                    link: `/features/${f.title_en?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`
+                }))];
+            }
+
+            if (faqs) {
+                 dynamicData = [...dynamicData, ...faqs.map(f => ({
+                    title_en: f.title_en,
+                    title_ar: f.title_ar,
+                    type: 'FAQ',
+                    link: `/faq`
+                 }))];
+            }
+
+            setSearchData([...staticRoutes, ...dynamicData]);
+        };
+        buildIndex();
+        
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setIsSearchOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+        if (e.target.value.trim() !== '') setIsSearchOpen(true);
+        else setIsSearchOpen(false);
+    };
+
+    const handleResultClick = (link) => {
+        navigate(link);
+        setIsSearchOpen(false);
+        setSearchQuery('');
+    };
+
+    const filteredResults = searchQuery.trim() === '' ? [] : searchData.filter(item => {
+        const q = searchQuery.toLowerCase();
+        const tEn = item.title_en?.toLowerCase() || '';
+        const tAr = item.title_ar || '';
+        const dEn = item.desc_en?.toLowerCase() || '';
+        const dAr = item.desc_ar || '';
+        return tEn.includes(q) || tAr.includes(q) || dEn.includes(q) || dAr.includes(q);
+    });
 
     return (
         <nav className="navbar">
@@ -42,10 +118,16 @@ const NavBar = () => {
                 </div>
             </div>
 
-
-            <div className="nav-search-container">
+            <div className="nav-search-container" ref={searchRef}>
                 <div className="search-wrapper">
-                    <input type="text" placeholder={isAr ? "بحث..." : "Search..."} className="search-input" />
+                    <input 
+                        type="text" 
+                        placeholder={isAr ? "بحث..." : "Search..."} 
+                        className="search-input" 
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                        onFocus={() => { if(searchQuery.trim()) setIsSearchOpen(true) }}
+                    />
                     <button className="search-btn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="11" cy="11" r="8"></circle>
@@ -53,6 +135,26 @@ const NavBar = () => {
                         </svg>
                     </button>
                 </div>
+                
+                {isSearchOpen && (
+                    <div className="nav-search-dropdown">
+                        {filteredResults.length > 0 ? (
+                            filteredResults.slice(0, 8).map((res, idx) => (
+                                <div className="search-result-item" key={idx} onClick={() => handleResultClick(res.link)}>
+                                    <div className="res-type">{isAr && res.type==='Feature'?'ميزة':(isAr && res.type==='Page'?'صفحة':res.type)}</div>
+                                    <div className="res-content">
+                                        <h4>{isAr ? res.title_ar : res.title_en}</h4>
+                                        { (res.desc_en && res.desc_ar) && <p>{isAr ? res.desc_ar.substring(0,50) : res.desc_en.substring(0,50)}...</p> }
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="no-results-item">
+                                {isAr ? "لا توجد نتائج" : "No results found"}
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </nav>
     );
