@@ -28,7 +28,6 @@ const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
-    // 'lang' = language picker, 'chat' = conversation, 'form' = contact form, 'success' = sent
     const [mode, setMode] = useState('lang');
     const [chatLang, setChatLang] = useState(null); // 'en' | 'ar'
 
