@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '@google/model-viewer';
 import './CommandCenter.css';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';

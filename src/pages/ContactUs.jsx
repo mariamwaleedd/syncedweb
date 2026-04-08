@@ -3,11 +3,19 @@ import './ContactUs.css';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
-import { IoSend } from 'react-icons/io5';
+import { IoSend, IoCheckmarkCircle } from 'react-icons/io5';
 
 const ContactUs = () => {
     const { isAr } = useGlobal();
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+    });
 
     useEffect(() => {
         document.title = isAr ? "سينكد | اتصل بنا" : "Synced | Contact Us";
@@ -24,6 +32,36 @@ const ContactUs = () => {
         fetchContactData();
     }, []);
 
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const { error } = await supabase.from('contact_messages').insert([
+            {
+                sender_name_en: formData.name,
+                sender_name_ar: formData.name,
+                sender_email: formData.email,
+                subject_en: formData.subject,
+                subject_ar: formData.subject,
+                message_body_en: formData.message,
+                message_body_ar: formData.message,
+                status_en: 'New',
+                status_ar: 'جديد'
+            }
+        ]);
+
+        if (!error) {
+            setSubmitted(true);
+            setFormData({ name: '', email: '', subject: '', message: '' });
+            setTimeout(() => setSubmitted(false), 5000);
+        }
+        setLoading(false);
+    };
+
     const getItem = (key) => data.find(i => i.key === key);
     const getList = (type) => data.filter(i => i.type === type);
 
@@ -32,7 +70,6 @@ const ContactUs = () => {
 
     return (
         <div className="contact-page-root">
-            
             <section className="contact-hero-side-by-side">
                 <div className="hero-bg-layer"></div>
                 <div className="hero-grid-overlay"></div>
@@ -47,28 +84,71 @@ const ContactUs = () => {
                     </div>
 
                     <div className="contact-hero-form">
-                        <form className="contact-form-panel side-form-card">
+                        <div className="contact-form-panel side-form-card">
                             <h3>{isAr ? "اترك لنا رسالة" : "Leave Us a Message"}</h3>
-                            <div className="input-group-field">
-                                <label>{isAr ? "الاسم الكامل" : "Your Name"}</label>
-                                <input type="text" placeholder="John Doe" required />
-                            </div>
-                            <div className="input-group-field">
-                                <label>{isAr ? "البريد الإلكتروني" : "Email Address"}</label>
-                                <input type="email" placeholder="john@example.com" required />
-                            </div>
-                            <div className="input-group-field">
-                                <label>{isAr ? "الموضوع" : "Subject"}</label>
-                                <input type="text" placeholder={isAr ? "كيف نساعدك؟" : "How can we help?"} required />
-                            </div>
-                            <div className="input-group-field">
-                                <label>{isAr ? "الرسالة" : "Message"}</label>
-                                <textarea rows="4" placeholder={isAr ? "اكتب رسالتك هنا..." : "Tell us more about your inquiry..."} required></textarea>
-                            </div>
-                            <button type="submit" className="form-action-btn">
-                                {isAr ? "إرسال الرسالة" : "Send Message"} <IoSend />
-                            </button>
-                        </form>
+                            
+                            {submitted ? (
+                                <div className="form-success-state">
+                                    <IoCheckmarkCircle size={50} color="#34d399" />
+                                    <h4>{isAr ? "تم الإرسال بنجاح" : "Sent Successfully"}</h4>
+                                    <p>{isAr ? "سنتواصل معك في أقرب وقت ممكن." : "We will get back to you as soon as possible."}</p>
+                                </div>
+                            ) : (
+                                <form onSubmit={handleSubmit}>
+                                    <div className="input-group-field">
+                                        <label>{isAr ? "الاسم الكامل" : "Your Name"}</label>
+                                        <input 
+                                            type="text" 
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            placeholder="John Doe" 
+                                            required 
+                                        />
+                                    </div>
+                                    <div className="input-group-field">
+                                        <label>{isAr ? "البريد الإلكتروني" : "Email Address"}</label>
+                                        <input 
+                                            type="email" 
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            placeholder="john@example.com" 
+                                            required 
+                                        />
+                                    </div>
+                                    <div className="input-group-field">
+                                        <label>{isAr ? "الموضوع" : "Subject"}</label>
+                                        <input 
+                                            type="text" 
+                                            name="subject"
+                                            value={formData.subject}
+                                            onChange={handleChange}
+                                            placeholder={isAr ? "كيف نساعدك؟" : "How can we help?"} 
+                                            required 
+                                        />
+                                    </div>
+                                    <div className="input-group-field">
+                                        <label>{isAr ? "الرسالة" : "Message"}</label>
+                                        <textarea 
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            rows="4" 
+                                            placeholder={isAr ? "اكتب رسالتك هنا..." : "Tell us more about your inquiry..."} 
+                                            required
+                                        ></textarea>
+                                    </div>
+                                    <button type="submit" className="form-action-btn" disabled={loading}>
+                                        {loading ? (isAr ? "جاري الإرسال..." : "Sending...") : (
+                                            <>
+                                                {isAr ? "إرسال الرسالة" : "Send Message"} <IoSend />
+                                            </>
+                                        )}
+                                    </button>
+                                </form>
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -105,7 +185,6 @@ const ContactUs = () => {
                     </div>
                 </div>
             </main>
-
         </div>
     );
 };

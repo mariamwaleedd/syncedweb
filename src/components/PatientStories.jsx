@@ -43,6 +43,7 @@ const PatientStories = () => {
         
         if (data && data.length > 0) {
             setHeader(data.find(i => i.type === 'header'));
+            // ONLY show items where type is 'card' (Approved)
             setCards(data.filter(i => i.type === 'card'));
             setBar(data.find(i => i.type === 'bar'));
         }
@@ -63,7 +64,7 @@ const PatientStories = () => {
         const { error } = await supabase
             .from('testimonials')
             .insert([{
-                type: 'card',
+                type: 'pending', // Mark as pending for admin approval
                 variant: 'normal',
                 name_en: newReview.name,
                 name_ar: newReview.name,
@@ -71,13 +72,13 @@ const PatientStories = () => {
                 role_ar: newReview.role,
                 content_en: newReview.content,
                 content_ar: newReview.content,
-                order_index: cards.length + 1
+                order_index: "0" // Will be re-indexed on approval
             }]);
 
         if (!error) {
             setIsModalOpen(false);
             setNewReview({ name: '', role: '', content: '', rating: 5 });
-            fetchTestimonials();
+            alert(isAr ? "شكراً لك! مراجعتك قيد المراجعة." : "Thank you! Your review is pending approval.");
         }
         setSubmitting(false);
     };

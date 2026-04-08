@@ -41,17 +41,32 @@ const Process = () => {
 
     return (
         <section className="process-section" ref={sectionRef}>
-            <div className={`process-header ${inView ? 'animate-header' : ''}`}>
-                <div className="process-label">
-                    <span className="line"></span> 
-                    {header ? (isAr ? header.label_ar : header.label_en) : "THE PROCESS"}
+            <div className="process-top">
+                <div className={`process-header ${inView ? 'animate-header' : ''}`}>
+                    <div className="process-label">
+                        <span className="line"></span> 
+                        {header ? (isAr ? header.label_ar : header.label_en) : "THE PROCESS"}
+                    </div>
+                    <h2>
+                        {header ? (isAr ? header.title_ar : header.title_en) : "Up and running in minutes"}
+                    </h2>
+                    <p>
+                        {header ? (isAr ? header.desc_ar : header.desc_en) : "Loading details..."}
+                    </p>
                 </div>
-                <h2>
-                    {header ? (isAr ? header.title_ar : header.title_en) : "Up and running in minutes"}
-                </h2>
-                <p>
-                    {header ? (isAr ? header.desc_ar : header.desc_en) : "Loading details..."}
-                </p>
+                <div className={`process-model-container ${inView ? 'animate-header' : ''}`}>
+                    <model-viewer 
+                        src="alarm_clock.glb" 
+                        ar 
+                        ar-modes="webxr scene-viewer quick-look" 
+                        camera-controls 
+                        tone-mapping="neutral" 
+                        poster="poster.webp" 
+                        shadow-intensity="1" 
+                        autoplay 
+                        auto-rotate>
+                    </model-viewer>
+                </div>
             </div>
 
             <div className="steps-container">

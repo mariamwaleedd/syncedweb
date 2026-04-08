@@ -1,7 +1,6 @@
 import React from 'react';
 import { useGlobal } from '../../context/GlobalContext';
 import { FaCheckCircle } from 'react-icons/fa';
-import '@google/model-viewer';
 import iphoneModel from '../../3d/iphone_12_pro.glb';
 
 const WS_Interface = () => {

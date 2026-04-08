@@ -27,8 +27,6 @@ const ContactForm = () => {
         fetchUI();
     }, [isAr]);
 
-
-
     const validate = () => {
         let tempErrors = {};
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -50,12 +48,17 @@ const ContactForm = () => {
         e.preventDefault();
         if (validate()) {
             setIsLoading(true);
-            const { error } = await supabase.from('contact_submissions').insert([
+            const { error } = await supabase.from('contact_messages').insert([
                 { 
-                    full_name: formData.fullName, 
-                    email: formData.email, 
-                    subject: formData.subject, 
-                    message: formData.message 
+                    sender_name_en: formData.fullName,
+                    sender_name_ar: formData.fullName,
+                    sender_email: formData.email, 
+                    subject_en: formData.subject,
+                    subject_ar: formData.subject,
+                    message_body_en: formData.message,
+                    message_body_ar: formData.message,
+                    status_en: 'New',
+                    status_ar: 'جديد'
                 }
             ]);
 
