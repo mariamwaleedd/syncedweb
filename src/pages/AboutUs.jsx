@@ -65,7 +65,7 @@ const AboutUs = () => {
                         </div>
                         <div className="v5-origin-image">
                             <div className="ceo-frame">
-                                <img src={origin?.img_url} alt="CEO" className="ceo-main-img" />
+                                <img src={`${origin?.img_url}?t=${new Date().getTime()}`} alt="CEO" className="ceo-main-img" />
                                 <div className="ceo-badge">
                                     <strong>Mariam Waleed</strong>
                                     <span>Founder & CEO</span>

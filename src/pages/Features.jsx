@@ -72,7 +72,7 @@ const Features = () => {
                                 onMouseLeave={handleImgLeave}
                             >
                                 <div className="img-spotlight"></div>
-                                <img src={item.img_url} alt="" className="feature-3d-img" />
+                                <img src={`${item.img_url}?t=${new Date().getTime()}`} alt="" className="feature-3d-img" />
                             </div>
 
                             <div className="feat-content-box">

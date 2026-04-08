@@ -1,6 +1,6 @@
 import React from 'react';
 const WS_Hero = ({ data, isAr }) => (
-    <section className="ws-hero" style={{backgroundImage: `url(${data?.img_url})`}}>
+    <section className="ws-hero" style={{backgroundImage: `url(${data?.img_url}?t=${new Date().getTime()})`}}>
         <div className="ws-hero-overlay"></div>
         <div className="ws-hero-content">
             <span className="ws-badge">{isAr ? data?.label_ar : data?.label_en}</span>

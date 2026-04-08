@@ -33,7 +33,7 @@ const Footer = () => {
                 <div className="footer-top">
                     <div className="footer-brand">
                         <img 
-                            src={brandData.logo_url} 
+                            src={`${brandData.logo_url}?t=${new Date().getTime()}`} 
                             alt="Logo" 
                             className="footer-top-logo" 
                             style={{ filter: isDark ? 'none' : 'invert(1)' }}
@@ -64,7 +64,7 @@ const Footer = () => {
                 <div className="footer-bottom">
                     <div className="footer-branding-full">
                         <img 
-                            src={brandData.full_logo_url} 
+                            src={`${brandData.full_logo_url}?t=${new Date().getTime()}`} 
                             alt="Synced Full Logo" 
                             style={{ filter: isDark ? 'none' : 'invert(1)' }}
                         />

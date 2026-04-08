@@ -72,8 +72,9 @@ const WhatWeOffer = () => {
                             <h4>{isAr ? card.title_ar : card.title_en}</h4>
                             <p>{isAr ? card.desc_ar : card.desc_en}</p>
                         </div>
-                        <div className="img-wrapper">
-                            <img src={card.img_url} alt="" className={card.img_class} />
+                        <div className="card-image-wrapper">
+                            <div className="img-gradient-overlay"></div>
+                            <img src={`${card.img_url}?t=${new Date().getTime()}`} alt="" className={card.img_class} />
                         </div>
                     </div>
                 ))}
