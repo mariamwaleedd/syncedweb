@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Process.css';
 import { supabase } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
+import alarmClockModel from '../3d/alarm_clock.glb';
 
 const Process = () => {
     const { isAr } = useGlobal();
@@ -54,17 +55,19 @@ const Process = () => {
                         {header ? (isAr ? header.desc_ar : header.desc_en) : "Loading details..."}
                     </p>
                 </div>
+                
                 <div className={`process-model-container ${inView ? 'animate-header' : ''}`}>
                     <model-viewer 
-                        src="alarm_clock.glb" 
+                        src={alarmClockModel} 
                         ar 
                         ar-modes="webxr scene-viewer quick-look" 
                         camera-controls 
                         tone-mapping="neutral" 
-                        poster="poster.webp" 
                         shadow-intensity="1" 
                         autoplay 
-                        auto-rotate>
+                        auto-rotate
+                        disable-zoom
+                        interaction-prompt="none">
                     </model-viewer>
                 </div>
             </div>
