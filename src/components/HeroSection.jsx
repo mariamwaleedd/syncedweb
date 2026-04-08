@@ -27,16 +27,18 @@ const HeroSection = () => {
             <div className="video-background">
                 {content.video_link && (
                     <video 
+                        key={content.video_link}
                         autoPlay 
                         loop 
                         muted 
                         playsInline 
-                        className="hero-bg-video"
+                        preload="metadata" 
+                        className="main-video"
                     >
                         <source src={`${content.video_link}?t=${new Date().getTime()}`} type="video/mp4" />
                     </video>
                 )}
-                <div className="hero-video-overlay"></div>
+                <div className="overlay"></div>
             </div>
 
             <div className="hero-content">
