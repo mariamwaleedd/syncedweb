@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ClickAway.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const ClickAway = () => {
@@ -8,13 +8,14 @@ const ClickAway = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data: sectionData } = await supabase
+        const fetchData = () => {
+            fetchWithCache('hero_extra_click_away', supabase
                 .from('hero_extra_sections')
                 .select('*')
                 .eq('section_id', 'click_away')
-                .single();
-            if (sectionData) setData(sectionData);
+                .single(), (sectionData) => {
+                setData(sectionData);
+            });
         };
         fetchData();
     }, []);

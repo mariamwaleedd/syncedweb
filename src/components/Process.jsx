@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Process.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import alarmClockModel from '../3d/alarm_clock.glb';
 
@@ -12,18 +12,14 @@ const Process = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data, error } = await supabase
+        const fetchData = () => {
+            fetchWithCache('the_process', supabase
                 .from('the_process')
                 .select('*')
-                .order('order_index', { ascending: true });
-            
-            if (data && data.length > 0) {
+                .order('order_index', { ascending: true }), (data) => {
                 setHeader(data.find(i => i.type === 'header'));
                 setSteps(data.filter(i => i.type === 'step'));
-            } else if (error) {
-                console.error("Process Table Error:", error.message);
-            }
+            });
         };
         fetchData();
 

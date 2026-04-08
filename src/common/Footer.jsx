@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Footer.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const Footer = () => {
@@ -11,18 +11,16 @@ const Footer = () => {
     const [copyrightData, setCopyrightData] = useState(null);
 
     useEffect(() => {
-        const fetchFooterData = async () => {
-            const { data, error } = await supabase
+        const fetchFooterData = () => {
+            fetchWithCache('footer_data', supabase
                 .from('footer')
                 .select('*')
-                .order('order_index', { ascending: true });
-            
-            if (data) {
+                .order('order_index', { ascending: true }), (data) => {
                 setBrandData(data.find(i => i.type === 'brand'));
                 setProductLinks(data.filter(i => i.category === 'Product'));
                 setCompanyLinks(data.filter(i => i.category === 'Company'));
                 setCopyrightData(data.find(i => i.type === 'copyright'));
-            }
+            });
         };
         fetchFooterData();
     }, []);

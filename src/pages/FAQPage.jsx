@@ -3,10 +3,9 @@ import './FAQPage.css';
 import TopSections from '../common/TopSections';
 import Footer from '../common/Footer';
 import NavBar from '../common/NavBar';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { FaHeartbeat, FaUsers, FaShieldAlt, FaFileMedical, FaSearch, FaPlus, FaPaperPlane } from 'react-icons/fa';
-
 
 const FAQPage = () => {
     const { isAr } = useGlobal();
@@ -26,13 +25,12 @@ const FAQPage = () => {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        const fetchFaqData = async () => {
-            const { data } = await supabase.from('faq_page').select('*').order('order_index', { ascending: true });
-            if (data) {
+        const fetchFaqData = () => {
+            fetchWithCache('faq_page', supabase.from('faq_page').select('*').order('order_index', { ascending: true }), (data) => {
                 setHeader(data.find(i => i.type === 'header'));
                 setCategories(data.filter(i => i.type === 'cat_card'));
                 setFaqs(data.filter(i => i.type === 'faq'));
-            }
+            });
         };
         fetchFaqData();
 

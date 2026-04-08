@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ContactForm.css';
 import { useGlobal } from '../context/GlobalContext';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { FaUser, FaEnvelope, FaPen, FaCommentDots, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import Spline from '@splinetool/react-spline';
 
@@ -14,15 +14,14 @@ const ContactForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const fetchUI = async () => {
-            const { data } = await supabase.from('contact_form_ui').select('key, en, ar');
-            if (data) {
+        const fetchUI = () => {
+            fetchWithCache('contact_form_ui', supabase.from('contact_form_ui').select('key, en, ar'), (data) => {
                 const mappedUI = data.reduce((acc, item) => {
                     acc[item.key] = isAr ? item.ar : item.en;
                     return acc;
                 }, {});
                 setUi(mappedUI);
-            }
+            });
         };
         fetchUI();
     }, [isAr]);

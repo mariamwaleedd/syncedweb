@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Spline from '@splinetool/react-spline';
 import './iPhoneSpline.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const IPhoneSpline = () => {
@@ -9,13 +9,14 @@ const IPhoneSpline = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data: sectionData } = await supabase
-                .from('hero_extra_sections') // Changed to lowercase
+        const fetchData = () => {
+            fetchWithCache('hero_extra_spline', supabase
+                .from('hero_extra_sections')
                 .select('*')
                 .eq('section_id', 'spline')
-                .single();
-            if (sectionData) setData(sectionData);
+                .single(), (sectionData) => {
+                setData(sectionData);
+            });
         };
         fetchData();
     }, []);

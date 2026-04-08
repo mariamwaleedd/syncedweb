@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './FrequentlyAsked.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const FrequentlyAsked = () => {
@@ -11,24 +11,17 @@ const FrequentlyAsked = () => {
     const [faqs, setFaqs] = useState([]);
 
     useEffect(() => {
-        const fetchFaqs = async () => {
-            const { data, error } = await supabase
+        const fetchFaqs = () => {
+            fetchWithCache('faqs', supabase
                 .from('faqs')
                 .select('*')
-                .order('order_index', { ascending: true });
-            
-            if (error) {
-                console.error(error);
-                return;
-            }
-
-            if (data) {
+                .order('order_index', { ascending: true }), (data) => {
                 const headerRow = data.find(i => i.type?.toLowerCase().includes('header'));
                 const faqRows = data.filter(i => i.type?.toLowerCase().includes('faq'));
                 
                 setHeader(headerRow);
                 setFaqs(faqRows);
-            }
+            });
         };
         fetchFaqs();
     }, []);

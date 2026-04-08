@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './TakeControl.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import { FaTimes, FaMobileAlt, FaUserPlus, FaLink, FaUsers, FaArrowRight } from 'react-icons/fa';
@@ -11,13 +11,14 @@ const TakeControl = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data: sectionData } = await supabase
+        const fetchData = () => {
+            fetchWithCache('hero_extra_take_control', supabase
                 .from('hero_extra_sections')
                 .select('*')
                 .eq('section_id', 'take_control')
-                .single();
-            if (sectionData) setData(sectionData);
+                .single(), (sectionData) => {
+                setData(sectionData);
+            });
         };
         fetchData();
     }, []);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './CommandCenter.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 import heartModel from '../3d/lowpoly_human_heart.glb';
@@ -17,18 +17,16 @@ const CommandCenter = () => {
     const models = [heartModel, lungsModel, rbcModel];
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await supabase
+        const fetchData = () => {
+            fetchWithCache('command_center', supabase
                 .from('command_center')
                 .select('*')
-                .order('order_index', { ascending: true });
-
-            if (data) {
+                .order('order_index', { ascending: true }), (data) => {
                 setHeader(data.find(i => i.type === 'header'));
                 setMetrics(data.filter(i => i.type === 'metric'));
                 const anatomy = data.find(i => i.type === 'anatomy');
                 if (anatomy) setAnatomyAlt({ en: anatomy.alt_en, ar: anatomy.alt_ar });
-            }
+            });
         };
         fetchData();
     }, []);

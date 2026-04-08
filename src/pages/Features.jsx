@@ -4,9 +4,8 @@ import './Features.css';
 import NavBar from '../common/NavBar';
 import Footer from '../common/Footer';
 import TopSections from '../common/TopSections';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
-
 
 const Features = () => {
     const { isAr } = useGlobal();
@@ -18,12 +17,13 @@ const Features = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchFeatures = async () => {
-            const { data } = await supabase
+        const fetchFeatures = () => {
+            fetchWithCache('features_page', supabase
                 .from('features')
                 .select('*')
-                .order('order_index', { ascending: true });
-            if (data) setFeatures(data);
+                .order('order_index', { ascending: true }), (data) => {
+                setFeatures(data);
+            });
         };
         fetchFeatures();
     }, []);

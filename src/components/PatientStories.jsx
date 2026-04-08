@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './PatientStories.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const UserIcon = () => (
@@ -35,18 +35,17 @@ const PatientStories = () => {
         rating: 5
     });
 
-    const fetchTestimonials = async () => {
-        const { data, error } = await supabase
+    const fetchTestimonials = () => {
+        fetchWithCache('testimonials', supabase
             .from('testimonials')
             .select('*')
-            .order('order_index', { ascending: true });
-        
-        if (data && data.length > 0) {
-            setHeader(data.find(i => i.type === 'header'));
-            // ONLY show items where type is 'card' (Approved)
-            setCards(data.filter(i => i.type === 'card'));
-            setBar(data.find(i => i.type === 'bar'));
-        }
+            .order('order_index', { ascending: true }), (data) => {
+            if (data && data.length > 0) {
+                setHeader(data.find(i => i.type === 'header'));
+                setCards(data.filter(i => i.type === 'card'));
+                setBar(data.find(i => i.type === 'bar'));
+            }
+        });
     };
 
     useEffect(() => {

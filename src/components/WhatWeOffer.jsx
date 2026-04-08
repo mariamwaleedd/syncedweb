@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './WhatWeOffer.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const Counter = ({ end, suffix, duration = 2000 }) => {
@@ -29,13 +29,12 @@ const WhatWeOffer = () => {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        const fetchOfferData = async () => {
-            const { data } = await supabase.from('what_we_offer').select('*');
-            if (data) {
+        const fetchOfferData = () => {
+            fetchWithCache('what_we_offer', supabase.from('what_we_offer').select('*'), (data) => {
                 setHeader(data.find(item => item.type === 'header'));
                 setStats(data.filter(item => item.type === 'stat'));
                 setCards(data.filter(item => item.type === 'card'));
-            }
+            });
         };
         fetchOfferData();
     }, []);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './HeroSection.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const HeroSection = () => {
@@ -8,14 +8,14 @@ const HeroSection = () => {
     const [content, setContent] = useState(null);
 
     useEffect(() => {
-        const fetchHeroData = async () => {
-            const { data } = await supabase
+        const fetchHeroData = () => {
+            fetchWithCache('site_content_hero', supabase
                 .from('site_content')
                 .select('*')
                 .eq('section_id', 'hero')
-                .single();
-            
-            if (data) setContent(data);
+                .single(), (data) => {
+                    setContent(data);
+            });
         };
         fetchHeroData();
     }, []);

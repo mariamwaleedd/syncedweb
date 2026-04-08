@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useGlobal } from '../../context/GlobalContext';
-import { supabase } from '../../Supabase';
+import { supabase, fetchWithCache } from '../../Supabase';
 
 const WS_WhoFor = () => {
     const { isAr } = useGlobal();
@@ -8,17 +8,15 @@ const WS_WhoFor = () => {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        const fetchWhoData = async () => {
-            const { data } = await supabase
+        const fetchWhoData = () => {
+            fetchWithCache('why_synced_who_for', supabase
                 .from('why_synced')
                 .select('*')
                 .or('type.eq.who,type.eq.who_header')
-                .order('order_index', { ascending: true });
-
-            if (data) {
+                .order('order_index', { ascending: true }), (data) => {
                 setHeader(data.find(i => i.type === 'who_header'));
                 setCards(data.filter(i => i.type === 'who'));
-            }
+            });
         };
         fetchWhoData();
     }, []);

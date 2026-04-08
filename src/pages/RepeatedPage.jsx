@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './RepeatedPage.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { 
     FaStethoscope, FaInfoCircle, FaCheck, FaLightbulb, 
@@ -17,11 +17,12 @@ const RepeatedPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchPageData = async () => {
+        const fetchPageData = () => {
             setLoading(true);
-            const { data: pageData } = await supabase.from('feature_details').select('*').eq('slug', slug).single();
-            if (pageData) setData(pageData);
-            setLoading(false);
+            fetchWithCache(`feature_details_${slug}`, supabase.from('feature_details').select('*').eq('slug', slug).single(), (pageData) => {
+                setData(pageData);
+                setLoading(false);
+            });
         };
         fetchPageData();
         window.scrollTo(0, 0);

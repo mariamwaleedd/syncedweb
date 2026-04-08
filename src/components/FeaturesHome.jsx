@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './FeaturesHome.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 const FeaturesHome = () => {
@@ -9,16 +9,14 @@ const FeaturesHome = () => {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        const fetchFeatures = async () => {
-            const { data } = await supabase
+        const fetchFeatures = () => {
+            fetchWithCache('features_home', supabase
                 .from('features_home')
                 .select('*')
-                .order('order_index', { ascending: true });
-            
-            if (data) {
+                .order('order_index', { ascending: true }), (data) => {
                 setHeader(data.find(i => i.type === 'header'));
                 setCards(data.filter(i => i.type === 'card'));
-            }
+            });
         };
         fetchFeatures();
     }, []);

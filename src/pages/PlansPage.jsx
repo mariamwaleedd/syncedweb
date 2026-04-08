@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './PlansPage.css';
 import TopSections from '../common/TopSections';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { FaCheck } from 'react-icons/fa';
-
 
 const PlansPage = () => {
     const { isAr } = useGlobal();
@@ -17,17 +16,15 @@ const PlansPage = () => {
     const [plans, setPlans] = useState([]);
 
     useEffect(() => {
-        const fetchPlans = async () => {
-            const { data } = await supabase
+        const fetchPlans = () => {
+            fetchWithCache('subscription_plans', supabase
                 .from('subscription_plans')
                 .select('*')
-                .order('order_index', { ascending: true });
-            
-            if (data) {
+                .order('order_index', { ascending: true }), (data) => {
                 setHeader(data.find(i => i.type === 'header'));
                 setSecTitle(data.find(i => i.type === 'section_title'));
                 setPlans(data.filter(i => i.type === 'plan'));
-            }
+            });
         };
         fetchPlans();
     }, []);

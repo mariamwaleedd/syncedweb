@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './AboutUs.css';
 import TopSections from '../common/TopSections';
 import { useGlobal } from '../context/GlobalContext';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { 
     FaBullseye, FaEye, FaFlag, FaLightbulb, FaRocket, 
     FaShieldAlt, FaUsers, FaHeartbeat, FaHistory, FaDraftingCompass,
@@ -19,9 +19,10 @@ const AboutUs = () => {
     }, [isAr]);
 
     useEffect(() => {
-        const fetchAbout = async () => {
-            const { data } = await supabase.from('about_us').select('*').order('order_index', { ascending: true });
-            if (data) setDbData(data);
+        const fetchAbout = () => {
+            fetchWithCache('about_us_page', supabase.from('about_us').select('*').order('order_index', { ascending: true }), (data) => {
+                setDbData(data);
+            });
         };
         fetchAbout();
     }, []);

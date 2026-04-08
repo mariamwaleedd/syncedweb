@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './WhySynced.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 
 import WS_Hero from '../components/whysynced/WS_Hero';
@@ -13,15 +13,15 @@ import WS_Video from '../components/whysynced/WS_Video';
 import WS_WhyDownload from '../components/whysynced/WS_WhyDownload';
 import WS_Ready from '../components/whysynced/WS_Ready';
 
-
 const WhySynced = () => {
     const { isAr } = useGlobal();
     const [pageData, setPageData] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await supabase.from('why_synced').select('*').order('order_index', { ascending: true });
-            if (data) setPageData(data);
+        const fetchData = () => {
+            fetchWithCache('why_synced', supabase.from('why_synced').select('*').order('order_index', { ascending: true }), (data) => {
+                setPageData(data);
+            });
         };
         fetchData();
         document.title = isAr ? "سينكد | لماذا سينكد؟" : "Synced | Why Synced?";

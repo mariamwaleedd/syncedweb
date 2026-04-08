@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ContactUs.css';
-import { supabase } from '../Supabase';
+import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { IoSend, IoCheckmarkCircle } from 'react-icons/io5';
@@ -22,12 +22,13 @@ const ContactUs = () => {
     }, [isAr]);
 
     useEffect(() => {
-        const fetchContactData = async () => {
-            const { data: contactData } = await supabase
+        const fetchContactData = () => {
+            fetchWithCache('contact_us_page', supabase
                 .from('contact_us')
                 .select('*')
-                .order('order_index', { ascending: true });
-            if (contactData) setData(contactData);
+                .order('order_index', { ascending: true }), (contactData) => {
+                setData(contactData);
+            });
         };
         fetchContactData();
     }, []);
