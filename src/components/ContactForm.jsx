@@ -71,7 +71,12 @@ const ContactForm = () => {
 
     return (
         <section className="contact-form-section">
-            <div className="spline-bg">
+            <div 
+                className="spline-bg"
+                onWheelCapture={(e) => e.stopPropagation()}
+                onTouchMoveCapture={(e) => e.stopPropagation()}
+                onScrollCapture={(e) => e.stopPropagation()}
+            >
                 <Spline scene="https://prod.spline.design/aD3oOJjMGWrg1pu2/scene.splinecode" />
             </div>
             <div className="form-container-v2">
