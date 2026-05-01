@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import './NavBar.css';
 import whitelogo from '../imgs/logowhite.png';
 import { useGlobal } from '../context/GlobalContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../Supabase';
 
 const NavBar = () => {
     const { isAr, toggleLang, isDark, toggleTheme } = useGlobal();
     const navigate = useNavigate();
+    const location = useLocation();
+    const currentPath = location.pathname;
     
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -93,13 +95,13 @@ const NavBar = () => {
                         <span></span>
                     </div>
                     <ul className="burger-menu">
-                        <li><Link to="/">{isAr ? 'الرئيسية' : 'Home'}</Link></li>
-                        <li><Link to="/features">{isAr ? 'الميزات' : 'Features'}</Link></li>
-                        <li><Link to="/AboutUs">{isAr ? 'عنا' : 'About'}</Link></li>
-                        <li><Link to="/ContactUs">{isAr ? 'اتصل بنا' : 'Contact'}</Link></li>
-                        <li><Link to="/plans">{isAr ? 'الأطباء' : 'Plans'}</Link></li>
-                        <li><Link to="/whysynced">{isAr ? ' ليه Synced ' : 'Why Synced'}</Link></li>
-                        <li><Link to="/blog">{isAr ? 'مدونة' : 'Blog'}</Link></li>
+                        <li><Link to="/" className={currentPath === "/" ? "active-link" : ""}>{isAr ? 'الرئيسية' : 'Home'}</Link></li>
+                        <li><Link to="/features" className={currentPath === "/features" ? "active-link" : ""}>{isAr ? 'الميزات' : 'Features'}</Link></li>
+                        <li><Link to="/AboutUs" className={currentPath === "/AboutUs" ? "active-link" : ""}>{isAr ? 'عنا' : 'About'}</Link></li>
+                        <li><Link to="/ContactUs" className={currentPath === "/ContactUs" ? "active-link" : ""}>{isAr ? 'اتصل بنا' : 'Contact'}</Link></li>
+                        <li><Link to="/plans" className={currentPath === "/plans" ? "active-link" : ""}>{isAr ? 'الأطباء' : 'Plans'}</Link></li>
+                        <li><Link to="/whysynced" className={currentPath === "/whysynced" ? "active-link" : ""}>{isAr ? ' ليه Synced ' : 'Why Synced'}</Link></li>
+                        <li><Link to="/blog" className={currentPath === "/blog" ? "active-link" : ""}>{isAr ? 'مدونة' : 'Blog'}</Link></li>
                     </ul>
                 </div>
 

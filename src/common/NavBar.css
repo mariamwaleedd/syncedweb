@@ -114,6 +114,12 @@
     color: var(--lightblue);
 }
 
+.active-link {
+    color: var(--lightblue) !important;
+    font-weight: 700 !important;
+    text-shadow: 0 0 10px rgba(163, 214, 255, 0.4);
+}
+
 .burger-menu a {
     text-decoration: none;
     color: inherit;
