@@ -53,6 +53,7 @@ const Routing = () => {
 
     observeElements();
 
+    let timeoutId;
     const mutationObserver = new MutationObserver((mutations) => {
       let shouldCheck = false;
       for (const m of mutations) {
@@ -62,7 +63,8 @@ const Routing = () => {
         }
       }
       if (shouldCheck) {
-        setTimeout(observeElements, 50);
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(observeElements, 100);
       }
     });
 
@@ -71,6 +73,7 @@ const Routing = () => {
     return () => {
       intersectionObserver.disconnect();
       mutationObserver.disconnect();
+      clearTimeout(timeoutId);
     };
   }, []);
 

@@ -1,24 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './HealthCursor.css';
 
 const HealthCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+  const pointRef = useRef(null);
+  const glowRef = useRef(null);
 
   useEffect(() => {
+    let animationFrameId = null;
+
     const moveCursor = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
+      animationFrameId = requestAnimationFrame(() => {
+        if (pointRef.current) {
+          pointRef.current.style.left = `${x}px`;
+          pointRef.current.style.top = `${y}px`;
+          pointRef.current.style.opacity = '1';
+        }
+        if (glowRef.current) {
+          glowRef.current.style.left = `${x}px`;
+          glowRef.current.style.top = `${y}px`;
+          glowRef.current.style.opacity = '1';
+        }
+      });
     };
 
-    const handleMouseDown = () => setIsClicked(true);
-    const handleMouseUp = () => setIsClicked(false);
+    const handleMouseDown = () => {
+      if (pointRef.current) pointRef.current.classList.add('clicked');
+      if (glowRef.current) glowRef.current.classList.add('clicked');
+    };
+
+    const handleMouseUp = () => {
+      if (pointRef.current) pointRef.current.classList.remove('clicked');
+      if (glowRef.current) glowRef.current.classList.remove('clicked');
+    };
 
     const handleMouseOver = (e) => {
-      if (e.target.closest('a, button, [role="button"]')) {
-        setIsHovering(true);
+      if (e.target.closest('a, button, [role="button"], input, textarea')) {
+        if (glowRef.current) glowRef.current.classList.add('hover');
       } else {
-        setIsHovering(false);
+        if (glowRef.current) glowRef.current.classList.remove('hover');
       }
     };
 
@@ -32,18 +58,21 @@ const HealthCursor = () => {
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('mouseover', handleMouseOver);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
     <div className="custom-cursor-wrapper">
       <div
-        className={`cursor-point ${isClicked ? 'clicked' : ''}`}
-        style={{ left: `${position.x}px`, top: `${position.y}px` }}
+        ref={pointRef}
+        className="cursor-point"
+        style={{ left: '-100px', top: '-100px', opacity: 0 }}
       />
       <div
-        className={`cursor-glow ${isHovering ? 'hover' : ''} ${isClicked ? 'clicked' : ''}`}
-        style={{ left: `${position.x}px`, top: `${position.y}px` }}
+        ref={glowRef}
+        className="cursor-glow"
+        style={{ left: '-100px', top: '-100px', opacity: 0 }}
       />
     </div>
   );
