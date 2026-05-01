@@ -15,7 +15,6 @@ const Error = () => {
 
     return (
         <div className="error-page-root">
-            <NavBar />
             <main className="error-content-container">
                 <div className="error-visuals">
                     <div className="error-code-bg">404</div>
@@ -44,7 +43,6 @@ const Error = () => {
                     </Link>
                 </div>
             </main>
-            <Footer />
         </div>
     );
 };
