@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import './PatientStories.css';
 import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
@@ -77,7 +78,7 @@ const PatientStories = () => {
         if (!error) {
             setIsModalOpen(false);
             setNewReview({ name: '', role: '', content: '', rating: 5 });
-            alert(isAr ? "شكراً لك! مراجعتك قيد المراجعة." : "Thank you! Your review is pending approval.");
+            toast.success(isAr ? "شكراً لك! مراجعتك قيد المراجعة." : "Thank you! Your review is pending approval.");
         }
         setSubmitting(false);
     };

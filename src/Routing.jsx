@@ -1,5 +1,6 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import NavBar from './common/NavBar';
 import Footer from './common/Footer';
 import Preloader from './common/Preloader';
@@ -79,6 +80,24 @@ const Routing = () => {
 
   return (
     <>
+      <Toaster 
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: 'rgba(1, 4, 34, 0.85)',
+            color: '#fff',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            fontFamily: 'var(--subtitlefont)',
+          },
+          success: {
+            iconTheme: {
+              primary: '#A3D6FF',
+              secondary: '#010422',
+            },
+          },
+        }}
+      />
       <NavBar />
       <ScrollToTop />
       <Preloader/>

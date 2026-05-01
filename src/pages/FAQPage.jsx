@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import toast from 'react-hot-toast';
 import './FAQPage.css';
 import TopSections from '../common/TopSections';
 import Footer from '../common/Footer';
@@ -67,7 +68,7 @@ const FAQPage = () => {
         const { error } = await supabase.from('user_questions').insert([{ question: userQuestion }]);
         if (!error) {
             setUserQuestion('');
-            alert(isAr ? "تم إرسال سؤالك بنجاح!" : "Your question was sent successfully!");
+            toast.success(isAr ? "تم إرسال سؤالك بنجاح!" : "Your question was sent successfully!");
         }
         setIsSubmitting(false);
     };
