@@ -60,21 +60,23 @@ const CommandCenter = () => {
                                     </span>
                                 </div>
                                 <div className="metric-model">
-                                    <model-viewer loading="lazy" 
-                                        key={`${idx}-${isAr}`}
-                                        src={models[idx]} 
-                                        alt={isAr ? m.alt_ar : m.alt_en}
-                                        camera-orbit={idx === 0 ? "45deg 75deg 105%" : idx === 1 ? "0deg 90deg 100%" : "-45deg 75deg 100%"}
-                                        field-of-view={idx === 1 ? "35deg" : "30deg"}
-                                        tone-mapping="neutral" 
-                                        shadow-intensity="1" 
-                                        auto-rotate 
-                                        autoplay 
-                                        disable-zoom
-                                        dir="ltr"
-                                        loading="eager"
-                                        reveal="auto"
-                                    ></model-viewer>
+                                    {models[idx] && (
+                                        <model-viewer 
+                                            key={`${idx}-${isAr}`}
+                                            src={models[idx]} 
+                                            alt={isAr ? m.alt_ar : m.alt_en}
+                                            camera-orbit={idx === 0 ? "45deg 75deg 105%" : idx === 1 ? "0deg 90deg 100%" : "-45deg 75deg 100%"}
+                                            field-of-view={idx === 1 ? "35deg" : "30deg"}
+                                            tone-mapping="neutral" 
+                                            shadow-intensity="1" 
+                                            auto-rotate 
+                                            autoplay 
+                                            disable-zoom
+                                            dir="ltr"
+                                            loading="eager"
+                                            reveal="auto"
+                                        ></model-viewer>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -83,7 +85,7 @@ const CommandCenter = () => {
 
                 <div className="cc-right">
                     <div className="anatomy-card">
-                        <model-viewer loading="lazy" 
+                        <model-viewer 
                             key={`anatomy-${isAr}`}
                             src={anatomyModel} 
                             alt={isAr ? anatomyAlt.ar : anatomyAlt.en}

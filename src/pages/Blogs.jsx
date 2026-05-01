@@ -108,7 +108,7 @@ const Blogs = () => {
                         date: "Feb 23, 2026",
                         readTime: "7 min read"
                     })}>
-                        <div className="img-zoom-wrap"><img loading="lazy" src={story1} alt="Fitness" /></div>
+                        <div className="img-zoom-wrap"><img loading="lazy" crossOrigin="anonymous" src={story1} alt="Fitness" /></div>
                         <div className="story-card-content">
                             <h3>Fitness Made Simple: Workouts for Every Level</h3>
                             <p>From beginner to advanced, find the perfect exercise routine to match your fitness goals.</p>
@@ -127,7 +127,7 @@ const Blogs = () => {
                         date: "Feb 24, 2026",
                         readTime: "6 min read"
                     })}>
-                        <div className="img-zoom-wrap"><img loading="lazy" src={story2} alt="Nutrition" /></div>
+                        <div className="img-zoom-wrap"><img loading="lazy" crossOrigin="anonymous" src={story2} alt="Nutrition" /></div>
                         <div className="story-card-content">
                             <h3>Nutrition Essentials: Building a Balanced Plate</h3>
                             <p>Expert nutritionists share their top tips for creating meals that nourish your body and mind.</p>
@@ -146,7 +146,7 @@ const Blogs = () => {
                         date: "Feb 26, 2026",
                         readTime: "5 min read"
                     })}>
-                        <div className="img-zoom-wrap"><img loading="lazy" src={story3} alt="Mindfulness" /></div>
+                        <div className="img-zoom-wrap"><img loading="lazy" crossOrigin="anonymous" src={story3} alt="Mindfulness" /></div>
                         <div className="story-card-content">
                             <h3>Mindfulness Meditation: Transform Your Mental Health</h3>
                             <p>Learn how daily meditation practices can reduce stress, improve focus, and enhance overall wellbeing.</p>
@@ -402,7 +402,7 @@ const Blogs = () => {
                             &times;
                         </button>
                         {selectedArticle.image && (
-                            <img src={selectedArticle.image} alt={selectedArticle.title} className="blog-modal-img" />
+                            <img src={selectedArticle.image} crossOrigin="anonymous" alt={selectedArticle.title} className="blog-modal-img" />
                         )}
                         <span className="blog-modal-cat">{selectedArticle.category}</span>
                         <h3>{selectedArticle.title}</h3>

@@ -27,6 +27,7 @@ const ClickAway = () => {
             <div className="click-away-container">
                 <div className="click-away-image">
                     <img loading="lazy" 
+                        crossOrigin="anonymous"
                         src={`${data.img_url}`} 
                         alt="Synced Mobile Experience" 
                         className={isAr ? 'rotated-ar' : ''} 

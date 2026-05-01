@@ -14,7 +14,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
 
 :root {
@@ -95,7 +94,6 @@ p, span, li, button, input, .hero-subtitle {
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-    will-change: opacity, transform;
 }
 
 .reveal-visible {
@@ -106,7 +104,6 @@ p, span, li, button, input, .hero-subtitle {
 /* GLOBAL HOVER EFFECTS */
 .global-hover-effect {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, box-shadow;
 }
 
 .global-hover-effect:hover {

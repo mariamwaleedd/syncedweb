@@ -72,7 +72,9 @@ const Features = () => {
                                 onMouseLeave={handleImgLeave}
                             >
                                 <div className="img-spotlight"></div>
-                                <img loading="lazy" src={`${item.img_url}`} alt="" className="feature-3d-img" />
+                                {item.img_url && (
+                                    <img loading="lazy" crossOrigin="anonymous" src={item.img_url} alt="" className="feature-3d-img" />
+                                )}
                             </div>
 
                             <div className="feat-content-box">

@@ -39,7 +39,9 @@ const WS_WhoFor = () => {
                         key={card.key_id || index}
                     >
                         <div className="ws-who-img-container">
-                            <img loading="lazy" src={`${card.img_url}`} alt="" />
+                            {card.img_url && (
+                                <img loading="lazy" src={card.img_url} crossOrigin="anonymous" alt="" />
+                            )}
                         </div>
                         <div className="ws-who-text">
                             <h3>{isAr ? card.title_ar : card.title_en}</h3>

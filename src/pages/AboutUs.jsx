@@ -65,7 +65,9 @@ const AboutUs = () => {
                         </div>
                         <div className="v5-origin-image">
                             <div className="ceo-frame">
-                                <img loading="lazy" src={`${origin?.img_url}`} alt="CEO" className="ceo-main-img" />
+                                {origin?.img_url && (
+                                    <img loading="lazy" crossOrigin="anonymous" src={origin.img_url} alt="CEO" className="ceo-main-img" />
+                                )}
                                 <div className="ceo-badge">
                                     <strong>Mariam Waleed</strong>
                                     <span>Founder & CEO</span>

@@ -34,8 +34,9 @@ const HeroSection = () => {
                         playsInline 
                         preload="metadata" 
                         className="main-video"
+                        crossOrigin="anonymous"
                     >
-                        <source src={`${content.video_link}`} type="video/mp4" />
+                        <source src={content.video_link} type="video/mp4" />
                     </video>
                 )}
                 <div className="overlay"></div>

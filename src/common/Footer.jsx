@@ -32,12 +32,15 @@ const Footer = () => {
             <div className="footer-overlay">
                 <div className="footer-top">
                     <div className="footer-brand">
-                        <img loading="lazy" 
-                            src={`${brandData.logo_url}`} 
-                            alt="Logo" 
-                            className="footer-top-logo" 
-                            style={{ filter: isDark ? 'none' : 'invert(1)' }}
-                        />
+                        {brandData.logo_url && (
+                            <img loading="lazy" 
+                                crossOrigin="anonymous"
+                                src={brandData.logo_url} 
+                                alt="Logo" 
+                                className="footer-top-logo" 
+                                style={{ filter: isDark ? 'none' : 'invert(1)' }}
+                            />
+                        )}
                         <p>{isAr ? brandData.desc_ar : brandData.desc_en}</p>
                     </div>
 
@@ -63,11 +66,14 @@ const Footer = () => {
 
                 <div className="footer-bottom">
                     <div className="footer-branding-full">
-                        <img loading="lazy" 
-                            src={`${brandData.full_logo_url}`} 
-                            alt="Synced Full Logo" 
-                            style={{ filter: isDark ? 'none' : 'invert(1)' }}
-                        />
+                        {brandData.full_logo_url && (
+                            <img loading="lazy" 
+                                crossOrigin="anonymous"
+                                src={brandData.full_logo_url} 
+                                alt="Synced Full Logo" 
+                                style={{ filter: isDark ? 'none' : 'invert(1)' }}
+                            />
+                        )}
                     </div>
                     <p className="footer-copyright">
                         {isAr ? copyrightData?.desc_ar : copyrightData?.desc_en}
