@@ -4,9 +4,9 @@ import './ChatBot.css';
 import { useGlobal } from '../context/GlobalContext';
 import { FaComments, FaTimes, FaUser, FaHeadset, FaPaperPlane, FaInfoCircle, FaRocket, FaGlobe } from 'react-icons/fa';
 
-const GROQ_API_KEY = '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';
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const MODEL = 'llama-3.1-8b-instant';
+const OPENROUTER_API_KEY = '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'; // <-- PASTE YOUR KEY HERE
+const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const MODEL = 'meta-llama/llama-3.1-8b-instruct'; // Or any other OpenRouter model
 
 const getSystemPrompt = (lang) => `You are the Synced Assistant, a helpful, friendly, and knowledgeable AI chatbot for Synced — a modern healthcare management platform.
 
@@ -111,16 +111,18 @@ const ChatBot = () => {
         setApiHistory([]);
     };
 
-    /* ── Groq API call ────────────────────────────────────────────── */
-    const sendToGroq = async (userText, history, lang) => {
+    /* ── OpenRouter API call ────────────────────────────────────────────── */
+    const sendToOpenRouter = async (userText, history, lang) => {
         const newHistory = [...history, { role: 'user', content: userText }];
         setApiHistory(newHistory);
 
-        const response = await fetch(GROQ_API_URL, {
+        const response = await fetch(OPENROUTER_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${GROQ_API_KEY}`,
+                Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+                'HTTP-Referer': window.location.href, // Required for OpenRouter rankings
+                'X-Title': 'Synced Website', // Optional for OpenRouter
             },
             body: JSON.stringify({
                 model: MODEL,
@@ -132,7 +134,7 @@ const ChatBot = () => {
 
         if (!response.ok) {
             const errBody = await response.text();
-            console.error('Groq API error', response.status, errBody);
+            console.error('OpenRouter API error', response.status, errBody);
             throw new Error(`API ${response.status}: ${errBody}`);
         }
 
@@ -154,7 +156,7 @@ const ChatBot = () => {
         setIsLoading(true);
 
         try {
-            const botText = await sendToGroq(text, apiHistory, chatLang);
+            const botText = await sendToOpenRouter(text, apiHistory, chatLang);
             setMessages((prev) => [...prev, { id: Date.now() + 1, type: 'bot', text: botText }]);
         } catch (err) {
             console.error('ChatBot error:', err);
