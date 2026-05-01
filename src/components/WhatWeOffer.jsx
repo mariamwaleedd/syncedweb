@@ -69,7 +69,12 @@ const WhatWeOffer = () => {
             <div className="offer-grid">
                 {cards.map((card, idx) => {
                     // Generate a slug based on the English title, matching the router's expectations
-                    const slug = card.title_en?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+                    let slug = card.title_en?.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+                    
+                    // Fix specific slug mismatches between what_we_offer and feature_details tables
+                    if (slug === 'medicine') slug = 'medicine-tracking';
+                    if (slug === 'health-tracking') slug = 'health-vitals';
+
                     return (
                         <Link 
                             to={`/features/${slug}`} 

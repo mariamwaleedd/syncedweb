@@ -28,7 +28,12 @@ const RepeatedPage = () => {
         window.scrollTo(0, 0);
     }, [slug, isAr]);
 
-    if (loading || !data) return <div className="loading-state-v4"></div>;
+    if (loading) return <div className="loading-state-v4"></div>;
+    if (!data) return (
+        <div className="feature-v4-root" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <h2>{isAr ? "عذراً، هذه الميزة غير متوفرة حالياً." : "Sorry, this feature is currently unavailable."}</h2>
+        </div>
+    );
 
     const splitData = (str) => str ? str.split(';') : [];
     const splitSub = (str) => str ? str.split(':') : ['', ''];
