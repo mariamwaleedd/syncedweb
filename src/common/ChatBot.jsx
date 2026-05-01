@@ -29,7 +29,7 @@ const ChatBot = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const [mode, setMode] = useState('lang');
-    const [chatLang, setChatLang] = useState(null); // 'en' | 'ar'
+    const [chatLang, setChatLang] = useState(null);
 
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');

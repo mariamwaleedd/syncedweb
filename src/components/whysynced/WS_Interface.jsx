@@ -27,7 +27,7 @@ const WS_Interface = () => {
                     </div>
                 </div>
                 <div className="ws-int-visual">
-                    <model-viewer
+                    <model-viewer loading="lazy"
                         src={iphoneModel}
                         camera-controls
                         auto-rotate

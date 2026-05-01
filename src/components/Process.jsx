@@ -69,7 +69,7 @@ const Process = () => {
                 </div>
                 
                 <div className={`process-model-container ${inView ? 'animate-header' : ''}`}>
-                    <model-viewer 
+                    <model-viewer loading="lazy" 
                         ref={modelRef}
                         src={alarmClockModel} 
                         ar 

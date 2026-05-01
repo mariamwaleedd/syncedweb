@@ -2,7 +2,7 @@ import React from 'react';
 const FeatureHero = ({ title, sub, cap, img }) => (
     <section className="f-hero">
         <div className="f-hero-bg-overlay"></div>
-        <img src={img} alt="" className="f-hero-img" />
+        <img loading="lazy" src={img} alt="" className="f-hero-img" />
         <div className="f-hero-content">
             <span className="f-hero-cap">{cap}</span>
             <h1>{title}</h1>

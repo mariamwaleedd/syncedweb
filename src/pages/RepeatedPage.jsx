@@ -37,7 +37,7 @@ const RepeatedPage = () => {
 
     return (
         <div className="feature-v4-root">
-            <section className="f-hero-v4" style={{backgroundImage: `url(${data.hero_img}?t=${new Date().getTime()})`}}>
+            <section className="f-hero-v4" style={{backgroundImage: `url(${data.hero_img})`}}>
                 <div className="hero-overlay-v4"></div>
                 <div className="hero-v4-content">
                     <div className="v4-icon-badge"><FaStethoscope /></div>

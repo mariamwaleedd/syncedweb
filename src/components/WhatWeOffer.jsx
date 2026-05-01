@@ -82,7 +82,7 @@ const WhatWeOffer = () => {
                                 <p>{isAr ? card.desc_ar : card.desc_en}</p>
                             </div>
                             <div className="img-wrapper">
-                                <img src={`${card.img_url}?t=${new Date().getTime()}`} alt="" className={card.img_class} />
+                                <img loading="lazy" src={`${card.img_url}`} alt="" className={card.img_class} />
                             </div>
                         </Link>
                     );

@@ -60,7 +60,7 @@ const CommandCenter = () => {
                                     </span>
                                 </div>
                                 <div className="metric-model">
-                                    <model-viewer 
+                                    <model-viewer loading="lazy" 
                                         key={`${idx}-${isAr}`}
                                         src={models[idx]} 
                                         alt={isAr ? m.alt_ar : m.alt_en}
@@ -83,7 +83,7 @@ const CommandCenter = () => {
 
                 <div className="cc-right">
                     <div className="anatomy-card">
-                        <model-viewer 
+                        <model-viewer loading="lazy" 
                             key={`anatomy-${isAr}`}
                             src={anatomyModel} 
                             alt={isAr ? anatomyAlt.ar : anatomyAlt.en}

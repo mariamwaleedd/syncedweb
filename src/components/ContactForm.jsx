@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy, useRef } from 'react';
 import './ContactForm.css';
 import { useGlobal } from '../context/GlobalContext';
 import { supabase, fetchWithCache } from '../Supabase';
@@ -12,6 +12,8 @@ const ContactForm = () => {
     const [errors, setErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const splineRef = useRef(null);
 
     useEffect(() => {
         const fetchUI = () => {
@@ -25,6 +27,17 @@ const ContactForm = () => {
         };
         fetchUI();
     }, [isAr]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsVisible(true);
+                observer.disconnect();
+            }
+        });
+        if (splineRef.current) observer.observe(splineRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     const validate = () => {
         let tempErrors = {};
@@ -76,10 +89,15 @@ const ContactForm = () => {
                 onWheelCapture={(e) => e.stopPropagation()}
                 onTouchMoveCapture={(e) => e.stopPropagation()}
                 onScrollCapture={(e) => e.stopPropagation()}
+                ref={splineRef}
             >
-                <Suspense fallback={<div style={{ width: '100%', height: '100%', opacity: 0 }}></div>}>
-                    <Spline scene="https://prod.spline.design/aD3oOJjMGWrg1pu2/scene.splinecode" />
-                </Suspense>
+                {isVisible ? (
+                    <Suspense fallback={<div style={{ width: '100%', height: '100%', opacity: 0 }}></div>}>
+                        <Spline scene="https://prod.spline.design/aD3oOJjMGWrg1pu2/scene.splinecode" />
+                    </Suspense>
+                ) : (
+                    <div style={{ width: '100%', height: '100%', opacity: 0 }}></div>
+                )}
             </div>
             <div className="form-container-v2">
                 <div className="form-header-v2">

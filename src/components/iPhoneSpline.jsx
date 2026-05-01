@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import React, { useEffect, useState, Suspense, lazy, useRef } from 'react';
 import './iPhoneSpline.css';
 import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
@@ -8,6 +8,8 @@ const Spline = lazy(() => import('@splinetool/react-spline'));
 const IPhoneSpline = () => {
     const { isAr } = useGlobal();
     const [data, setData] = useState(null);
+    const [isVisible, setIsVisible] = useState(false);
+    const splineRef = useRef(null);
 
     useEffect(() => {
         const fetchData = () => {
@@ -22,14 +24,31 @@ const IPhoneSpline = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        if (!data) return; // Wait until data is loaded and DOM is rendered
+        
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsVisible(true);
+                observer.disconnect();
+            }
+        });
+        if (splineRef.current) observer.observe(splineRef.current);
+        return () => observer.disconnect();
+    }, [data]);
+
     if (!data) return null;
 
     return (
         <section className="spline-section">
-            <div className="spline-container">
-                <Suspense fallback={<div style={{ width: '100%', height: '100%', opacity: 0 }}></div>}>
-                    <Spline scene={data.spline_url} />
-                </Suspense>
+            <div className="spline-container" ref={splineRef}>
+                {isVisible ? (
+                    <Suspense fallback={<div style={{ width: '100%', height: '100%', opacity: 0 }}></div>}>
+                        <Spline scene={data.spline_url} />
+                    </Suspense>
+                ) : (
+                    <div style={{ width: '100%', height: '100%', opacity: 0 }}></div>
+                )}
             </div>
             <div className="spline-content">
                 <div className="spline-label">

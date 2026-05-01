@@ -35,7 +35,7 @@ const HeroSection = () => {
                         preload="metadata" 
                         className="main-video"
                     >
-                        <source src={`${content.video_link}?t=${new Date().getTime()}`} type="video/mp4" />
+                        <source src={`${content.video_link}`} type="video/mp4" />
                     </video>
                 )}
                 <div className="overlay"></div>

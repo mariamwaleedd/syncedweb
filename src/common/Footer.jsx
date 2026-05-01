@@ -32,8 +32,8 @@ const Footer = () => {
             <div className="footer-overlay">
                 <div className="footer-top">
                     <div className="footer-brand">
-                        <img 
-                            src={`${brandData.logo_url}?t=${new Date().getTime()}`} 
+                        <img loading="lazy" 
+                            src={`${brandData.logo_url}`} 
                             alt="Logo" 
                             className="footer-top-logo" 
                             style={{ filter: isDark ? 'none' : 'invert(1)' }}
@@ -63,8 +63,8 @@ const Footer = () => {
 
                 <div className="footer-bottom">
                     <div className="footer-branding-full">
-                        <img 
-                            src={`${brandData.full_logo_url}?t=${new Date().getTime()}`} 
+                        <img loading="lazy" 
+                            src={`${brandData.full_logo_url}`} 
                             alt="Synced Full Logo" 
                             style={{ filter: isDark ? 'none' : 'invert(1)' }}
                         />

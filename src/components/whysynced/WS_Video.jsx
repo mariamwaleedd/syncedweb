@@ -9,7 +9,7 @@ const WS_Video = ({ isAr }) => {
                 <video autoPlay loop muted playsInline preload="metadata" className="ws-bg-video">
                     <source src={hugsVideo} type="video/mp4" />
                 </video>
-                <img src={overlayImg} alt="" className="ws-video-img-overlay" />
+                <img loading="lazy" src={overlayImg} alt="" className="ws-video-img-overlay" />
                 <div className="ws-video-text-overlay">
                     <h2>
                         {isAr ? "ماذا تنتظر؟" : "What are you waiting for?"} 

@@ -26,8 +26,8 @@ const ClickAway = () => {
         <section className="click-away-section">
             <div className="click-away-container">
                 <div className="click-away-image">
-                    <img 
-                        src={`${data.img_url}?t=${new Date().getTime()}`} 
+                    <img loading="lazy" 
+                        src={`${data.img_url}`} 
                         alt="Synced Mobile Experience" 
                         className={isAr ? 'rotated-ar' : ''} 
                     />

@@ -48,19 +48,31 @@
 }
 
 body {
-    background-color: var(--darkbg);
-    background-image: var(--bg-img);
-    background-attachment: fixed;
-    background-size: cover;
     color: var(--white);
     overflow-x: hidden;
     width: 100%;
     margin: 0;
-    transition: background-color var(--transition), color var(--transition);
+    transition: color var(--transition);
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+html::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--darkbg);
+    background-image: var(--bg-img);
+    background-size: cover;
+    background-position: center;
+    z-index: -9999;
+    pointer-events: none;
+    transition: background-color var(--transition);
 }
 
 input, textarea, select {
@@ -106,7 +118,7 @@ p, span, li, button, input, .hero-subtitle {
     box-shadow: 0 15px 35px rgba(0, 102, 255, 0.15) !important;
 }
 
-/* CREATIVE AURORA EDGE GLOW */
+/* CREATIVE AURORA EDGE GLOW - OPTIMIZED */
 body::before, body::after {
     content: '';
     position: fixed;
@@ -115,32 +127,30 @@ body::before, body::after {
     width: 80vw;
     height: 80vw;
     border-radius: 50%;
-    z-index: 9999;
+    z-index: -9998;
     pointer-events: none;
-    mix-blend-mode: screen;
+    will-change: transform;
 }
 
 body::before {
     background: radial-gradient(circle, var(--lightblue) 0%, transparent 50%);
-    opacity: 0.15;
+    opacity: 0.08;
     animation: orbTravel1 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
 body::after {
     background: radial-gradient(circle, #ffffff 0%, transparent 60%);
-    opacity: 0.07;
+    opacity: 0.04;
     animation: orbTravel2 24s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite reverse;
 }
 
 [data-theme='light'] body::before {
-    opacity: 0.1;
-    mix-blend-mode: normal;
+    opacity: 0.06;
 }
 
 [data-theme='light'] body::after {
     background: radial-gradient(circle, var(--lightblue) 0%, transparent 60%);
-    opacity: 0.05;
-    mix-blend-mode: normal;
+    opacity: 0.03;
 }
 
 @keyframes orbTravel1 {

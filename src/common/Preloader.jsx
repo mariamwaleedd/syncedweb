@@ -19,7 +19,7 @@ const Preloader = () => {
                 <div className="medical-logo-anim">
                     <div className="outer-ring"></div>
                     <div className="inner-logo-wrapper">
-                        <img src={logoblue} alt="Synced Logo" className="rotating-logo" />
+                        <img loading="lazy" src={logoblue} alt="Synced Logo" className="rotating-logo" />
                     </div>
                 </div>
                 
