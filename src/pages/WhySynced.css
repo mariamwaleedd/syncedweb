@@ -90,7 +90,23 @@
 @media (max-width: 1024px) {
     .ws-hero { background-image: none; }
     .ws-hero-overlay { background: var(--darkbg); }
-    .ws-what-grid, .ws-features-grid, .ws-who-grid, .ws-interface-grid, .ws-reasons-grid { grid-template-columns: 1fr; }
+    .ws-what-grid, .ws-who-grid, .ws-interface-grid, .ws-reasons-grid { grid-template-columns: 1fr; }
+    .ws-features-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding-block: 15px 25px;
+        scrollbar-width: none; /* Firefox */
+        -webkit-overflow-scrolling: touch;
+    }
+    .ws-features-grid::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+    .ws-features-grid .ws-glass-card {
+        flex: 0 0 75%;
+        scroll-snap-align: start;
+    }
     .ws-steps-row { flex-direction: column; gap: 40px; }
     .ws-step-arrow { display: none; }
     .wide-who { flex-direction: column; }
