@@ -299,6 +299,10 @@
     border-radius: 10px;
 }
 
+.mobile-controls-item {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .navbar {
         height: 80px;
@@ -315,5 +319,42 @@
     
     .nav-search-dropdown {
         width: 250px;
+    }
+
+    .mobile-controls-item {
+        display: block !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 15px;
+        padding-top: 15px !important;
+    }
+
+    [data-theme='light'] .mobile-controls-item {
+        border-top-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-controls-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    /* Ensure the toggle buttons show up correctly inside the menu list */
+    .mobile-controls-group .control-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+    }
+    
+    [data-theme='light'] .mobile-controls-group .control-btn {
+        background: rgba(0, 0, 0, 0.03);
+        border-color: rgba(0, 0, 0, 0.1);
+        color: #010422;
+    }
+    
+    .mobile-controls-group .control-btn:hover {
+        background: var(--lightblue);
+        color: #010422;
     }
 }
