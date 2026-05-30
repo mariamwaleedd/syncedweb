@@ -90,7 +90,9 @@
 @media (max-width: 1024px) {
     .ws-hero { background-image: none; }
     .ws-hero-overlay { background: var(--darkbg); }
-    .ws-what-grid, .ws-features-grid, .ws-who-grid, .ws-steps-row, .ws-interface-grid, .ws-reasons-grid { grid-template-columns: 1fr; }
+    .ws-what-grid, .ws-features-grid, .ws-who-grid, .ws-interface-grid, .ws-reasons-grid { grid-template-columns: 1fr; }
+    .ws-steps-row { flex-direction: column; gap: 40px; }
+    .ws-step-arrow { display: none; }
     .wide-who { flex-direction: column; }
     .ws-ready-btns { flex-direction: column; align-items: center; }
     .ws-int-visual { height: 500px; }
