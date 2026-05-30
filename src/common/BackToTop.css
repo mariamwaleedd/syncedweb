@@ -2,8 +2,8 @@
     position: fixed;
     bottom: 40px;
     right: 40px;
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     background: var(--lightblue);
     color: #010422;
     border: none;
@@ -86,8 +86,8 @@
     .back-to-top {
         bottom: 25px;
         right: 25px;
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
     }
     
     [dir="rtl"] .back-to-top {
