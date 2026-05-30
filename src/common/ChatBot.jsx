@@ -23,6 +23,65 @@ IMPORTANT: You MUST respond ONLY in ${lang === 'ar' ? 'Arabic (العربية). 
 
 Do not make up medical diagnoses. For serious health concerns, always recommend consulting a healthcare professional.`;
 
+const getLocalResponse = (query, lang) => {
+    const isAr = lang === 'ar';
+    const q = query.toLowerCase();
+
+    // Greetings
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('مرحبا') || q.includes('أهلاً') || q.includes('اهلا') || q.includes('سلام')) {
+        return isAr 
+            ? 'مرحباً بك! أنا مساعد سينكد الذكي. كيف يمكنني مساعدتك اليوم؟ يمكنك أن تسألني عن ميزات المنصة، خطط الاشتراك، أو كيفية التواصل مع الفريق.'
+            : 'Hello! I am your Synced assistant. How can I help you today? You can ask me about our features, subscription plans, or how to contact our team.';
+    }
+
+    // Features
+    if (q.includes('feature') || q.includes('mizat') || q.includes('ميزات') || q.includes('خدمات') || q.includes('تقديم') || q.includes('وظائف') || q.includes('ميزه') || q.includes('مزية')) {
+        return isAr
+            ? 'توفر منصة سينكد العديد من الميزات القوية:\n' +
+              '• بوابة العائلة: إدارة السجلات الصحية لعائلتك بأكملها في مكان واحد.\n' +
+              '• المؤشرات الحيوية: مراقبة المقاييس الصحية مثل نبض القلب والجلوكوز.\n' +
+              '• المزامنة الذكية: مزامنة تلقائية للبيانات مع الأجهزة القابلة للارتداء.\n' +
+              '• التذكيرات الطبية وتتبع المواعيد للحفاظ على صحة عائلتك.'
+            : 'Synced offers several powerful features:\n' +
+              '• Family Portal: Manage health records for your entire family in one place.\n' +
+              '• Health Vitals: Monitor essential health metrics like heart rate and glucose.\n' +
+              '• Smart Syncing: Automatically sync data across all wearable devices.\n' +
+              '• Medical Reminders & Appointment Tracking to keep your family healthy and organized.';
+    }
+
+    // Plans & Prices
+    if (q.includes('plan') || q.includes('price') || q.includes('sub') || q.includes('cost') || q.includes('خطة') || q.includes('سعر') || q.includes('اشتراك') || q.includes('باقة') || q.includes('اسعار') || q.includes('تكلفة')) {
+        return isAr
+            ? 'لدينا ثلاث خطط اشتراك تناسب احتياجاتك:\n' +
+              '1. الخطة المجانية: ميزات أساسية وتتبع حتى 5 مشاريع مجاناً للأبد.\n' +
+              '2. خطة برو (150 جنيه/شهرياً): مشاريع غير محدودة ودعم مميز ومزامنة ذكية.\n' +
+              '3. خطة بريميوم (350 جنيه/شهرياً): كل ميزات برو بالإضافة إلى دعم مخصص على مدار الساعة وسعة تخزين غير محدودة.'
+            : 'We offer three subscription plans to suit your needs:\n' +
+              '1. Free Plan: Basic features and tracking for up to 5 projects forever.\n' +
+              '2. Pro Plan (150 EGP/month): Unlimited projects, priority support, and smart syncing.\n' +
+              '3. Premium Plan (350 EGP/month): All Pro features plus 24/7 dedicated support and unlimited storage.';
+    }
+
+    // About Us
+    if (q.includes('about') || q.includes('who') || q.includes('من نحن') || q.includes('عن') || q.includes('سينكد') || q.includes('synced')) {
+        return isAr
+            ? 'سينكد (Synced) هي منصة رعاية صحية متطورة تهدف إلى ربط المرضى ومقدمي الرعاية الصحية بشكل ذكي ومباشر، وتسهيل تتبع البيانات الحيوية للمرضى وعائلاتهم لضمان حياة صحية مشتركة.'
+            : 'Synced is a cutting-edge healthcare management platform designed to connect patients and healthcare providers seamlessly, making it easy to track health vitals and records for you and your family.';
+    }
+
+    // Contact & Support
+    if (q.includes('contact') || q.includes('support') || q.includes('help') || q.includes('اتصال') || q.includes('دعم') || q.includes('فريق') || q.includes('تواصل') || q.includes('مساعدة')) {
+        return isAr
+            ? 'يمكنك التواصل مع فريق الدعم لدينا من خلال النقر على خيار "تحدث مع الفريق" في هذه النافذة وملء نموذج الاتصال، أو زيارة صفحة اتصل بنا المخصصة على موقعنا.'
+            : 'You can contact our support team by clicking the "Talk to Team" option in this chat window and filling out the contact form, or by visiting the dedicated Contact Us page on our website.';
+    }
+
+    // Default response
+    return isAr
+        ? 'شكراً لرسالتك! أنا هنا لمساعدتك في استكشاف منصة سينكد (Synced). يمكنك الاستفسار عن ميزات المنصة، خطط الأسعار، أو التوجيه لصفحة الاتصال بالدعم.'
+        : 'Thank you for your message! I am here to help you explore the Synced platform. Feel free to ask about our features, subscription plans, or how to contact our support team.';
+};
+
 const ChatBot = () => {
     const { isAr } = useGlobal();
     const [isOpen, setIsOpen] = useState(false);
@@ -159,15 +218,15 @@ const ChatBot = () => {
             const botText = await sendToOpenRouter(text, apiHistory, chatLang);
             setMessages((prev) => [...prev, { id: Date.now() + 1, type: 'bot', text: botText }]);
         } catch (err) {
-            console.error('ChatBot error:', err);
+            console.error('ChatBot API error, falling back to local response:', err);
+            await new Promise(resolve => setTimeout(resolve, 800));
+            const localResponse = getLocalResponse(text, chatLang);
             setMessages((prev) => [
                 ...prev,
                 {
                     id: Date.now() + 1,
                     type: 'bot',
-                    text: ar
-                        ? 'عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.'
-                        : `Error: ${err.message}`,
+                    text: localResponse,
                 },
             ]);
         } finally {
