@@ -207,6 +207,7 @@
 }
 
 .card-footer {
+    display: flex;
     justify-content: space-between;
     font-size: 0.8rem;
     font-weight: 300;
@@ -467,6 +468,40 @@
     .stories-grid, .news-grid, .topics-grid, .tips-grid, .perks-row { grid-template-columns: 1fr; }
     .section-header h2 { font-size: 2.8rem; }
     .subscribe-box { padding: 40px 20px; }
+    
+    .subscribe-form {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        padding: 0;
+        border-radius: 0;
+        gap: 15px;
+        max-width: 100%;
+    }
+    
+    .subscribe-form input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 16px 25px;
+        border-radius: 100px;
+        text-align: center;
+    }
+    
+    .subscribe-form input:focus {
+        border-color: var(--lightblue);
+    }
+    
+    .subscribe-form button {
+        width: 100%;
+        padding: 16px 30px;
+        border-radius: 100px;
+    }
+    
+    .perks-row {
+        flex-direction: column;
+        gap: 35px;
+    }
 }
 .perks-row {
     display: flex;
@@ -477,9 +512,6 @@
 }
 .subscribe-box {
     text-align: center;
-}
-.story-card {
-    width: 110%;
 }
 
 /* Modal Styles */
