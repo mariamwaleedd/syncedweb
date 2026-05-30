@@ -67,7 +67,7 @@ const TakeControl = () => {
                     </h2>
                     <p className="tc-description">{isAr ? data.desc_ar : data.desc_en}</p>
                     <div className="tc-buttons">
-                        <a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer" className="btn-download">
+                        <a href="https://apkpure.com/synced-health-hub/com.synced.healthhub" target="_blank" rel="noreferrer" className="btn-download">
                             {isAr ? data.btn1_ar : data.btn1_en}
                         </a>
                         <button className="btn-demo" onClick={() => setShowModal(true)}>

@@ -11,7 +11,6 @@
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 50px;
-    align-items: start;
 }
 
 .features-left-column {
@@ -109,15 +108,7 @@ background: linear-gradient(180deg, rgba(108, 144, 222, 0.178) 0%, rgba(60, 84, 
 
 .last-card {
     width: 100%;
-}
-
-.last-card .feature-info h4 {
-    font-size: 1.2rem;
-}
-
-.last-card .feature-info p {
-    font-size: 0.85rem;
-    max-width: 380px;
+    margin-top: auto;
 }
 
 @media (max-width: 1200px) {
@@ -150,5 +141,4 @@ background: linear-gradient(180deg, rgba(108, 144, 222, 0.178) 0%, rgba(60, 84, 
         text-align: center;
         padding: 30px 20px;
     }
-    .last-card .feature-info p { max-width: 100%; }
 }

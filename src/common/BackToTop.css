@@ -37,6 +37,7 @@
 
 .back-to-top:hover {
     background: var(--white);
+    color: var(--white-bg-text);
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 15px 40px rgba(163, 214, 255, 0.4);
 }

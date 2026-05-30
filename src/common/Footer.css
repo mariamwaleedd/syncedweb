@@ -68,6 +68,13 @@
     transition: all 0.3s ease;
 }
 
+.footer-col ul li a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
 .footer-col ul li:hover {
     opacity: 1;
     color: var(--lightblue);

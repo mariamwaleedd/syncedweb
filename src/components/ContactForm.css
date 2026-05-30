@@ -71,6 +71,12 @@ spline-viewer {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
 }
 
+[data-theme='light'] .form-wrapper-v2 {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 30px 60px rgba(1, 4, 34, 0.1);
+}
+
 .input-row-v2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -113,6 +119,24 @@ spline-viewer {
     background: rgba(255, 255, 255, 0.08);
     border-color: var(--lightblue);
     box-shadow: 0 0 15px rgba(163, 214, 255, 0.1);
+}
+
+[data-theme='light'] .input-group-v2 input, 
+[data-theme='light'] .input-group-v2 textarea {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #010422;
+}
+
+[data-theme='light'] .input-group-v2 input::placeholder,
+[data-theme='light'] .input-group-v2 textarea::placeholder {
+    color: rgba(1, 4, 34, 0.45);
+}
+
+[data-theme='light'] .input-group-v2 input:focus, 
+[data-theme='light'] .input-group-v2 textarea:focus {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: var(--lightblue);
 }
 
 .input-group-v2.has-error input, 

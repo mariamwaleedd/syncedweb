@@ -44,6 +44,10 @@
     padding: 0 20px;
 }
 
+[data-theme='light'] .hero-content {
+    color: var(--lightblue);
+}
+
 .hero-subtitle {
     font-family: var(--subtitlefont);
     font-size: clamp(1rem, 3vw, 2.2rem);

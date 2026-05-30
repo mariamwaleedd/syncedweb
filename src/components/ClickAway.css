@@ -52,6 +52,18 @@
     z-index: 2;
 }
 
+[data-theme='light'] .click-away-content {
+    color: #FFFFFF;
+}
+
+[data-theme='light'] .click-away-label {
+    color: #FFFFFF;
+}
+
+[data-theme='light'] .click-away-label .line {
+    background-color: #FFFFFF;
+}
+
 .click-away-label {
     display: flex;
     align-items: center;

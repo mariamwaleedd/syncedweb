@@ -161,7 +161,9 @@ const RepeatedPage = () => {
                         <FaChartLine className="v4-cta-icon" />
                         <h2>{isAr ? `هل أنت جاهز لتجربة ${data.title_ar}؟` : `Ready to Experience ${data.title_en}?`}</h2>
                         <p>{isAr ? "قم بتحميل التطبيق اليوم وابدأ في الاستفادة من هذه الميزة القوية" : "Download the app today and start benefiting from this powerful feature"}</p>
-                        <button className="v4-cta-btn">{isAr ? "تحميل الآن" : "Download Now"}</button>
+                        <a href="https://apkpure.com/synced-health-hub/com.synced.healthhub" target="_blank" rel="noreferrer" className="v4-cta-btn" style={{ textDecoration: 'none', display: 'inline-block' }}>
+                            {isAr ? "تحميل الآن" : "Download Now"}
+                        </a>
                     </div>
                 </section>
             </main>

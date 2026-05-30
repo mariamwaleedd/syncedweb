@@ -26,14 +26,16 @@
     --subtitlefont: "General Sans", sans-serif;
     --numbersfont: "Unbounded", sans-serif;
     --transition: 0.3s ease-in-out;
+    --white-bg-text: #010422;
 }
 
 :root[data-theme='light'] {
     --darkbg: #F4F7FF;
     --white: #010422;
-    --lightblue: #0066FF;
+    --lightblue: #A3D6FF;
     --cardbg: rgba(0, 0, 0, 0.05);
     --bg-img: none; 
+    --white-bg-text: #FFFFFF;
 }
 
 [dir='rtl'] {

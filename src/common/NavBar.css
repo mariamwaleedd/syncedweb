@@ -120,6 +120,15 @@
     text-shadow: 0 0 10px rgba(163, 214, 255, 0.4);
 }
 
+[data-theme='light'] .active-link {
+    color: #010422 !important;
+    text-shadow: none;
+}
+
+[data-theme='light'] .burger-menu li:hover {
+    color: #010422;
+}
+
 .burger-menu a {
     text-decoration: none;
     color: inherit;

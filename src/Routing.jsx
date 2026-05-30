@@ -20,6 +20,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const RepeatedPage = lazy(() => import('./pages/RepeatedPage'));
 const WhySynced = lazy(() => import('./pages/WhySynced'));
 const Blogs = lazy(() => import('./pages/Blogs'));
+const Application = lazy(() => import('./pages/Application'));
 
 const Routing = () => {
   useEffect(() => {
@@ -116,6 +117,7 @@ const Routing = () => {
           <Route path="/whysynced" element={<WhySynced />} />
           <Route path="/blog" element={<Blogs />} />
           <Route path="/features/:slug" element={<RepeatedPage />} />
+          <Route path="/application" element={<Application />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Suspense>

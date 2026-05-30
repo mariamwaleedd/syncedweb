@@ -127,6 +127,7 @@
     transform: scale(1.05) translateY(-5px);
     box-shadow: 0 20px 40px rgba(163, 214, 255, 0.3);
     background-color: var(--white);
+    color: var(--white-bg-text);
 }
 
 @keyframes drawLine {

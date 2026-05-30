@@ -14,6 +14,38 @@ const PlansPage = () => {
     const [header, setHeader] = useState(null);
     const [secTitle, setSecTitle] = useState(null);
     const [plans, setPlans] = useState([]);
+    const [selectedPlan, setSelectedPlan] = useState(null);
+    const [subscriberName, setSubscriberName] = useState('');
+    const [subscriberEmail, setSubscriberEmail] = useState('');
+    const [subSuccess, setSubSuccess] = useState(false);
+
+    const getPlanBadge = (planName) => {
+        switch (planName?.toLowerCase()) {
+            case 'free':
+            case 'مجاني':
+                return isAr ? 'مجاني للأبد' : 'Free Forever';
+            case 'pro':
+            case 'برو':
+                return isAr ? 'الأكثر طلباً' : 'Most Popular';
+            case 'premium':
+            case 'بريميوم':
+                return isAr ? 'أفضل قيمة' : 'Best Value';
+            default:
+                return '';
+        }
+    };
+
+    const handleSubscribe = (e) => {
+        e.preventDefault();
+        setSubSuccess(true);
+    };
+
+    const closeModal = () => {
+        setSelectedPlan(null);
+        setSubscriberName('');
+        setSubscriberEmail('');
+        setSubSuccess(false);
+    };
 
     useEffect(() => {
         const fetchPlans = () => {
@@ -50,10 +82,8 @@ const PlansPage = () => {
 
                 <div className="plans-grid">
                     {plans.map((plan, idx) => (
-                        <div className={`plan-card ${plan.is_featured ? 'featured' : ''}`} key={idx}>
-                            {plan.is_featured && (
-                                <div className="plan-badge">{isAr ? plan.badge_ar : plan.badge_en}</div>
-                            )}
+                        <div className={`plan-card ${plan.is_featured === true || plan.is_featured === 'true' ? 'featured' : ''} ${plan.main_en?.toLowerCase() === 'premium' ? 'premium-highlight' : ''}`} key={idx}>
+                            <div className="plan-badge">{getPlanBadge(plan.main_en)}</div>
                             <h3 className="plan-name">{isAr ? plan.main_ar : plan.main_en}</h3>
                             <div className="plan-price">
                                 {isAr ? plan.price_ar : plan.price_en}
@@ -68,13 +98,72 @@ const PlansPage = () => {
                                 ))}
                             </ul>
 
-                            <button className="plan-btn">
+                            <button className="plan-btn" onClick={() => setSelectedPlan(plan)}>
                                 {isAr ? plan.btn_ar : plan.btn_en}
                             </button>
                         </div>
                     ))}
                 </div>
             </main>
+
+            {selectedPlan && (
+                <div className="plans-modal-overlay">
+                    <div className="plans-modal-card">
+                        <button className="plans-modal-close" onClick={closeModal}>
+                            &times;
+                        </button>
+                        
+                        {!subSuccess ? (
+                            <form onSubmit={handleSubscribe} className="plans-modal-form">
+                                <h2>{isAr ? `الاشتراك في خطة ${selectedPlan.main_ar}` : `Subscribe to ${selectedPlan.main_en}`}</h2>
+                                <p className="modal-price">
+                                    {isAr ? selectedPlan.price_ar : selectedPlan.price_en}
+                                    <span>{isAr ? "/شهرياً" : "/month"}</span>
+                                </p>
+                                
+                                <div className="form-group">
+                                    <label>{isAr ? "الاسم الكامل" : "Full Name"}</label>
+                                    <input 
+                                        type="text" 
+                                        required 
+                                        value={subscriberName} 
+                                        onChange={(e) => setSubscriberName(e.target.value)} 
+                                        placeholder={isAr ? "أدخل اسمك الكامل" : "Enter your full name"} 
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>{isAr ? "البريد الإلكتروني" : "Email Address"}</label>
+                                    <input 
+                                        type="email" 
+                                        required 
+                                        value={subscriberEmail} 
+                                        onChange={(e) => setSubscriberEmail(e.target.value)} 
+                                        placeholder={isAr ? "أدخل بريدك الإلكتروني" : "Enter your email address"} 
+                                    />
+                                </div>
+                                
+                                <button type="submit" className="modal-submit-btn">
+                                    {isAr ? "تأكيد الاشتراك" : "Confirm Subscription"}
+                                </button>
+                            </form>
+                        ) : (
+                            <div className="plans-modal-success">
+                                <div className="success-icon">&#10004;</div>
+                                <h2>{isAr ? "تم الاشتراك بنجاح!" : "Subscription Successful!"}</h2>
+                                <p>
+                                    {isAr 
+                                        ? `شكراً لك يا ${subscriberName}. تم تسجيل اشتراكك في خطة ${selectedPlan.main_ar} بنجاح. سنرسل لك تفاصيل التأكيد على ${subscriberEmail}.`
+                                        : `Thank you, ${subscriberName}! You have successfully subscribed to the ${selectedPlan.main_en} plan. We have sent the confirmation details to ${subscriberEmail}.`
+                                    }
+                                </p>
+                                <button className="modal-close-btn" onClick={closeModal}>
+                                    {isAr ? "إغلاق" : "Close"}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -185,3 +185,210 @@
         margin-top: 0;
     }
 }
+
+.plan-card.premium-highlight {
+    background: linear-gradient(180deg, rgba(0, 102, 255, 0.12) 0%, rgba(1, 4, 34, 0.8) 100%);
+    border: 2px solid #0066FF;
+    box-shadow: 0 0 35px rgba(0, 102, 255, 0.35);
+    transform: scale(1.03);
+}
+
+.plan-card.premium-highlight:hover {
+    transform: translateY(-12px) scale(1.05);
+    border-color: #A3D6FF;
+    box-shadow: 0 0 50px rgba(163, 214, 255, 0.55);
+    background: linear-gradient(180deg, rgba(0, 102, 255, 0.18) 0%, rgba(1, 4, 34, 0.8) 100%);
+}
+
+.plan-card.premium-highlight .plan-badge {
+    background: #0066FF;
+    color: #ffffff;
+}
+
+.plan-card.premium-highlight .check-icon {
+    color: #A3D6FF;
+}
+
+.plan-card.premium-highlight .plan-btn {
+    background: #0066FF;
+    color: #ffffff;
+    border: 1px solid rgba(0, 102, 255, 0.4);
+}
+
+.plan-card.premium-highlight .plan-btn:hover {
+    background: #A3D6FF;
+    color: #010422;
+}
+
+.plans-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(1, 4, 34, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.plans-modal-card {
+    background: rgba(1, 4, 34, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    padding: 50px 40px;
+    max-width: 480px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+}
+
+.plans-modal-close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 2.2rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.plans-modal-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.plans-modal-form h2 {
+    font-family: var(--titlefont);
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.modal-price {
+    font-family: var(--subtitlefont);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 35px;
+    text-align: center;
+    color: var(--lightblue);
+}
+
+.modal-price span {
+    font-size: 0.95rem;
+    opacity: 0.6;
+}
+
+.plans-modal-form .form-group {
+    margin-bottom: 24px;
+}
+
+.plans-modal-form label {
+    display: block;
+    font-family: var(--subtitlefont);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+}
+
+.plans-modal-form input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--white);
+    font-family: var(--subtitlefont);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.plans-modal-form input:focus {
+    border-color: var(--lightblue);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(163, 214, 255, 0.15);
+}
+
+.modal-submit-btn {
+    width: 100%;
+    background: var(--lightblue);
+    color: #010422;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-family: var(--subtitlefont);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.modal-submit-btn:hover {
+    background: var(--white);
+    color: var(--white-bg-text);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.plans-modal-success {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.plans-modal-success h2 {
+    font-family: var(--titlefont);
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.plans-modal-success p {
+    font-family: var(--subtitlefont);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    opacity: 0.75;
+}
+
+.success-icon {
+    font-size: 4.5rem;
+    color: #52b788;
+    margin-bottom: 25px;
+    display: inline-block;
+    animation: scaleUpSuccess 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleUpSuccess {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-close-btn {
+    background: var(--lightblue);
+    color: #010422;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 12px;
+    font-family: var(--subtitlefont);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    background: var(--white);
+    color: var(--white-bg-text);
+    transform: translateY(-2px);
+}

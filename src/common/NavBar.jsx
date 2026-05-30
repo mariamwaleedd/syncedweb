@@ -25,6 +25,7 @@ const NavBar = () => {
                 { title_en: 'Why Synced', title_ar: 'لماذا سينكد', type: 'Page', link: '/whysynced' },
                 { title_en: 'Features', title_ar: 'الميزات', type: 'Page', link: '/features' },
                 { title_en: 'FAQs', title_ar: 'الأسئلة الشائعة', type: 'Page', link: '/faq' },
+                { title_en: 'Application', title_ar: 'التطبيق', type: 'Page', link: '/application' },
             ];
             
             let dynamicData = [];
@@ -96,6 +97,7 @@ const NavBar = () => {
                     </div>
                     <ul className="burger-menu">
                         <li><Link to="/" className={currentPath === "/" ? "active-link" : ""}>{isAr ? 'الرئيسية' : 'Home'}</Link></li>
+                        <li><Link to="/application" className={currentPath === "/application" ? "active-link" : ""}>{isAr ? 'التطبيق' : 'Application'}</Link></li>
                         <li><Link to="/features" className={currentPath === "/features" ? "active-link" : ""}>{isAr ? 'الميزات' : 'Features'}</Link></li>
                         <li><Link to="/AboutUs" className={currentPath === "/AboutUs" ? "active-link" : ""}>{isAr ? 'عنا' : 'About'}</Link></li>
                         <li><Link to="/ContactUs" className={currentPath === "/ContactUs" ? "active-link" : ""}>{isAr ? 'اتصل بنا' : 'Contact'}</Link></li>

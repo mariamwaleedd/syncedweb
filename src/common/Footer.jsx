@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Footer.css';
 import { supabase, fetchWithCache } from '../Supabase';
 import { useGlobal } from '../context/GlobalContext';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const { isAr, isDark } = useGlobal();
@@ -9,6 +10,29 @@ const Footer = () => {
     const [productLinks, setProductLinks] = useState([]);
     const [companyLinks, setCompanyLinks] = useState([]);
     const [copyrightData, setCopyrightData] = useState(null);
+
+    const getLinkPath = (titleEn) => {
+        switch (titleEn?.toLowerCase()) {
+            case 'services':
+                return '/features';
+            case 'family portal':
+                return '/features/family-portal';
+            case 'dashboard':
+                return '/features/dashboard';
+            case 'health tracking':
+                return '/features/health-vitals';
+            case 'about us':
+                return '/AboutUs';
+            case 'contact us':
+                return '/ContactUs';
+            case 'frequently asked':
+                return '/FAQPage';
+            case 'how to connect':
+                return '/ContactUs';
+            default:
+                return '/';
+        }
+    };
 
     useEffect(() => {
         const fetchFooterData = () => {
@@ -38,7 +62,7 @@ const Footer = () => {
                                 src={brandData.logo_url} 
                                 alt="Logo" 
                                 className="footer-top-logo" 
-                                style={{ filter: isDark ? 'none' : 'invert(1)' }}
+                                style={{ filter: isDark ? 'none' : 'invert(1) hue-rotate(180deg)' }}
                             />
                         )}
                         <p>{isAr ? brandData.desc_ar : brandData.desc_en}</p>
@@ -49,7 +73,11 @@ const Footer = () => {
                             <h4>{isAr ? "المنتجات" : "PRODUCT"}</h4>
                             <ul>
                                 {productLinks.map((link, idx) => (
-                                    <li key={idx}>{isAr ? link.title_ar : link.title_en}</li>
+                                    <li key={idx}>
+                                        <Link to={getLinkPath(link.title_en)}>
+                                            {isAr ? link.title_ar : link.title_en}
+                                        </Link>
+                                    </li>
                                 ))}
                             </ul>
                         </div>
@@ -57,7 +85,11 @@ const Footer = () => {
                             <h4>{isAr ? "الشركة" : "COMPANY"}</h4>
                             <ul>
                                 {companyLinks.map((link, idx) => (
-                                    <li key={idx}>{isAr ? link.title_ar : link.title_en}</li>
+                                    <li key={idx}>
+                                        <Link to={getLinkPath(link.title_en)}>
+                                            {isAr ? link.title_ar : link.title_en}
+                                        </Link>
+                                    </li>
                                 ))}
                             </ul>
                         </div>
@@ -71,7 +103,7 @@ const Footer = () => {
                                 crossOrigin="anonymous"
                                 src={brandData.full_logo_url} 
                                 alt="Synced Full Logo" 
-                                style={{ filter: isDark ? 'none' : 'invert(1)' }}
+                                style={{ filter: isDark ? 'none' : 'invert(1) hue-rotate(180deg)' }}
                             />
                         )}
                     </div>
