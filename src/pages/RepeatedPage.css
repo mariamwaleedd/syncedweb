@@ -84,8 +84,32 @@
 .sc-part strong { color: var(--lightblue); font-size: 0.8rem; letter-spacing: 4px; display: block; margin-bottom: 20px; }
 .sc-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 40px 0; }
 
-.v4-stats-strip { display: flex; justify-content: space-around; background: rgba(255, 255, 255, 0.03); border-radius: 40px; padding: 100px 50px; border: 1px solid rgba(255, 255, 255, 0.1); }
-.v4-stat-unit h4 { font-family: var(--numbersfont); font-size: 4.5rem; color: var(--lightblue); margin-bottom: 15px; }
+.v4-stats-strip {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 40px;
+    padding: 80px 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.v4-stat-item {
+    flex: 1 1 calc(25% - 30px);
+    min-width: 200px;
+    text-align: center;
+}
+.v4-stat-item h4 {
+    font-family: var(--numbersfont);
+    font-size: 4.5rem;
+    color: var(--lightblue);
+    margin-bottom: 15px;
+}
+.v4-stat-item p {
+    font-family: var(--subtitlefont);
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
 
 .v4-cta-card { background: linear-gradient(180deg, rgba(100, 181, 246, 0.25) 0%, #010422 100%); padding: 150px 80px; border-radius: 60px; text-align: center; border: 1px solid rgba(163, 214, 255, 0.3); }
 .v4-cta-icon { font-size: 6rem; color: var(--lightblue); margin-bottom: 50px; }
@@ -97,4 +121,51 @@
     .v4-why-grid, .v4-benefits-grid, .v4-scenario-grid, .v4-check-grid { grid-template-columns: 1fr; }
     .v4-stats-strip { flex-direction: column; gap: 80px; text-align: center; }
     .glass-card-v4 { padding: 40px 25px; }
+}
+
+@media (max-width: 768px) {
+    .v4-stats-strip {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 30px 20px;
+        border-radius: 24px;
+        background: transparent;
+        border: none;
+    }
+    .v4-stat-item {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 18px;
+        padding: 25px 15px;
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .v4-stat-item h4 {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+    }
+    .v4-stat-item p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .v4-stats-strip {
+        gap: 12px;
+        padding: 10px;
+    }
+    .v4-stat-item {
+        padding: 20px 10px;
+        border-radius: 14px;
+    }
+    .v4-stat-item h4 {
+        font-size: 2rem;
+    }
+    .v4-stat-item p {
+        font-size: 0.85rem;
+    }
 }
