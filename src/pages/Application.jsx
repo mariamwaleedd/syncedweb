@@ -1,14 +1,153 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Application.css';
 import { useGlobal } from '../context/GlobalContext';
 import TopSections from '../common/TopSections';
-import Footer from '../common/Footer';
 import { FaAndroid, FaGooglePlay, FaDownload, FaArrowRight, FaCheckCircle, FaMobileAlt } from 'react-icons/fa';
+
+const screens = [
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(9).png",
+        titleEn: "Hydration & Water Tracker",
+        titleAr: "تتبع شرب الماء والترطيب",
+        descEn: "Log your daily water intake, set hydration goals, and view quick intake percentages to maintain a healthy fluid balance.",
+        descAr: "سجل معدل شرب الماء اليومي، وحدد أهداف الترطيب، واطلع على نسب إنجازك اليومية للحفاظ على توازن السوائل في جسمك."
+    },
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(10).png",
+        titleEn: "Wellness Hub & Vitals Summary",
+        titleAr: "لوحة مؤشرات العافية والنشاط",
+        descEn: "Get a comprehensive summary of your daily steps, active calories, sleep duration, and hydration metrics in a single interactive dashboard.",
+        descAr: "احصل على ملخص شامل لخطواتك اليومية، السعرات الحرارية المحروقة، ساعات النوم، ومؤشرات شرب الماء في لوحة تحكم تفاعلية واحدة."
+    },
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(11).png",
+        titleEn: "Doctor Booking & Consultations",
+        titleAr: "حجز مواعيد الأطباء والاستشارات",
+        descEn: "Search for healthcare specialists by department, view clinical schedules, schedule physical checkups, and book appointments easily.",
+        descAr: "ابحث عن الأخصائيين والأطباء بحسب التخصص، واطلع على جداول العيادات المتاحة، واحجز مواعيدك واستشاراتك الطبية بسهولة."
+    },
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(12).png",
+        titleEn: "Medicine Tracker & Pill Reminders",
+        titleAr: "تتبع ذكي للأدوية والجرعات",
+        descEn: "Set precise medication schedules, configure custom repeat dosage alarms, track remaining pill inventory, and receive alerts.",
+        descAr: "قم بإعداد جداول الأدوية الخاصة بك، وفعل تنبيهات مخصصة بمواعيد الجرعات، وتتبع كمية الأقراص المتبقية لضمان الالتزام بخطتك العلاجية."
+    },
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(13).png",
+        titleEn: "Smart Wearable Device Pairing",
+        titleAr: "ربط ومزامنة الأجهزة الذكية",
+        descEn: "Scan and pair fitness bands, smartwatches, heart rate monitors, and smart scales via Bluetooth for automated health data importing.",
+        descAr: "ابحث واربط الساعات الذكية، أجهزة تتبع النشاط، أحزمة قياس النبض، والموازين الذكية عبر البلوتوث لمزامنة البيانات واستيرادها تلقائياً."
+    },
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(14).png",
+        titleEn: "Secure Medical Reports Vault",
+        titleAr: "خزنة التقارير الطبية الآمنة",
+        descEn: "Upload, archive, and preview medical reports, laboratory test results, radiological scans, and prescription histories securely.",
+        descAr: "قم بتحميل وأرشفة وعرض نتائج التحاليل المختبرية، صور وتقارير الأشعة، والوصفات الطبية الخاصة بك في خزنتك المشفرة والآمنة."
+    },
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(15).png",
+        titleEn: "AI Health Assistant & Symptoms",
+        titleAr: "مساعد الصحة بالذكاء الاصطناعي",
+        descEn: "Interact with our clinical AI chatbot to analyze wellness trends, check symptoms, ask health queries, and get personalized diet tips.",
+        descAr: "دردش مع المساعد الطبي الذكي المدعوم بالذكاء الاصطناعي لتحليل أعراضك، وطرح الاستفسارات الصحية، وتلقي نصائح التغذية والعافية."
+    },
+    {
+        img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(16).png",
+        titleEn: "Family Circle & Emergency SOS Alerts",
+        titleAr: "بوابة العائلة وطوارئ SOS",
+        descEn: "Manage family profiles, track vitals (heart rate, blood pressure, oxygen) for dependents, and coordinate instant emergency alerts.",
+        descAr: "أدر حسابات عائلتك (الأطفال وكبار السن)، وراقب مؤشراتهم الحيوية الحية (النبض، ضغط الدم، الأكسجين)، وفعل نداء الطوارئ SOS عند الخطر."
+    }
+];
+
+const steps = [
+    {
+        num: "01",
+        titleEn: "Download & Permissions",
+        titleAr: "تحميل التطبيق والأذونات",
+        descEn: "Download Synced Health Hub from Google Play or APKPure. Enable Bluetooth for medical devices and notifications for medication schedules.",
+        descAr: "قم بتنزيل تطبيق Synced Health Hub من متجر Google Play أو APKPure. قم بتفعيل البلوتوث لربط الأجهزة الطبية والتنبيهات لمواعيد الأدوية."
+    },
+    {
+        num: "02",
+        titleEn: "Setup Profiles & Circle",
+        titleAr: "إعداد الملفات الشخصية ودائرة العائلة",
+        descEn: "Create your secure account. Add your personal metrics (blood type, allergies, conditions) and invite family members to join your health circle.",
+        descAr: "أنشئ حسابك الآمن. أضف مؤشراتك الشخصية (فصيلة الدم، الحساسية، الأمراض المزمنة) وادعُ أفراد عائلتك للانضمام إلى دائرتك الصحية."
+    },
+    {
+        num: "03",
+        titleEn: "Pair Wearable Sensors",
+        titleAr: "ربط الأجهزة والمستشعرات الذكية",
+        descEn: "Connect your smartwatch, fitness tracker, or blood pressure monitors. The app automatically syncs heart rate, sleep, oxygen, and blood sugar trends.",
+        descAr: "اربط ساعتك الذكية، أو متتبع اللياقة البدنية، أو أجهزة قياس ضغط الدم. يقوم التطبيق بمزامنة نبضات القلب، النوم، والأكسجين تلقائياً."
+    },
+    {
+        num: "04",
+        titleEn: "Configure Meds & Vault",
+        titleAr: "إعداد الأدوية وخزنة التقارير",
+        descEn: "Input your prescription details and set precise dosage reminders. Scan and upload medical reports, lab results, and prescriptions to your secure vault.",
+        descAr: "أدخل تفاصيل الوصفات الطبية وحدد مواعيد وجرعات الأدوية بدقة. قم بمسح وتحميل التقارير الطبية ونتائج التحاليل إلى خزنتك الآمنة."
+    },
+    {
+        num: "05",
+        titleEn: "Monitor & Share Vitals",
+        titleAr: "المتابعة ومشاركة المؤشرات",
+        descEn: "View live health charts, access AI symptom assessment tools, share reports directly with doctors, and activate SOS emergency signals if needed.",
+        descAr: "تابع الرسوم البيانية الحية، واستخدم مساعد الذكاء الاصطناعي، وشارك التقارير مع أخصائيك، أو فعل نداء الطوارئ SOS عند الحاجة."
+    }
+];
 
 const Application = () => {
     const { isAr } = useGlobal();
     const [activeIndex, setActiveIndex] = useState(0);
     const [previewIndex, setPreviewIndex] = useState(null);
+    const scrollContainerRef = useRef(null);
+
+    const handleScroll = (e) => {
+        const container = e.target;
+        if (window.innerWidth > 1024) return;
+        
+        const containerRect = container.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+
+        const items = container.querySelectorAll('.showcase-nav-item');
+        let closestIndex = activeIndex;
+        let minDistance = Infinity;
+
+        items.forEach((item, idx) => {
+            const itemRect = item.getBoundingClientRect();
+            const itemCenter = itemRect.left + itemRect.width / 2;
+            const distance = Math.abs(containerCenter - itemCenter);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = idx;
+            }
+        });
+
+        if (closestIndex !== activeIndex) {
+            setActiveIndex(closestIndex);
+        }
+    };
+
+    const handleCardClick = (idx) => {
+        setActiveIndex(idx);
+        const container = scrollContainerRef.current;
+        if (container) {
+            const items = container.querySelectorAll('.showcase-nav-item');
+            const targetItem = items[idx];
+            if (targetItem) {
+                targetItem.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        }
+    };
 
     useEffect(() => {
         document.title = isAr ? "سينكد | التطبيق الذكي" : "Synced | Mobile App";
@@ -29,103 +168,6 @@ const Application = () => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [previewIndex]);
-
-    const screens = [
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(9).png",
-            titleEn: "Hydration & Water Tracker",
-            titleAr: "تتبع شرب الماء والترطيب",
-            descEn: "Log your daily water intake, set hydration goals, and view quick intake percentages to maintain a healthy fluid balance.",
-            descAr: "سجل معدل شرب الماء اليومي، وحدد أهداف الترطيب، واطلع على نسب إنجازك اليومية للحفاظ على توازن السوائل في جسمك."
-        },
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(10).png",
-            titleEn: "Wellness Hub & Vitals Summary",
-            titleAr: "لوحة مؤشرات العافية والنشاط",
-            descEn: "Get a comprehensive summary of your daily steps, active calories, sleep duration, and hydration metrics in a single interactive dashboard.",
-            descAr: "احصل على ملخص شامل لخطواتك اليومية، السعرات الحرارية المحروقة، ساعات النوم، ومؤشرات شرب الماء في لوحة تحكم تفاعلية واحدة."
-        },
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(11).png",
-            titleEn: "Doctor Booking & Consultations",
-            titleAr: "حجز مواعيد الأطباء والاستشارات",
-            descEn: "Search for healthcare specialists by department, view clinical schedules, schedule physical checkups, and book appointments easily.",
-            descAr: "ابحث عن الأخصائيين والأطباء بحسب التخصص، واطلع على جداول العيادات المتاحة، واحجز مواعيدك واستشاراتك الطبية بسهولة."
-        },
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(12).png",
-            titleEn: "Medicine Tracker & Pill Reminders",
-            titleAr: "تتبع ذكي للأدوية والجرعات",
-            descEn: "Set precise medication schedules, configure custom repeat dosage alarms, track remaining pill inventory, and receive alerts.",
-            descAr: "قم بإعداد جداول الأدوية الخاصة بك، وفعل تنبيهات مخصصة بمواعيد الجرعات، وتتبع كمية الأقراص المتبقية لضمان الالتزام بخطتك العلاجية."
-        },
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(13).png",
-            titleEn: "Smart Wearable Device Pairing",
-            titleAr: "ربط ومزامنة الأجهزة الذكية",
-            descEn: "Scan and pair fitness bands, smartwatches, heart rate monitors, and smart scales via Bluetooth for automated health data importing.",
-            descAr: "ابحث واربط الساعات الذكية، أجهزة تتبع النشاط، أحزمة قياس النبض، والموازين الذكية عبر البلوتوث لمزامنة البيانات واستيرادها تلقائياً."
-        },
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(14).png",
-            titleEn: "Secure Medical Reports Vault",
-            titleAr: "خزنة التقارير الطبية الآمنة",
-            descEn: "Upload, archive, and preview medical reports, laboratory test results, radiological scans, and prescription histories securely.",
-            descAr: "قم بتحميل وأرشفة وعرض نتائج التحاليل المختبرية، صور وتقارير الأشعة، والوصفات الطبية الخاصة بك في خزنتك المشفرة والآمنة."
-        },
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(15).png",
-            titleEn: "AI Health Assistant & Symptoms",
-            titleAr: "مساعد الصحة بالذكاء الاصطناعي",
-            descEn: "Interact with our clinical AI chatbot to analyze wellness trends, check symptoms, ask health queries, and get personalized diet tips.",
-            descAr: "دردش مع المساعد الطبي الذكي المدعوم بالذكاء الاصطناعي لتحليل أعراضك، وطرح الاستفسارات الصحية، وتلقي نصائح التغذية والعافية."
-        },
-        {
-            img: "https://uwtejjvilzwbxzhanbyd.supabase.co/storage/v1/object/public/Synced/imgs/Application/Jla3P43tx11(16).png",
-            titleEn: "Family Circle & Emergency SOS Alerts",
-            titleAr: "بوابة العائلة وطوارئ SOS",
-            descEn: "Manage family profiles, track vitals (heart rate, blood pressure, oxygen) for dependents, and coordinate instant emergency alerts.",
-            descAr: "أدر حسابات عائلتك (الأطفال وكبار السن)، وراقب مؤشراتهم الحيوية الحية (النبض، ضغط الدم، الأكسجين)، وفعل نداء الطوارئ SOS عند الخطر."
-        }
-    ];
-
-    const steps = [
-        {
-            num: "01",
-            titleEn: "Download & Permissions",
-            titleAr: "تحميل التطبيق والأذونات",
-            descEn: "Download Synced Health Hub from Google Play or APKPure. Enable Bluetooth for medical devices and notifications for medication schedules.",
-            descAr: "قم بتنزيل تطبيق Synced Health Hub من متجر Google Play أو APKPure. قم بتفعيل البلوتوث لربط الأجهزة الطبية والتنبيهات لمواعيد الأدوية."
-        },
-        {
-            num: "02",
-            titleEn: "Setup Profiles & Circle",
-            titleAr: "إعداد الملفات الشخصية ودائرة العائلة",
-            descEn: "Create your secure account. Add your personal metrics (blood type, allergies, conditions) and invite family members to join your health circle.",
-            descAr: "أنشئ حسابك الآمن. أضف مؤشراتك الشخصية (فصيلة الدم، الحساسية، الأمراض المزمنة) وادعُ أفراد عائلتك للانضمام إلى دائرتك الصحية."
-        },
-        {
-            num: "03",
-            titleEn: "Pair Wearable Sensors",
-            titleAr: "ربط الأجهزة والمستشعرات الذكية",
-            descEn: "Connect your smartwatch, fitness tracker, or blood pressure monitors. The app automatically syncs heart rate, sleep, oxygen, and blood sugar trends.",
-            descAr: "اربط ساعتك الذكية، أو متتبع اللياقة البدنية، أو أجهزة قياس ضغط الدم. يقوم التطبيق بمزامنة نبضات القلب، النوم، والأكسجين تلقائياً."
-        },
-        {
-            num: "04",
-            titleEn: "Configure Meds & Vault",
-            titleAr: "إعداد الأدوية وخزنة التقارير",
-            descEn: "Input your prescription details and set precise dosage reminders. Scan and upload medical reports, lab results, and prescriptions to your secure vault.",
-            descAr: "أدخل تفاصيل الوصفات الطبية وحدد مواعيد وجرعات الأدوية بدقة. قم بمسح وتحميل التقارير الطبية ونتائج التحاليل إلى خزنتك الآمنة."
-        },
-        {
-            num: "05",
-            titleEn: "Monitor & Share Vitals",
-            titleAr: "المتابعة ومشاركة المؤشرات",
-            descEn: "View live health charts, access AI symptom assessment tools, share reports directly with doctors, and activate SOS emergency signals if needed.",
-            descAr: "تابع الرسوم البيانية الحية، واستخدم مساعد الذكاء الاصطناعي، وشارك التقارير مع أخصائيك، أو فعل نداء الطوارئ SOS عند الحاجة."
-        }
-    ];
 
     return (
         <div className="app-page-root">
@@ -185,22 +227,29 @@ const Application = () => {
                         <div className="showcase-mockup-wrapper" onClick={() => setPreviewIndex(activeIndex)} style={{ cursor: 'pointer' }}>
                             <div className="phone-bezel">
                                 <div className="phone-screen">
-                                    <img 
-                                        src={screens[activeIndex].img} 
-                                        alt="App Screen" 
-                                        className="screen-img"
-                                    />
+                                    {screens.map((screen, idx) => (
+                                        <img 
+                                            key={idx}
+                                            src={screen.img} 
+                                            alt={isAr ? screen.titleAr : screen.titleEn} 
+                                            className={`screen-img ${idx === activeIndex ? 'active' : ''}`}
+                                        />
+                                    ))}
                                     <div className="screen-overlay-glow"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="showcase-nav-list">
+                        <div 
+                            className="showcase-nav-list"
+                            ref={scrollContainerRef}
+                            onScroll={handleScroll}
+                        >
                             {screens.map((screen, idx) => (
                                 <div 
                                     className={`showcase-nav-item ${idx === activeIndex ? 'active' : ''}`}
                                     key={idx}
-                                    onClick={() => setActiveIndex(idx)}
+                                    onClick={() => handleCardClick(idx)}
                                 >
                                     <span className="nav-index">0{idx + 1}</span>
                                     <div className="nav-item-content">
