@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './NavBar.css';
-import whitelogo from '../imgs/logowhite.png';
 import { useGlobal } from '../context/GlobalContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../Supabase';

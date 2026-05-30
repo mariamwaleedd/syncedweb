@@ -246,8 +246,23 @@
     .phi-text { max-width: 100%; }
     .v-line { left: 35px; }
     .road-point { flex-direction: row !important; text-align: left !important; }
-    .road-info { width: 100%; margin: 0 0 0 40px !important; }
-    .road-dot { width: 60px; height: 60px; }
+    
+    .road-info {
+        width: 100%;
+        margin: 0 0 0 40px !important;
+        order: 2;
+        text-align: left !important;
+    }
+    
+    [dir='rtl'] .road-info {
+        text-align: right !important;
+    }
+    
+    .road-dot {
+        width: 60px;
+        height: 60px;
+        order: 1;
+    }
 }
 .about-privacy-bar {
     width: 100%;
